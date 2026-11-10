@@ -1,0 +1,15 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# SEC EDGAR download cache (~2 GB, fully reproducible by re-running the scraper)
+edgar_cache/
+smoke_cache/
+
+# Intermediate checkpoint written during scraping; rdd_data.csv is the real output
+rdd_data.partial.csv
+rdd_data_live_partial.csv
+
+# Runtime state
+scrape.pid
