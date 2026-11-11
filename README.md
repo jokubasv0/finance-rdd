@@ -47,7 +47,7 @@ refiling rate of 27%. The 15% cutoff alone is far too thin to detect this
 ## Reproducing
 
 ```bash
-# environment
+# environment (Python)
 uv venv --python 3.13 .venv
 . .venv/bin/activate
 uv pip install requests beautifulsoup4 pandas numpy lxml rdrobust rddensity
@@ -58,6 +58,16 @@ python 01_scrape_edgar.py --self-test
 # scrape (SEC requires a real contact address in the User-Agent)
 export SEC_USER_AGENT="Your Name you@example.com"
 ./run_overnight.sh
+
+# analysis (Python)
+python 02_rdd_analysis.py        # single-cutoff, 15%
+python 02b_multi_cutoff_rd.py    # pooled, main result
+
+# analysis (R) -- reproduces the Python output exactly
+Rscript -e 'install.packages(c("rdrobust","rddensity"))'
+Rscript 02_rdd_analysis.R
+Rscript 02b_multi_cutoff_rd.R
+```
 
 # analysis
 python 02_rdd_analysis.py

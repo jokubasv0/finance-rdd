@@ -5,9 +5,9 @@
 | Stage | Status |
 |---|---|
 | 1. EDGAR scrape | ✅ `rdd_data.csv`, 2,294 obs, 100% real EDGAR data |
-| 2. Single-cutoff RD (15%) | ✅ `02_rdd_analysis.py` — underpowered, null |
-| 2b. Multi-cutoff RD (pooled) | ✅ `02b_multi_cutoff_rd.py` — **significant** |
-| 3. Paper draft | ⬜ next |
+| 2. Single-cutoff RD (15%) | ✅ `02_rdd_analysis.py` / `.R` — underpowered, null |
+| 2b. Multi-cutoff RD (pooled) | ✅ `02b_multi_cutoff_rd.py` / `.R` — **significant** |
+| 3. Paper draft | ✅ `03_paper_draft.md` — full draft, real numbers |
 | GitHub | ✅ pushed to `jokubasv0/finance-rdd` (private, SSH remote) |
 
 ## Headline result
@@ -46,9 +46,11 @@ p=1 0.158 and p=2 0.172.
 
 ## Still open
 
-- **Stage 3 paper draft** — not started. Use the pooled FE + covariates spec as
-  the headline, per-threshold as heterogeneity, and the single-cutoff 15% run as
-  the motivating "this alone cannot answer the question" discussion.
+- **Stage 3 paper draft** — first full draft written (`03_paper_draft.md`), with
+  abstract, institutional framework, identification, all result tables and
+  threats to validity. Remaining work is editorial: tighten the prose, verify
+  every citation, and decide whether the per-threshold heterogeneity (Section
+  5.4) is a finding or a caveat.
 - **First stage** (optional, needs a new scrape): measure whether the proposal
   was actually excluded, via SEC no-action letters, instead of the noisy
   `refiled_t1` proxy.
@@ -59,10 +61,11 @@ p=1 0.158 and p=2 0.172.
   (0.5). Largest single source of measurement error in the outcome.
 - **Unverified claim** in the Stage 1 docstring: that the SEC proposed
   rescinding Rule 14a-8 in September 2026. Verify or delete.
-- **R not installed.** Stage 2 runs on the authors' official Python ports
-  (`rdrobust 2.1.1`, `rddensity 3.0`). `02_rdd_analysis.R` is still owed as the
-  spec's deliverable and needs R + gfortran (sudo or `pkexec`).
-
+- ~~**R not installed.**~~ **Resolved.** R 4.6.2 installed to `~/.local/bin`
+  via `rig add release --user`. `rdrobust` and `rddensity` installed into
+  `~/R/library` (they compile without gfortran — the current CRAN versions are
+  C++, not Fortran). Both R scripts run and reproduce the Python output to the
+  last digit. Run them with `R_LIBS_USER=~/R/library Rscript <script>.R`.
 ## Commands
 
 ```bash
@@ -71,4 +74,9 @@ cd ~/rdd-paper
 python 02_rdd_analysis.py        # single-cutoff (15%) analysis
 python 02b_multi_cutoff_rd.py    # pooled multi-cutoff analysis
 python 01_scrape_edgar.py --self-test
+
+# same analyses in R (reproduces the Python output exactly)
+export R_LIBS_USER=~/R/library
+Rscript 02_rdd_analysis.R
+Rscript 02b_multi_cutoff_rd.R
 ```
