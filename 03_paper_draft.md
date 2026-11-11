@@ -76,13 +76,53 @@ Section 6 discusses threats to validity. Section 7 concludes.
 
 ## 2. Institutional Framework
 
-### 2.1 The resubmission rule
+### 2.1 Who may submit a proposal
+
+A shareholder proposal is a recommendation or requirement that the company or
+its board take a specified action, submitted for inclusion in the company's
+proxy materials and voted on at a shareholder meeting. The shareholder who
+submits it is the *proponent*.
+
+Eligibility under Rule 14a-8(b) is an ownership test. A proponent must have
+continuously held at least one of:
+
+**Table 2.1.** Ownership thresholds for proposal eligibility under Rule 14a-8(b).
+
+| Minimum market value | Holding period |
+|---|---|
+| $2,000 | 3 years |
+| $15,000 | 2 years |
+| $25,000 | 1 year |
+
+Holdings may not be aggregated across shareholders to satisfy the test, and a
+proponent may submit only one proposal per company per meeting. The proposal,
+including any supporting statement, is capped at 500 words and must be received
+at least 120 calendar days before the date the company released the previous
+year's proxy statement.
+
+These requirements shape who appears in our data. Individual retail holders
+almost never clear the ownership threshold. The recurring proponents are public
+pension funds, small activist funds that hold a token position purely to file,
+religious orders, labour unions, and non-governmental organisations. Each has a
+limited annual slate, so the decision to spend one slot on a given company and
+topic is a real allocation choice — which is precisely the margin our outcome
+variable measures.
+
+A proponent who fails to appear and present the proposal at the meeting, absent
+good cause, may have all proposals excluded for the following two calendar
+years. Filing is therefore a commitment, not a costless gesture.
+
+### 2.2 The resubmission rule
 
 Rule 14a-8(i)(12) is one of thirteen substantive bases on which a company may
 omit a shareholder proposal from its proxy statement. It applies where the
-proposal deals with substantially the same subject matter as one previously
-submitted within the preceding five years, and where that earlier proposal
-failed to meet the applicable vote threshold:
+current proposal addresses substantially the same subject matter as a proposal
+previously *included in the company's proxy materials* within the preceding
+five calendar years, provided that the most recent vote on that subject occurred
+within the preceding three calendar years, and provided that vote failed to meet
+the applicable threshold:
+
+**Table 2.2.** Resubmission thresholds under Rule 14a-8(i)(12).
 
 | Prior appearances in 5 years | Threshold on most recent vote |
 |---|---|
@@ -90,7 +130,19 @@ failed to meet the applicable vote threshold:
 | 2 | 15% of votes cast |
 | 3 or more | 25% of votes cast |
 
-Three features of the rule matter for identification.
+Two drafting details are easy to miss and both matter for our measurement.
+
+**The prior proposal must have been included, not merely submitted.** A
+proposal that was itself excluded never generated a vote and therefore does not
+count toward the tally. Because we observe vote records rather than filings,
+this condition is satisfied by construction in our data.
+
+**The recency condition is on the most recent vote.** Even if proposals on the
+subject appear within five years, the rule is unavailable if the last vote on
+them is more than three years old. A proposal that lapses for several years and
+then returns is treated as a first submission for the purposes of this rule.
+
+Three further features matter for identification.
 
 **The comparison is strict.** A proposal receiving 14.99% is excludable; one
 receiving 15.00% is not. The rule does not round.
@@ -106,7 +158,98 @@ estimate the effect of *becoming eligible* for exclusion, which is attenuated
 relative to the effect of actual exclusion by the share of companies that
 decline to use the rule.
 
-### 2.2 Threshold history
+### 2.3 The thirteen exclusion grounds
+
+Clearing a resubmission threshold closes one door, not thirteen. A company that
+cannot rely on (i)(12) may still seek exclusion on any of the grounds below,
+several of which are used far more often in practice.
+
+**Table 2.3.** The thirteen substantive exclusion grounds under Rule 14a-8(i).
+
+| Ground | Basis for omission |
+|---|---|
+| (i)(1) | Not a proper subject for shareholder action under state law |
+| (i)(2) | Implementation would violate state, federal, or foreign law |
+| (i)(3) | Proposal or supporting statement contravenes the proxy rules |
+| (i)(4) | Redress of a personal grievance or furtherance of a special interest |
+| (i)(5) | Relates to operations below 5% of assets, net earnings, and gross sales, and not otherwise significantly related to the business |
+| (i)(6) | Company lacks the power or authority to implement the proposal |
+| (i)(7) | Deals with a matter relating to ordinary business operations |
+| (i)(8) | Would affect the outcome of the upcoming director election |
+| (i)(9) | Directly conflicts with a company proposal at the same meeting |
+| (i)(10) | Company has already substantially implemented the proposal |
+| (i)(11) | Substantially duplicates another proponent's proposal for the same meeting |
+| (i)(12) | **Resubmission below the applicable vote threshold** |
+| (i)(13) | Relates to a specific amount of cash or stock dividends |
+
+Grounds (i)(7) and (i)(10) do most of the work in practice. A company facing a
+30% vote on a request to report on lobbying expenditure can simply publish the
+report and then omit next year's version as substantially implemented, without
+ever invoking (i)(12). Ground (i)(5), which governs economic relevance, is also
+frequently litigated.
+
+### 2.4 How exclusion actually happens
+
+Exclusion is a procedure, not an election. Rule 14a-8(j) requires a company
+intending to omit a proposal to file its reasons with the Commission no later
+than 80 calendar days before it files its definitive proxy statement, and to
+send a copy of that submission to the proponent. The burden of persuasion rests
+on the company (Rule 14a-8(g)), which must supply the proposal, an explanation
+citing applicable authority, and — where the argument turns on state or foreign
+law — a supporting opinion of counsel.
+
+Commission staff then respond. In practice this is the *no-action letter*
+process: staff indicate whether they will recommend enforcement action if the
+company omits the proposal. A favourable response lets the company drop the
+proposal without litigation risk; an unfavourable one leaves the company to
+include it or proceed at its own risk. The proponent may file a reply under Rule
+14a-8(k).
+
+Three consequences follow for our design. First, the treatment is real: there
+exists a low-cost administrative route from "below the threshold" to "not on the
+ballot". Second, the treatment is costly enough that many eligible companies
+never use it, since the process consumes legal fees and management attention.
+Third, the route is not exclusive to (i)(12) — the same procedure serves every
+ground in Table 2.3.
+
+### 2.5 Why clearing the threshold does not guarantee a ballot
+
+A reader might assume that a proposal which cleared its threshold is
+automatically included next year. It is not. The full path from one year to the
+next contains several points at which the proposal can disappear:
+
+1. The proponent must decide to file again. Clearing the threshold creates no
+   obligation, and a proponent whose request was substantially satisfied, whose
+   fund exited the position, or who reallocated a limited slate elsewhere may
+   simply not return.
+2. The company may exclude on any of the other twelve grounds in Table 2.3.
+3. The company may negotiate a withdrawal: the proponent retracts the proposal
+   in exchange for a policy commitment, and no vote occurs.
+4. Only if all three hurdles are cleared does the proposal reach the ballot.
+
+Clearing the threshold therefore removes one specific obstacle. It does not
+create a right to a vote.
+
+This is the single most important institutional fact for interpreting our
+estimates, and it cuts in two directions.
+
+*It does not threaten identification.* The other twelve grounds, the withdrawal
+channel, and the proponent's own cost-benefit calculation all operate on both
+sides of the cutoff, because they depend on what the proposal asks for and what
+the company has done — not on whether the vote was 14.8% or 15.2%. These
+channels are therefore smooth in the running variable, and the discontinuity we
+estimate is attributable to the availability of ground (i)(12) alone. If all
+thirteen grounds switched off at the threshold we would still measure an effect,
+but we could not attribute it to the resubmission rule specifically.
+
+*It does constrain what the estimate means.* Our outcome records whether a
+proposal on the same subject is *filed* for the following meeting, not whether
+it *reached a ballot*. We therefore estimate the effect of eligibility on
+proponent filing behaviour. The company's subsequent inclusion decision is a
+separate, unmeasured margin. Section 6 discusses what this implies for
+interpreting the coefficient as a deterrent effect.
+
+### 2.6 Threshold history
 
 The 5%/15%/25% schedule governs meetings held on or after 1 January 2022. Before
 that date the bars were 3%/6%/10%. This matters for sample construction: votes
@@ -364,14 +507,31 @@ proposal language would tighten this at the cost of sample size.
 for heterogeneity in the treatment effect across bars, and the observed ordering
 suggests that heterogeneity is present.
 
+**Window measurement.** The five-year look-back is implemented as a 1,827-day
+window measured from the date of the current vote. The rule measures it from the
+date the company evaluates exclusion, which is up to roughly eighteen months
+later. At the five-year boundary this can shift a proposal between "voted once"
+(5% bar) and "voted twice" (15% bar). Only proposals whose prior history sits
+almost exactly five years back are affected, so the exposure is small, but it is
+a genuine approximation rather than an exact implementation of the rule.
+
 **Intent-to-treat.** Falling below the bar permits exclusion but does not compel
 it. The estimate is therefore a lower bound on the effect of actual exclusion,
 scaled by the share of eligible proposals that companies choose to omit.
 
-**External validity.** The sample covers 2022–2025, a period in which SEC staff
-largely stopped issuing no-action relief on 14a-8 grounds. Companies relying on
-the rule during this period were doing so without the staff guidance that
-historically accompanied it. Behaviour may differ in other regimes.
+**External validity.** The sample covers 2022–2025. Reporting suggests that
+during part of this period SEC staff granted no-action relief on 14a-8 grounds
+far less readily than in earlier years, and that the Commission has since
+proposed further changes to the rule. We have not independently verified the
+extent of either development, and we therefore do not condition the analysis on
+them. If relief did become harder to obtain, companies relying on the rule
+during our sample were doing so without the staff guidance that historically
+accompanied it, which would attenuate the estimated effect of eligibility
+relative to a regime with a functioning no-action process.
+
+<!-- TODO(jn): verify the no-action-relief and rescission claims against SEC
+     releases before circulation, or delete this paragraph. Currently unverified
+     and stated conditionally for that reason. -->
 
 ---
 

@@ -60,7 +60,21 @@ p=1 0.158 and p=2 0.172.
 - **Fuzzy refiling.** `refiled_t1` links on Jaccard similarity of title tokens
   (0.5). Largest single source of measurement error in the outcome.
 - **Unverified claim** in the Stage 1 docstring: that the SEC proposed
-  rescinding Rule 14a-8 in September 2026. Verify or delete.
+  rescinding Rule 14a-8 in September 2026. Verify or delete. The paper now
+  states this conditionally and carries a `TODO(jn)` marker.
+- **Rule text now verified** against 17 CFR 240.14a-8 (eCFR). Section 2 was
+  rewritten from the primary source and now covers: proponent eligibility
+  ($2k/3yr, $15k/2yr, $25k/1yr; one proposal per meeting; 500 words; 120-day
+  deadline; two-year ban for non-attendance), all thirteen exclusion grounds,
+  the Rule 14a-8(j) no-action procedure (80-day filing, burden on company),
+  and an explicit subsection on why clearing a threshold does not guarantee a
+  ballot. Two corrections against earlier notes: ground (i)(5) is an economic
+  relevance test, not a social-policy test, and (i)(6) is absence of power.
+- **Three-year recency clause** in (i)(12) is non-binding in our design (the
+  most recent vote is always the current one, which is within 18 months of the
+  outcome), but the five-year window is measured from the vote date rather than
+  the company's evaluation date — documented in Section 6 as a small
+  approximation.
 - ~~**R not installed.**~~ **Resolved.** R 4.6.2 installed to `~/.local/bin`
   via `rig add release --user`. `rdrobust` and `rddensity` installed into
   `~/R/library` (they compile without gfortran — the current CRAN versions are
