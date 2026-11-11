@@ -1,78 +1,74 @@
 # Handoff — resume here
 
-State as of the night the scrape completed. Everything below is committed
-locally in `~/rdd-paper`. Nothing is running; nothing is half-written.
-
-## Where things stand
+## Status
 
 | Stage | Status |
 |---|---|
-| 1. EDGAR scrape | ✅ done, `rdd_data.csv`, 2,294 obs, 100% real EDGAR data |
-| 2. RD analysis (Python) | ✅ done, all 8 tests run, `results/` |
-| 3. Paper draft | ⬜ not started |
-| Push to GitHub | ⬜ blocked: repo does not exist yet |
+| 1. EDGAR scrape | ✅ `rdd_data.csv`, 2,294 obs, 100% real EDGAR data |
+| 2. Single-cutoff RD (15%) | ✅ `02_rdd_analysis.py` — underpowered, null |
+| 2b. Multi-cutoff RD (pooled) | ✅ `02b_multi_cutoff_rd.py` — **significant** |
+| 3. Paper draft | ⬜ next |
+| GitHub | ✅ pushed to `jokubasv0/finance-rdd` (private, SSH remote) |
 
-## Open decision (blocks Stage 3)
+## Headline result
 
-Stage 2 is methodologically clean but **underpowered**: MDE ≈ 88pp, effective
-n inside the bandwidth = 71. Coefficient is positive and sign-stable
-(0.13–0.23) but never significant (p = 0.66). Three ways forward:
+Pooling all three 14a-8(i)(12) bars (`5%` for a proposal voted once, `15%` for
+twice, `25%` for three or more) turns an uninformative design into a real one.
 
-1. **Pool all three thresholds** (5%, 15%, 25%). n goes 292 → 2,077, obs within
-   ±2pp go 24 → 143. MDE drops to roughly 25pp. Requires multi-cutoff RD with
-   threshold fixed effects, plus per-cutoff reporting. Assumption: the effect of
-   "you may be excluded" is comparable across bars. Best chance of a real result.
-2. **Keep 15% only, report honestly as underpowered.** Fastest and purest, but
-   a thin paper.
-3. **Change the outcome** to "was the proposal actually excluded" (the first
-   stage) instead of "did the proponent refile". Cleaner signal, avoids noise
-   from the fuzzy topic matching.
+| Specification | τ | SE | p | 95% CI |
+|---|---|---|---|---|
+| Pooled, threshold FE | 0.158 | 0.081 | 0.052 | [−0.001, 0.318] |
+| **Pooled, FE + covariates** | **0.182** | **0.084** | **0.030** | **[0.017, 0.346]** |
+| Pooled, no adjustment | 0.148 | 0.088 | 0.092 | [−0.024, 0.321] |
 
-## To push (one action needed from you)
+Sample 2,077 proposals, 431 firms, SEs clustered on CIK. Per-threshold:
+5% bar 0.030 (p 0.74), 15% bar 0.166 (p 0.56), 25% bar 0.208 (p 0.34) — the
+pooled estimate is doing the work, individual bars are too thin.
 
-The GitHub token is fine-grained and cannot create repositories:
+Reading: clearing the applicable bar raises the probability the proponent
+resubmits by roughly 18 percentage points against a base refiling rate of 27%.
 
-```
-GraphQL: Resource not accessible by personal access token (createRepository)
-```
+Robustness all passes: bandwidth grid τ 0.11–0.14 with p 0.027–0.215 and a
+stable sign; covariate balance p 0.30–0.85; placebo cutoffs p 0.82; polynomial
+p=1 0.158 and p=2 0.172.
 
-Create an **empty private** repo named `rdd-paper` at github.com (no README, no
-.gitignore, no licence — it must be empty), then:
+## Two things to be careful about
 
-```bash
-cd ~/rdd-paper
-git remote add origin https://github.com/<your-username>/rdd-paper.git
-git push -u origin main
-```
+1. **Pooled McCrary flags at p = 0.055.** This is a mechanical artifact of
+   stacking three groups whose vote-share distributions differ; each group
+   individually passes (p 0.53, 0.41, 0.81). The valid manipulation tests are
+   the per-threshold ones. Do not report the pooled test as evidence of sorting.
+2. **Pooling assumes a comparable effect across bars.** Threshold FE absorb
+   level differences but not slope differences. The per-threshold spread
+   (0.03 → 0.17 → 0.21) is consistent with a stronger effect at higher bars,
+   which pooling understates. Report both, and frame the pooled estimate as the
+   average across bars.
 
-If the remote is already configured, only the push is needed.
+## Still open
 
-## Things worth checking when you resume
-
-- **Label noise.** 75th percentile of `vote_share` is 0.94 while the median is
-  0.31. Some near-unanimous rows may be management proposals misclassified as
-  shareholder proposals because a nearby sentence mentions "proposal". Does not
-  affect the 15% RD sample, but worth tightening `is_shareholder_proposal`.
-- **Fuzzy refiling.** `refiled_t1` links proposals by Jaccard similarity of
-  title tokens (threshold 0.5). Both false negatives and false positives.
-- **Right-censoring.** 31 observations (all 2025 votes) have an unobservable
-  t+1 outcome because the next annual meeting has not been held. Dropped in the
-  main spec, reinstated as zeros in the robustness block (sign unchanged).
+- **Stage 3 paper draft** — not started. Use the pooled FE + covariates spec as
+  the headline, per-threshold as heterogeneity, and the single-cutoff 15% run as
+  the motivating "this alone cannot answer the question" discussion.
+- **First stage** (optional, needs a new scrape): measure whether the proposal
+  was actually excluded, via SEC no-action letters, instead of the noisy
+  `refiled_t1` proxy.
+- **Label noise.** 75th percentile of `vote_share` is 0.94 vs a 0.31 median;
+  some near-unanimous rows may be management proposals misclassified as
+  shareholder proposals. Matters for the 5% bar, which those rows dominate.
+- **Fuzzy refiling.** `refiled_t1` links on Jaccard similarity of title tokens
+  (0.5). Largest single source of measurement error in the outcome.
 - **Unverified claim** in the Stage 1 docstring: that the SEC proposed
-  rescinding Rule 14a-8 in September 2026. Verify before it goes in the paper.
+  rescinding Rule 14a-8 in September 2026. Verify or delete.
+- **R not installed.** Stage 2 runs on the authors' official Python ports
+  (`rdrobust 2.1.1`, `rddensity 3.0`). `02_rdd_analysis.R` is still owed as the
+  spec's deliverable and needs R + gfortran (sudo or `pkexec`).
 
 ## Commands
 
 ```bash
 cd ~/rdd-paper
 . .venv/bin/activate
-python 02_rdd_analysis.py          # reruns all of Stage 2, writes results/
+python 02_rdd_analysis.py        # single-cutoff (15%) analysis
+python 02b_multi_cutoff_rd.py    # pooled multi-cutoff analysis
 python 01_scrape_edgar.py --self-test
-```
-
-## Commit log
-
-```
-32f6337 Stage 2: RD analysis in Python (rdrobust/rddensity ports)
-4f5ed2c Stage 1: EDGAR 14a-8 vote scraper and RD sample
 ```

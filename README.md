@@ -24,8 +24,25 @@ in the filing.
 | File | Purpose |
 |---|---|
 | `01_scrape_edgar.py` | Scrape EDGAR 8-K Item 5.07 vote tables, build the sample |
-| `02_rdd_analysis.R` / `.py` | McCrary density test, local linear RD, robustness |
+| `02_rdd_analysis.py` | Single-cutoff RD at 15% (the spec's baseline) |
+| `02b_multi_cutoff_rd.py` | Pooled RD across all three bars — the main result |
+| `02_rdd_analysis.R` | R equivalent of the 15% spec (needs R + gfortran) |
 | `03_paper_draft.md` | Paper outline, identification, result tables |
+
+## Headline result
+
+Pooling all three resubmission bars (5%, 15%, 25%) turns an uninformative
+single-cutoff design into a significant one:
+
+| Specification | τ | SE | p | 95% CI |
+|---|---|---|---|---|
+| Pooled, threshold FE | 0.158 | 0.081 | 0.052 | [−0.001, 0.318] |
+| Pooled, FE + covariates | **0.182** | **0.084** | **0.030** | **[0.017, 0.346]** |
+
+2,077 proposals, 431 firms, SEs clustered on CIK. Clearing the applicable bar
+raises the probability a proponent resubmits by roughly 18pp against a base
+refiling rate of 27%. The 15% cutoff alone is far too thin to detect this
+(24 observations within ±2pp, minimum detectable effect ≈ 88pp).
 
 ## Reproducing
 
@@ -72,10 +89,19 @@ the t+1 outcome (`refiled_t1`) both need history.
 
 ## Known limitations
 
-- **Small sample.** 28 observations within ±2pp of the cutoff. Estimates are
-  suggestive, not precise. Reported with bias-corrected CIs and a full bandwidth
-  sensitivity grid rather than a single preferred specification.
-- **Imperfect take-up.** Falling below 15% *permits* exclusion; it does not
+- **Small sample at any single cutoff.** Only 24 observations sit within ±2pp of
+  the 15% bar, giving a minimum detectable effect near 88pp. This is why the
+  headline estimate pools all three bars; see the next point for the cost.
+- **Pooling assumes comparable effects.** Stacking the 5%, 15% and 25% bars
+  assumes the effect of becoming excludable is similar across them. Threshold
+  fixed effects absorb level differences but not slope differences. The
+  per-threshold spread (0.03 → 0.17 → 0.21) hints the effect grows with the bar,
+  which pooling understates. Report both.
+- **Pooled density test is not meaningful.** The pooled McCrary statistic
+  (p = 0.055) reflects the three groups' differing vote-share distributions, not
+  manipulation. Each threshold passes individually (p = 0.53, 0.41, 0.81); those
+  are the valid tests.
+- **Imperfect take-up.** Falling below the bar *permits* exclusion; it does not
   compel it. The RD is an intent-to-treat estimate, attenuated by companies that
   decline to exclude.
 - **Fuzzy topic matching.** `refiled_t1` links proposals by Jaccard similarity of
