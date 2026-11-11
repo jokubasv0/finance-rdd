@@ -1,0 +1,673 @@
+================================================================================
+STUDY PROCESS LOG
+Do Resubmission Thresholds Deter Shareholder Proposals?
+Regression Discontinuity Evidence from SEC Rule 14a-8(i)(12)
+================================================================================
+Author: Jokubas Narvydas
+Started: 2026-11-10
+Last updated: 2026-11-11 (see Section 9 for what is still open)
+
+This file records, in order, every step taken, every assumption made, every
+mistake found, and every earlier decision that was later removed or reversed.
+It is deliberately chronological: if a reader wants to know why the data looks
+the way it does, the answer is in the order things happened.
+
+Nothing here is a substitute for the paper (03_paper_draft.md). This is the
+audit trail behind it.
+
+
+================================================================================
+1. THE QUESTION
+================================================================================
+
+SEC Rule 14a-8(i)(12) lets a company omit a shareholder proposal that has
+failed before. The bar depends on how many times the proposal has been voted on
+within the preceding five calendar years:
+
+    voted once            -> must have received at least  5%
+    voted twice           -> must have received at least 15%
+    voted three or more   -> must have received at least 25%
+
+Below the bar, the company may exclude the next submission. Above it, it may not
+exclude on this ground.
+
+The study asks whether this rule deters proponents from returning. The design is
+a regression discontinuity: proposals just below the bar are excludable, those
+just above are not, and nothing else should differ sharply at the line.
+
+The thresholds were 3%/6%/10% before 1 January 2022 and 5%/15%/25% after. This
+single fact caused the largest correction in the whole project (Section 5.4).
+
+
+================================================================================
+2. PHASE 0 — THE SPECIFICATION
+================================================================================
+
+Two input files were supplied:
+
+  ~/Downloads/usr bin env python3.txt   the assignment: a three-stage pipeline
+  ~/Downloads/scraper.txt               a 1,329-line Stage 1 scraper
+
+The assignment required:
+  Stage 1  01_scrape_edgar.py   scrape 8-K Item 5.07 vote tables from EDGAR
+  Stage 2  02_rdd_analysis.R    rdrobust/rddensity: McCrary, local linear RD,
+                                bandwidth grid, covariate balance, placebos,
+                                polynomial sensitivity
+  Stage 3  03_paper_draft.md    paper outline with real table templates
+
+Assumption A1: the supplied scraper is correct and only needs to be run.
+This assumption was wrong twice (Sections 3 and 5.4).
+
+
+================================================================================
+3. PHASE 1 — FINDING THE FIRST BUG
+================================================================================
+
+Before running anything, the code was read end to end and the environment
+measured rather than assumed.
+
+Environment found:
+  python3 3.13.5, no pip, no ensurepip, no uv
+  no pandas, no requests, no bs4 importable into system python
+  lxml 6.1.3 present
+  176 GB free disk
+
+Network probed with a proper User-Agent:
+  www.sec.gov/files/company_tickers.json          200
+  data.sec.gov/submissions/CIK...json             200
+  data.sec.gov/api/xbrl/companyfacts/CIK...json   200
+
+BUG 1 — the EDGAR full-text search endpoint.
+  Original line 126:
+      EFTS_URL = "https://efts.sec.gov/LatestSearch/rest/search-index"
+  This returns HTTP 403. The working endpoint is:
+      EFTS_URL = "https://efts.sec.gov/LATEST/search-index"
+  Consequences were severe and silent. A 403 triggers retries, then
+  EdgarBlockedError. EdgarBlockedError extends RuntimeError, NOT
+  EdgarRequestError, so it escapes discover_via_fulltext's except clause.
+  Discovery returns zero filings. The pipeline then sees fewer than min_obs
+  valid rows and falls back to the synthetic generator, writing 200 fake rows
+  to rdd_data.csv that look completely real.
+
+  Fix: EFTS_URL corrected, with a comment recording why.
+
+  Lesson carried forward: the synthetic fallback is dangerous for unattended
+  runs. It was disabled for all real runs with --min-obs 0.
+
+Assumption A2: EFTS response shape is as the code expects.
+Verified against a live query. hits.hits[]._source contains adsh, ciks,
+display_names, file_date, file_type, form, items, sics, period_ending and
+others. The `items` field exists (e.g. ['8.01']), so the code's
+"5.07" in src["items"] filter is valid. file_type is '8-K', so the
+startswith("8-K") check is valid.
+
+
+================================================================================
+4. PHASE 2 — ENVIRONMENT SETUP
+================================================================================
+
+Installed uv 0.13.7 to ~/.local/bin from the GitHub release tarball, sha256
+verified against the published checksum. No sudo, per the standing preference
+for prebuilt binaries in ~/.local/bin.
+
+Created ~/rdd-paper/.venv on CPython 3.13.5 and installed:
+  requests 2.34.2, beautifulsoup4 4.15.0, pandas 3.1.1, numpy 2.5.4, lxml 6.1.3
+
+Assumption A3: one venv is enough for the whole project.
+Later extended with rdrobust 2.1.1, rddensity 3.0, scipy, statsmodels for
+Stage 2. R installed separately (Section 8).
+
+Two safety changes were made to the scraper before any long run:
+
+  CHECKPOINT_EVERY = 100
+  CHECKPOINT_FILE  = "rdd_data.partial.csv"
+  _write_checkpoint() writes the parsed rows so far, inside try/except so a
+  failed checkpoint can never kill a multi-hour scrape.
+
+  This proved essential: the partial file is now the only record of the
+  pre-2022 filings, which the final export drops (Section 5.6).
+
+
+================================================================================
+5. PHASE 3 — DATA COLLECTION
+================================================================================
+
+5.1 Sizing
+
+EFTS exact-phrase counts for "shareholder proposal" in Form 8-K:
+  2021: 305   2022: 309   2023: 362   2024: 320
+
+Because the rule needs a five-year look-back and a one-year-forward outcome,
+discovery was widened to roughly 2016-2026, about 3,000-3,500 filings.
+
+5.2 First run — window 2021-01-01 to 2024-12-31
+
+Launched detached with setsid + nohup, wrapped in systemd-inhibit so the laptop
+would not suspend mid-run. The inhibitor does not inherit an activated venv, so
+the absolute interpreter path had to be passed; bare `python` failed with
+"Failed to execute : No such file or directory".
+
+Result: 3,359 discovered, 3,359 fetched, 3,207 parsed, 152 skipped, 0 fetch
+errors, 41,163 proposal rows, 5,293 shareholder-proposal rows, 2,345 valid
+observations. 19 minutes. Cache 1.8 GB.
+
+5.3 Live smoke test (before the full run)
+
+25 filings, --no-history, --min-obs 0. 30 discovered, 29 parsed, 619 proposal
+rows, 214 valid observations, 12 seconds, zero cache hits.
+
+The data was then verified as genuinely real, not synthetic, by cross-checking
+parsed covariates against known filings:
+  MSFT log_assets 26.744 -> $412B   vs actual FY2023 total assets $411.98B
+  META log_assets 25.948 -> $185B   vs 2022 total assets $185.7B
+  AMZN leverage 0.709               vs 227/321 = 70.7%
+  AMZN roa 0.066                    vs 21.3/321 = 6.6%
+Vote shares were also plausible (AMZN 14.94%, MSFT 15.19%, META 14.56%).
+
+5.4 THE SECOND AND WORST BUG — wrong thresholds for 2021
+
+Of the 334 observations in the 15% sample, 81 (24%) were 2021 votes. But the
+5%/15%/25% schedule only governs meetings on or after 1 January 2022. Before
+that the bars were 3%/6%/10%.
+
+add_threshold_variables never looked at the filing date. It mapped
+RESUBMISSION_THRESHOLDS purely by vote_number_5y:
+
+    n = df["vote_number_5y"].clip(lower=1, upper=3).astype(int)
+    df["applicable_threshold"] = n.map(RESUBMISSION_THRESHOLDS)
+    df["run_var"] = df["vote_share"] - df["applicable_threshold"]
+    df["below_threshold"] = df["vote_share"] < df["applicable_threshold"]
+
+So a 2021 vote at 12% was scored against a 15% bar, when the law in force said
+10%. Those rows were assigned to the wrong side of the line entirely.
+
+Fix: analysis window moved to 2022-01-01 .. 2025-12-31. The date filter sits
+after parsing, so the rerun cost only 95 HTTP requests against 3,528 cache hits
+and finished in 597 seconds.
+
+5.5 Corrected run — window 2022-01-01 to 2025-12-31 (authoritative)
+
+  3,040 discovered, 3,040 fetched, 2,905 parsed, 135 skipped, 0 fetch errors
+  37,653 proposal rows, 4,852 shareholder-proposal rows, 2,294 valid
+  15% sample: 323 (94 below, 229 at or above)
+  covariate coverage 100%
+  years: 2022 67, 2023 89, 2024 97, 2025 70
+  earliest filing 2022-03-14
+
+5.6 A structural detail that caused a false alarm later
+
+add_resubmission_variables runs on the FULL parsed set, before the date filter.
+So priors from 2017-2021 count toward vote_number_5y but are absent from the
+exported rdd_data.csv.
+
+Consequence: the CSV alone cannot reproduce vote_number_5y. An early attempt to
+recompute the linkage from the CSV alone showed 45.7% of rows changing bar. That
+figure was an artifact of the missing pre-2022 priors and was discarded. The
+real figure, computed on the full universe, is about 4% (Section 10.3).
+
+Assumption A4: vote_share is computed from raw counts, never printed
+percentages. VERIFIED. votes_for and votes_against have zero nulls across all
+2,294 rows. No row has vote_share exactly equal to 0.05, 0.15 or 0.25; only
+three values sit at two decimal places. The rounding-at-the-cutoff worry is
+therefore dead, and this is the single most important thing to have gotten
+right.
+
+Assumption A5: abstentions and broker non-votes are excluded from the
+denominator, per SEC Staff Legal Bulletin No. 14. The denominator is For plus
+Against.
+
+Assumption A6: the comparison is strict. 14.99% is excludable, 15.00% is not.
+Implemented as a strict `<`, and covered by a self-test.
+
+Assumption A7: for a proposal on its second appearance, comparing that vote's
+share to 15% is exactly the bar governing exclusion of the third submission.
+Confirmed correct. This is a subtle point and the code gets it right.
+
+Assumption A8: history_complete is True for all usable rows. VERIFIED for all
+2,052.
+
+
+================================================================================
+6. PHASE 4 — STAGE 2, AND THE POWER PROBLEM
+================================================================================
+
+R was not installed and gfortran was missing, so the R route looked blocked.
+The official Python ports by the same authors (rdpackages) were installed
+instead: rdrobust 2.1.1, rddensity 3.0.
+
+02_rdd_analysis.py was written and debugged. Four bugs, all in the Python port's
+API rather than the statistics:
+
+  BUG 2  rddensity r.test is a pandas Series indexed
+         ['t_asy','t_jk','p_asy','p_jk'], not a dict with a 'test' key. The
+         asymptotic entries are NaN under the default binned setup; the
+         jackknife pair is the one to report.
+  BUG 3  r.n and r.h are Series with named indices ('full','left','right',...).
+         Integer indexing raised KeyError: 0.
+  BUG 4  bwselect="manual" raises "bwselect incorrectly specified". The valid
+         list is mserd/msetwo/msesum/msecomb1/msecomb2/cerrd/... and an EMPTY
+         STRING signals manual.
+  BUG 5  pandas iterrows upcast integers to floats, breaking "{:d}" formatting.
+
+Single-cutoff result at 15%, n=292:
+  McCrary t=0.830 p=0.407  PASS
+  h*=0.0677, bias-corrected tau=0.137, SE 0.313, p 0.663
+  bandwidth grid: sign stable across 0.5x-2x
+  covariate balance: all pass
+  placebo cutoffs at 10% and 20%: null
+  polynomial p=1 vs p=2: stable
+
+The problem: MDE at 80% power was 87.8 percentage points. Only 24 observations
+sat within +/-2pp of the cutoff, 71 inside the bandwidth. Detecting a realistic
+10pp effect would have required roughly 77 times more effective observations.
+
+This is not a bug. It is a property of the design at a single threshold, and it
+became the paper's central motivation rather than a buried failure.
+
+Right-censoring was found here: 31 of the 323 rows have a null refiled_t1, all
+from filing year 2025, because their next annual meeting has not happened. The
+main specification drops them (n=292); a robustness block reinstates them as
+zeros and the sign is unchanged.
+
+
+================================================================================
+7. PHASE 5 — POOLING THE THREE BARS (the headline)
+================================================================================
+
+7.1 The idea
+
+All three bars have the same structure: a running variable measured as vote
+share minus the applicable bar. Stacking them takes the sample from 298 to
+2,052 and observations within +/-2pp from 29 to 153.
+
+7.2 Two structural discoveries
+
+  DISCOVERY 1  vote_number_5y runs from 1 to 65, not 1 to 3. Recurring
+  proposals (lobbying disclosure and similar) accumulate appearances, and the
+  law caps the bar at 25% for three or more. So the groups are n==1 -> 5%,
+  n==2 -> 15%, n>=3 -> 25%.
+
+  DISCOVERY 2  Only 431 unique firms, with up to 85 rows from a single firm.
+  Unclustered standard errors were badly overstated. All specifications now
+  cluster on CIK.
+
+7.3 Main estimates (bias-corrected, clustered on CIK)
+
+SUPERSEDED — these are the pre-fix tokenizer numbers, kept only to show what was
+originally reported. The current estimates are in Section 12.2 and are roughly
+half this size.
+
+  pooled, threshold FE                  0.158  SE 0.081  p 0.052
+  pooled, threshold FE + covariates     0.182  SE 0.084  p 0.030
+  pooled, no adjustment                 0.148  SE 0.088  p 0.092
+
+Per threshold (covariates + cluster):
+  5% bar   tau 0.030  SE 0.092  p 0.742
+  15% bar  tau 0.166  SE 0.286  p 0.562
+  25% bar  tau 0.208  SE 0.218  p 0.339
+
+Current per threshold (post-fix, see Section 12.2):
+  5% bar   tau -0.030  SE 0.088  p 0.735
+  15% bar  tau  0.110  SE 0.246  p 0.654
+  25% bar  tau -0.004  SE 0.224  p 0.985
+
+7.4 Assumption A9 — the one the pooled design lives on
+
+Pooling assumes the effect of becoming eligible for exclusion is comparable
+across the three bars. Threshold fixed effects absorb differences in the LEVEL
+of refiling between groups; they cannot fix differences in the SLOPE of the
+effect. The per-bar point estimates (0.03, 0.17, 0.21) suggest the effect grows
+with the bar, which pooling understates. This is stated in the paper rather
+than hidden.
+
+7.5 The pooled density test is a known artifact
+
+  per bar:  5% t=0.634 p=0.526 | 15% t=0.830 p=0.407 | 25% t=0.245 p=0.806
+  pooled:   t=1.921 p=0.055
+
+The pooled figure is meaningless. Stacking three groups with different vote
+share distributions creates a mechanical density jump at zero that has nothing
+to do with manipulation. Each bar passes individually. The paper says so
+explicitly and never reports the pooled number as evidence of sorting.
+
+7.6 Assumption A10 — threshold assignment depends on topic matching
+
+vote_number_5y is built by matching proposal titles across years with Jaccard
+similarity >= 0.5. This is a proxy for "substantially the same subject matter".
+Errors here assign the wrong CUTOFF, not merely a noisy outcome. Section 10
+covers what was found when this was audited.
+
+
+================================================================================
+8. PHASE 6 — R INSTALLED, AND CROSS-VALIDATION
+================================================================================
+
+The gfortran worry turned out to be unfounded: current CRAN rdrobust and
+rddensity are C++/Rcpp, not Fortran.
+
+R 4.6.2 installed with rig in USER mode, no sudo:
+  rig add release --user --without-translations
+Two failed attempts first: --without-translation (wrong flag) and admin mode
+demanding a sudo password. --user fixed it. Binaries at ~/.local/bin/R.
+Packages installed into ~/R/library, so R_LIBS_USER must be exported.
+
+Two R-specific bugs:
+
+  BUG 6  rddensity() returns $test as a LIST with $t_asy/$t_jk/$p_asy/$p_jk,
+         not a vector. dens$test[1] silently returned the NA asymptotic
+         statistic and printed it as a p-value.
+  BUG 7  R's rdrobust rejects an empty bwselect string, unlike the Python port
+         where "" means manual. When h is supplied, omit bwselect entirely.
+
+02_rdd_analysis.R and 02b_multi_cutoff_rd.R both run and reproduce every Python
+number to the last digit: 0.158/0.254, 0.137/0.313, the full bandwidth grid,
+balance, placebos, polynomial, censoring robustness, the pooled 0.182/0.084 and
+the per-bar 0.030/0.166/0.208. Only difference is a rounding-level placebo
+p-value (0.822 vs 0.823).
+
+This cross-implementation agreement is a real credibility asset and should be
+mentioned in the paper's appendix.
+
+
+================================================================================
+9. PHASE 7 — PAPER AND RULE VERIFICATION
+================================================================================
+
+03_paper_draft.md written: title, abstract, introduction, institutional
+framework, data, identification, results, threats, conclusion, appendices.
+
+Section 2 was later rebuilt from the primary source (17 CFR 240.14a-8, eCFR)
+rather than from memory. That corrected three factual errors:
+
+  said                          actually
+  (i)(5) social policy test     (i)(5) ECONOMIC RELEVANCE: under 5% of total
+                                assets AND 5% of net earnings AND 5% of gross
+                                sales, and not otherwise significantly related
+  (i)(6) unused                 (i)(6) ABSENCE OF POWER/AUTHORITY to implement
+  $2,000 held one year          tiered: $2k/3yr, $15k/2yr, or $25k/1yr
+
+Also corrected: one proposal per person per company per meeting; 500-word cap
+including the supporting statement; deadline is 120 calendar days before the
+company released the previous year's proxy; failure to appear and present a
+proposal permits exclusion of that proponent's proposals for two calendar years.
+
+Section 2 now covers, in order: who may submit (2.1), the resubmission rule
+(2.2), all thirteen exclusion grounds (2.3), the 14a-8(j) procedure including
+the 80-day filing deadline and the fact that the burden of persuasion sits on
+the company (2.4), why clearing the threshold does not guarantee a ballot
+(2.5), and threshold history (2.6).
+
+Assumption A11: the three-year recency clause does not bind in this design.
+Verified. It constrains exclusion of the next submission based on recency of
+the most recent vote, which is always the current vote, observed 6-18 months
+before the outcome. An earlier recomputation appearing to show 352 of 2,077 rows
+failing this condition was measuring priors rather than the most recent vote and
+was discarded.
+
+Assumption A12 (approximation): the five-year window is implemented as 1,827
+days measured from the vote date, while the rule measures from the date the
+company evaluates exclusion, up to ~18 months later. At the boundary this can
+shift a proposal between the 5% and 15% bars. Documented in Section 6.
+
+Removed from the paper: the claim that SEC staff "largely stopped issuing
+no-action relief" and that the SEC proposed rescinding Rule 14a-8 in September
+2026. Neither was verified. Both are now stated conditionally with an HTML
+TODO marker telling the author to verify or delete before circulation.
+
+
+================================================================================
+10. PHASE 8 — REFEREE AUDIT AND THE CORRECTIONS IT FORCED
+================================================================================
+
+The whole foundation was then audited as a hostile referee would. Six
+substantive problems were found. All six are being fixed; this section records
+what they were.
+
+10.1 The outcome was misdescribed (most serious)
+
+refiled_t1 is 1 where a similar proposal was VOTED ON 6-18 months later. An
+excluded resubmission produces no vote record, so it is invisible and scores 0.
+
+Therefore the outcome is:
+
+    P(same topic reaches a ballot next year) = P(refiled AND included)
+
+The paper had it exactly backwards, stating that the outcome records whether a
+proposal was filed rather than whether it reached a ballot. It also described
+the company's inclusion decision as "a separate, unmeasured margin", which is
+false: it is inside the outcome.
+
+Fixed. The estimand is now stated correctly as the reduced-form effect on
+BALLOT ACCESS. This is arguably the better and more policy-relevant object,
+because the rule exists to keep proposals off ballots. But it is not an estimate
+of proponent behaviour alone, and the paper now says so.
+
+10.2 No first stage, so the mechanism is unidentified
+
+Exclusion is never observed. The coefficient cannot be decomposed into companies
+excluding (supply) and proponents anticipating exclusion and not filing (demand).
+These have different policy implications. Resolving this requires SEC no-action
+letters. This remains the single largest open item (Section 12).
+
+10.3 Threshold assignment is fragile under topic-matching choices
+
+The tokenizer stripped proposal vocabulary but not vote-result boilerplate.
+50.4% of descriptions contain such boilerplate, rising to 83.4% of the 25% bar.
+Example:
+
+    "The stockholder proposal regarding political spending disclosure as
+     described in the Company's 2022 proxy statement was not approved as
+     follows:"
+
+Rebuilding the linkage with that boilerplate stripped moves about 4.3% of bar
+assignments in the full universe (2022-2025, all proposals) and about 10.3% in
+the final shareholder-proposal sample. Because boilerplate prevalence differs
+sharply by bar, the error is correlated with treatment assignment.
+
+Fixed: _TOPIC_STOP rewritten into two documented families, structural
+vocabulary and vote-result boilerplate, with content words such as report and
+policy deliberately retained. The whole pipeline was re-run from the warm cache
+so that vote_number_5y and refiled_t1 are recomputed, not patched.
+
+10.4 Sample completeness was asserted, never validated
+
+Discovery requires an 8-K with Item 5.07 AND one of three phrases in the full
+text. No external benchmark had been checked.
+
+Validated for 2023: 362 filings use "shareholder proposal", 613 use
+"stockholder proposal"; 49.7% and 32.7% respectively carry Item 5.07, implying
+roughly 340 eligible filings. We discovered 319, a capture rate near 94%. The
+items metadata was confirmed reliable (empty for 0.0% of sampled hits).
+
+10.5 Missing controls
+
+Year is imbalanced across bars (25% bar: 160 rows in 2022 vs 100 in 2025), and
+topic composition differs by bar (the 25% bar is dominated by persistent
+lobbying proposals). Neither year fixed effects nor topic fixed effects were in
+any specification. The 25% bar also pooled n==3 with n==65.
+
+Fixed: 02c_robustness.py adds year FE, topic FE, both together, a
+covariates-free variant, a 25%-bar-restricted-to-n==3 variant, and a variant
+dropping the 5% bar entirely. Duplicates on (cik, filing_date, proposal_desc)
+are dropped.
+
+10.6 The headline was the most favourable of three specifications
+
+FE only p=0.052, FE+covariates p=0.030, no adjustment p=0.092. Only one clears
+0.05 and it has the most free parameters. The paper now reports the range rather
+than a single number, and the robustness suite is presented as a distribution of
+estimates rather than a hunt for stars.
+
+Also flagged but not yet fixed: MSERD bandwidth selection is derived for
+independent sampling, so pairing it with clustering on CIK is not covered by the
+theory. Mitigation is to report the fixed-bandwidth grid alongside h* and not to
+lean on h* as if it were optimal under clustering.
+
+Also noted: 20 exact duplicate rows existed in the usable sample, and some
+descriptions are truncated to no topic at all, e.g.
+"Greenhill's stockholders voted against the Stockholder Proposal:" - these
+cannot be matched meaningfully.
+
+
+================================================================================
+11. PHASE 9 — WHAT WAS RE-RUN AFTER THE AUDIT
+================================================================================
+
+  1. Tokenizer rewritten in 01_scrape_edgar.py (_TOPIC_STOP).
+  2. Self-test re-run: all fixtures, header mapping, threshold boundary,
+     resubmission linkage and synthetic DGP still pass.
+  3. Full pipeline re-run from the warm cache with the corrected tokenizer, so
+     vote_number_5y and refiled_t1 are regenerated rather than patched.
+  4. 02_rdd_analysis.py and 02b_multi_cutoff_rd.py re-run on the new data.
+  5. 02c_robustness.py run for the first time.
+  6. Paper Sections 2.5, 3.1, 3.3 and 6 updated for the corrected outcome
+     definition, the coverage validation, and the tokenizer change.
+
+The previous dataset is preserved as rdd_data_v1.csv, with the old summary at
+results/v1_pooled_results_summary.md, so every revision can be compared against
+what was reported before.
+
+
+================================================================================
+12. PHASE 10 — THE MATCHING THRESHOLD, AND THE COLLAPSE OF THE HEADLINE
+================================================================================
+
+This is the most important correction in the project, and it was found by
+testing the audit's own fix rather than trusting it.
+
+12.1 Why it was tested
+
+Fixing the tokenizer (Section 10.3) changes vote_number_5y, and therefore changes
+which bar every proposal is measured against. That is not a cosmetic edit. If the
+new stoplist were too aggressive, it would break genuine matches and demote real
+15%-bar proposals to the 5% bar, producing a spuriously null result. If it were
+too weak, the old false matches would survive.
+
+So the matching threshold was made a parameter rather than a constant:
+
+    TOPIC_SIMILARITY_MIN = float(os.environ.get("TOPIC_SIM_MIN", "0.5"))
+
+and the entire pipeline was re-run at 0.4, 0.5 and 0.6 from the warm cache.
+
+12.2 What happened
+
+The headline estimate had been 0.182 with p = 0.030 on the pre-fix tokenizer.
+After the fix at the same 0.5 threshold it fell to 0.107 with p = 0.151.
+
+Pooled, bias-corrected, clustered on CIK:
+
+    Jaccard   pooled FE           pooled FE + covariates    p
+    0.4       0.126 (SE 0.072)    0.140 (SE 0.072)          0.052
+    0.5       0.085 (SE 0.073)    0.107 (SE 0.075)          0.151
+    0.6       0.138 (SE 0.059)    0.158 (SE 0.058)          0.007
+
+Per bar, the swing is much larger:
+
+    15% bar   0.399 (p 0.041) -> 0.110 (p 0.654) -> 0.450 (p 0.002)
+    25% bar   0.058 (p 0.808) -> -0.004 (p 0.985) -> -0.144 (p 0.507)
+
+The 25% bar changes sign. The 15% bar nearly quadruples. Only the pooled
+estimate keeps a stable sign.
+
+12.3 What was concluded, and what was thrown away
+
+The old 0.182 result is dead. It was produced by a tokenizer that let vote-result
+boilerplate into the topic tokens, inflating prior matches and therefore pushing
+proposals into higher bars.
+
+The honest claim is now: the effect is positive in every specification and every
+matching threshold, with a pooled range of roughly 0.07 to 0.25, but its
+magnitude and significance are not robust. The binding constraint on this study
+is the measurement of the threshold assignment, not the sample size.
+
+Consequences applied to the paper:
+
+  - Abstract rewritten around 0.107 (SE 0.075, p 0.151), framed as suggestive.
+  - Section 4.4 updated to the new single-cutoff numbers (298 proposals, 29
+    within 2pp, 0.116 with SE 0.270, p 0.668, MDE ~76pp).
+  - Section 5.1 rewritten, explicitly stating the estimate is about half the
+    preliminary version and that the earlier figure must not be cited.
+  - Section 5.2, 5.3, 5.4, 5.5, 5.6, 5.7 all re-tabulated.
+  - New Section 5.8 added, with 5.8a (seven robustness specifications) and
+    5.8b (three matching thresholds).
+  - The claim of a monotone gradient across bars was RETRACTED. The per-bar
+    estimates are now -0.030, 0.110 and -0.004, which is no pattern at all.
+  - Section 6 measurement paragraph rewritten to distinguish outcome noise from
+    cutoff misassignment, and to name the latter as the binding limitation.
+  - Section 7 conclusion rewritten as suggestive evidence.
+  - Section 3 sample table updated to 2,052 observations, 430 firms.
+  - README and NEXT_STEPS rewritten, with an explicit superseded notice.
+
+12.4 The lesson worth keeping
+
+A robustness check that only confirms what you already found is not a check.
+The single most useful thing done in this project was varying the one parameter
+that the whole identification depends on, and reporting the result when it moved.
+
+Assumption A10 (topic matching identifies "substantially the same subject
+matter") is therefore not merely imperfect: it is the dominant source of
+uncertainty in the estimates, and it is now stated that way.
+
+================================================================================
+13. OPEN ITEMS
+================================================================================
+
+  1. HAND-VALIDATE THE LINKAGE (now the highest-value item). Draw a random
+     sample of matched and unmatched pairs and hand-code whether they are the
+     same subject matter. That would establish whether 0.4, 0.5 or 0.6 is
+     closest to truth, and would convert the current range of estimates into a
+     single defensible number with a measurement-error correction. Everything
+     else on this list is secondary to it.
+
+  2. FIRST STAGE. Scrape SEC no-action letters to observe whether exclusion
+     actually happened. Without it the coefficient cannot be split into company
+     exclusion versus proponent deterrence. New data collection.
+
+  3. Verify or delete the two claims about no-action relief drying up and the
+     proposed rescission of Rule 14a-8. Marked with a TODO in the paper.
+
+  4. Proponent identity is not parsed, so sponsor fixed effects are impossible
+     as built. Would require parsing the proponent name from each filing.
+
+  5. MSERD bandwidth selection under clustering is not theory-supported.
+     Reported as a robustness grid instead.
+
+  6. Descriptions truncated to no topic should be counted and dropped
+     explicitly rather than matched arbitrarily.
+
+  7. The 94% coverage figure is for 2023 only. Other years are assumed similar
+     and not measured.
+
+
+================================================================================
+14. STANDING ASSUMPTIONS, COLLECTED
+================================================================================
+
+  A1  The supplied scraper is correct. (Wrong twice; see Sections 3 and 5.4.)
+  A2  EFTS response shape matches the code. Verified live.
+  A3  One venv suffices for the whole project. Extended as needed.
+  A4  vote_share comes from raw counts, never printed percentages. Verified:
+      zero nulls, no mass at the thresholds.
+  A5  Abstentions and broker non-votes excluded, per SLB No. 14.
+  A6  Comparison is strict: 14.99% excludable, 15.00% not.
+  A7  A second-appearance vote is compared to the 15% bar governing the third
+      submission. Confirmed correct.
+  A8  history_complete is True for all usable rows. Verified.
+  A9  The effect of eligibility is comparable across the three bars. Untestable
+      directly; per-bar estimates are too imprecise to establish heterogeneity.
+  A10 Topic matching with Jaccard >= 0.5 identifies "substantially the same
+      subject matter". NOT merely a proxy: it is the dominant source of
+      uncertainty, because it assigns the cutoff. Section 12 shows the pooled
+      estimate moving 0.107 to 0.158 across thresholds 0.4-0.6.
+  A11 The three-year recency clause does not bind. Verified.
+  A12 The five-year window is approximated by 1,827 days from the vote date.
+  A13 Exclusion is permitted, not required, so the estimate is intent-to-treat
+      over eligibility rather than over actual exclusion.
+  A14 The outcome measures ballot access, not filing, because excluded
+      resubmissions leave no vote record.
+  A15 Firm-level clustering (431 clusters) captures the dependence structure.
+      Two-way clustering on firm and year is not implemented.
+
+================================================================================
+END
+================================================================================

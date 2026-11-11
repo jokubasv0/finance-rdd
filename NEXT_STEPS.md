@@ -13,30 +13,44 @@
 ## Headline result
 
 Pooling all three 14a-8(i)(12) bars (`5%` for a proposal voted once, `15%` for
-twice, `25%` for three or more) turns an uninformative design into a real one.
+twice, `25%` for three or more) is what makes the question answerable at all.
+The estimate is positive everywhere but its significance depends on the matching
+threshold, so it is reported as suggestive.
 
 | Specification | τ | SE | p | 95% CI |
 |---|---|---|---|---|
-| Pooled, threshold FE | 0.158 | 0.081 | 0.052 | [−0.001, 0.318] |
-| **Pooled, FE + covariates** | **0.182** | **0.084** | **0.030** | **[0.017, 0.346]** |
-| Pooled, no adjustment | 0.148 | 0.088 | 0.092 | [−0.024, 0.321] |
+| Pooled, threshold FE | 0.085 | 0.073 | 0.244 | [−0.058, 0.229] |
+| Pooled, FE + covariates | 0.107 | 0.075 | 0.151 | [−0.039, 0.253] |
+| Pooled, no adjustment | 0.092 | 0.078 | 0.241 | [−0.062, 0.245] |
 
-Sample 2,077 proposals, 431 firms, SEs clustered on CIK. Per-threshold:
-5% bar 0.030 (p 0.74), 15% bar 0.166 (p 0.56), 25% bar 0.208 (p 0.34) — the
-pooled estimate is doing the work, individual bars are too thin.
+Sample 2,052 proposals, 430 firms, SEs clustered on CIK. Per-threshold:
+5% bar −0.030 (p 0.74), 15% bar 0.110 (p 0.65), 25% bar −0.004 (p 0.99) — the
+pooled estimate is doing the work, individual bars are far too thin, and there
+is no longer any evidence of a monotone gradient.
 
-Reading: clearing the applicable bar raises the probability the proponent
-resubmits by roughly 18 percentage points against a base refiling rate of 27%.
+Reading: clearing the applicable bar raises the probability that a same-topic
+proposal reaches the ballot a year later by roughly 10 percentage points against
+a base rate of 27%.
 
-Robustness all passes: bandwidth grid τ 0.11–0.14 with p 0.027–0.215 and a
-stable sign; covariate balance p 0.30–0.85; placebo cutoffs p 0.82; polynomial
-p=1 0.158 and p=2 0.172.
+Robustness suite (`02c_robustness.py`): seven specifications, τ in [0.073, 0.254],
+positive in 7 of 7, significant at 5% in 0 of 7. Balance p 0.26–0.74; placebos
+p 0.79–0.97; polynomial p=1 0.085, p=2 0.047.
+
+> **Superseded:** an earlier version reported 0.182 (p = 0.030). That came from a
+> tokenizer that left vote-result boilerplate in the matching tokens. Do not cite
+> it. See `STUDY_PROCESS.txt` Phase 10.
 
 ## Two things to be careful about
 
-1. **Pooled McCrary flags at p = 0.055.** This is a mechanical artifact of
+1. **The matching threshold drives the precision, not the sample size.** Moving
+   the Jaccard cutoff from 0.4 to 0.6 moves the pooled estimate from 0.107 to
+   0.158 and its p-value from 0.052 to 0.007; the 15% bar swings 0.110 → 0.450
+   and the 25% bar changes sign. Direction is robust, magnitude is not. Hand-coding
+   a validation sample is the highest-value remaining analysis.
+
+2. **Pooled McCrary flags at p = 0.039.** This is a mechanical artifact of
    stacking three groups whose vote-share distributions differ; each group
-   individually passes (p 0.53, 0.41, 0.81). The valid manipulation tests are
+   individually passes (p 0.55, 0.62, 0.57). The valid manipulation tests are
    the per-threshold ones. Do not report the pooled test as evidence of sorting.
 2. **Pooling assumes a comparable effect across bars.** Threshold FE absorb
    level differences but not slope differences. The per-threshold spread

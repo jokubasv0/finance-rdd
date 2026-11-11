@@ -143,7 +143,9 @@ FOCAL_CUTOFF = 0.15
 MIN_GAP_DAYS = 180            # anything closer is the same meeting / season
 NEXT_MEETING_MAX_DAYS = 550   # t+1 annual meeting must fall within ~18 months
 LOOKBACK_DAYS = 5 * 365 + 2   # "preceding five calendar years" (approximation)
-TOPIC_SIMILARITY_MIN = 0.5    # Jaccard similarity on topic keywords
+TOPIC_SIMILARITY_MIN = float(os.environ.get("TOPIC_SIM_MIN", "0.5"))
+# Jaccard similarity on topic keywords. Overridable so the sensitivity of the
+# threshold assignment to this choice can be measured without editing code.
 
 # Output schema: the 12 standard columns first, then audit / design columns.
 STANDARD_COLUMNS = [
@@ -814,12 +816,25 @@ def compute_vote_share(votes_for: Any, votes_against: Any) -> float:
 # 2b. RESUBMISSION HISTORY & OUTCOME (vote_number_5y, refiled_t1)
 # =============================================================================
 
+# Words carrying no topical signal, in two families:
+#   1. structural  -- proposal vocabulary present in nearly every description
+#   2. vote-result -- 8-K reporting language that leaks into proposal_desc when a
+#      table cell is captured with its surrounding sentence, e.g.
+#      "...was not approved as follows:". Left in, these words make unrelated
+#      proposals look similar and inflate the apparent resubmission history.
+# Content words such as "report" and "policy" are deliberately NOT stripped:
+# they distinguish what is being asked for ("report on X" vs "adopt a policy on
+# X"), and removing them was found to raise false-positive matches.
 _TOPIC_STOP = set("""
 a an the of on to for and or in by with from at as be is are its our their this that these
 regarding requesting request requests relating related concerning re shareholder shareholders
-stockholder stockholders shareowner shareowners proposal proposals vote voting approve approval
-adopt adoption company companys item no non binding advisory submitted presented entitled
-board directors report reports policy""".split())
+stockholder stockholders shareowner shareowners proposal proposals vote voting votes voted
+approve approval approved adopt adoption company companys item no non binding advisory
+submitted presented entitled board directors
+were was been being below above described description statement proxy follows following
+based upon table set forth pursuant hereby further including include includes commission
+sec annual meeting meetings cast record date abstain abstentions abstained brokers broker
+against""".split())
 
 
 def topic_tokens(desc: str) -> frozenset:
