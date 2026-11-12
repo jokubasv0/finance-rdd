@@ -85,6 +85,10 @@ def fmt(r: dict, digits: int = 3) -> str:
             f"n={r['n_left']}/{r['n_right']}")
 
 
+# MDE at 80% power for a two-sided 5% test: (z_0.975 + z_0.80) * SE.
+MDE_Z = 1.959964 + 0.841621
+
+
 # ---------------------------------------------------------------------------
 # analysis blocks
 # ---------------------------------------------------------------------------
@@ -259,6 +263,9 @@ def main(argv: list[str] | None = None) -> int:
         "marginally significant" if base["p_bc"] < 0.10 else "NOT significant")
     print(f" interpretation       : effect of eligibility is {sig} at 5% "
           f"(p={base['p_bc']:.3f})")
+    # MDE at 80% power, two-sided 5%: (z_{0.975} + z_{0.80}) * SE = 2.802 * SE.
+    # A coefficient below its own MDE cannot be distinguished from zero here.
+    print(f" minimum detectable effect (80% power): {MDE_Z * base['se_bc']:.3f}")
     pd.DataFrame([base]).to_csv(outdir / "03_baseline.csv", index=False)
 
     # ---- 4. bandwidth sensitivity ----

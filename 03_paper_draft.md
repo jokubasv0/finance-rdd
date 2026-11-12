@@ -639,19 +639,27 @@ a genuine approximation rather than an exact implementation of the rule.
 it. The estimate is therefore a lower bound on the effect of actual exclusion,
 scaled by the share of eligible proposals that companies choose to omit.
 
-**External validity.** The sample covers 2022–2025. Reporting suggests that
-during part of this period SEC staff granted no-action relief on 14a-8 grounds
-far less readily than in earlier years, and that the Commission has since
-proposed further changes to the rule. We have not independently verified the
-extent of either development, and we therefore do not condition the analysis on
-them. If relief did become harder to obtain, companies relying on the rule
-during our sample were doing so without the staff guidance that historically
-accompanied it, which would attenuate the estimated effect of eligibility
-relative to a regime with a functioning no-action process.
+**External validity.** The sample covers 2022–2025, and the institutional
+environment changed at the very end of that window and immediately after it.
+On 17 November 2025 the Division of Corporation Finance announced that, for the
+2025–2026 proxy season, it would not respond to no-action requests under Rule
+14a-8 except those brought under Rule 14a-8(i)(1) (SEC, 2025). On 14 August 2026
+the Division made that practice permanent, discontinuing responses to Rule 14a-8
+no-action requests entirely and ceasing to issue "no objection" letters (SEC,
+2026a). On 16 September 2026 the Commission proposed to rescind Rule 14a-8
+altogether, together with amendments to Rule 14a-4(c) governing discretionary
+voting authority (SEC, 2026b, Release No. 34-106383).
 
-<!-- TODO(jn): verify the no-action-relief and rescission claims against SEC
-     releases before circulation, or delete this paragraph. Currently unverified
-     and stated conditionally for that reason. -->
+Two implications follow. First, for almost all of our sample period the
+no-action process was functioning normally, so the estimates describe a regime
+in which companies could obtain staff confirmation before excluding. If that
+confirmation lowered the perceived cost of exclusion, our estimates understate
+the effect that would obtain under the post-2025 regime, where companies must
+judge the legal risk themselves. Second, the proposed rescission, if adopted,
+would remove the thresholds studied here and return the question to state law and
+company governing documents, which makes the magnitude of the deterrence effect
+directly relevant to the policy debate rather than a matter of historical
+interest.
 
 ---
 
@@ -744,3 +752,15 @@ McCrary, J. (2008). Manipulation of the running variable in the regression
 discontinuity design: a density test. *Journal of Econometrics*.
 
 SEC Staff Legal Bulletin No. 14 (CF). Shareholder proposals.
+
+U.S. Securities and Exchange Commission (2025). Division of Corporation
+Finance, statement on the Rule 14a-8 no-action process, 17 November 2025.
+
+U.S. Securities and Exchange Commission (2026a). Division of Corporation
+Finance, "Statement Regarding Rule 14a-8 Process," 14 August 2026.
+https://www.sec.gov/newsroom/speeches-statements/corpfin-statement-rule-14a-8-process-081426
+
+U.S. Securities and Exchange Commission (2026b). "Rescission of Rule 14a-8's
+Federal Regulation of Shareholder Proposals and Amendments to Rule 14a-4,"
+Release No. 34-106383, File No. S7-2026-32, 91 Fed. Reg. 59904 (21 September
+2026).

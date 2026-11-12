@@ -1,0 +1,601 @@
+INFO    Discovery 2016-12-31..2016-12-31: 0 Item 5.07 filings
+INFO    Discovery 2017-01-01..2017-12-31: 298 Item 5.07 filings
+INFO    Discovery 2018-01-01..2018-12-31: 286 Item 5.07 filings
+INFO    Discovery 2019-01-01..2019-12-31: 297 Item 5.07 filings
+INFO    Discovery 2020-01-01..2020-12-31: 295 Item 5.07 filings
+INFO    Discovery 2021-01-01..2021-12-31: 294 Item 5.07 filings
+INFO    Discovery 2022-01-01..2022-12-31: 306 Item 5.07 filings
+INFO    Discovery 2023-01-01..2023-12-31: 319 Item 5.07 filings
+INFO    Discovery 2024-01-01..2024-12-31: 339 Item 5.07 filings
+INFO    Discovery 2025-01-01..2025-12-31: 327 Item 5.07 filings
+INFO    Discovery 2026-01-01..2026-11-11: 279 Item 5.07 filings
+INFO    Discovered 3040 candidate 8-K filings (2016-12-31 .. 2026-11-11)
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1161728/000116172817000012/f8k_20170516.pdf
+WARNING SKIP no-vote-data | 0001161728 | 0001161728-17-000012 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1161728/000116172817000012/f8k_20170516.pdf
+WARNING SKIP no-vote-data | 0001286681 | 0001193125-17-148365 | tables=5 errors=4 | https://www.sec.gov/Archives/edgar/data/1286681/000119312517148365/d386644d8k.htm
+INFO      ... 50/3040 filings processed
+WARNING SKIP no-vote-data | 0000713676 | 0001193125-17-145322 | tables=16 errors=0 | https://www.sec.gov/Archives/edgar/data/713676/000119312517145322/d385803d8k.htm
+WARNING SKIP no-vote-data | 0000916457 | 0000916457-17-000039 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/916457/000091645717000039/cpn_8kx2017xannualxmeeting.htm
+WARNING SKIP no-vote-data | 0001467858 | 0001193125-17-201530 | tables=8 errors=6 | https://www.sec.gov/Archives/edgar/data/1467858/000119312517201530/d395090d8k.htm
+INFO      ... 100/3040 filings processed
+INFO      checkpoint: 1275 rows from 100/3040 filings -> rdd_data.partial.csv
+WARNING SKIP no-vote-data | 0001530721 | 0001530721-17-000076 | tables=4 errors=4 | https://www.sec.gov/Archives/edgar/data/1530721/000153072117000076/kors8-k07012017.htm
+WARNING SKIP no-vote-data | 0001636050 | 0001047469-17-007784 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1636050/000104746917007784/a2234128z8-k.htm
+WARNING SKIP no-vote-data | 0000042582 | 0001193125-17-123372 | tables=1 errors=0 | https://www.sec.gov/Archives/edgar/data/42582/000119312517123372/d375510d8k.htm
+WARNING SKIP no-vote-data | 0000316709 | 0000316709-17-000023 | tables=4 errors=1 | https://www.sec.gov/Archives/edgar/data/316709/000031670917000023/form8-kannualmeetingvote.htm
+INFO      ... 150/3040 filings processed
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1418091/000156459017011570/twtr-8k_20170523.htm
+WARNING SKIP no-vote-data | 0001065088 | 0001065088-17-000019 | tables=15 errors=4 | https://www.sec.gov/Archives/edgar/data/1065088/000106508817000019/form8-k2017annualmeeting.htm
+INFO      ... 200/3040 filings processed
+INFO      checkpoint: 2433 rows from 200/3040 filings -> rdd_data.partial.csv
+WARNING SKIP no-vote-data | 0000949039 | 0001193125-17-173383 | tables=2 errors=1 | https://www.sec.gov/Archives/edgar/data/949039/000119312517173383/d382193d8k.htm
+WARNING SKIP no-vote-data | 0000075362 | 0001193125-17-148456 | tables=9 errors=0 | https://www.sec.gov/Archives/edgar/data/75362/000119312517148456/d371963d8k.htm
+WARNING SKIP no-vote-data | 0001120193 | 0001193125-17-168646 | tables=1 errors=1 | https://www.sec.gov/Archives/edgar/data/1120193/000119312517168646/d373728d8k.htm
+WARNING SKIP no-vote-data | 0000096021 | 0001193125-17-347159 | tables=6 errors=4 | https://www.sec.gov/Archives/edgar/data/96021/000119312517347159/d490616d8k.htm
+INFO      ... 250/3040 filings processed
+WARNING SKIP no-vote-data | 0000352363 | 0001558370-17-004747 | tables=5 errors=4 | https://www.sec.gov/Archives/edgar/data/352363/000155837017004747/f8-k.htm
+WARNING SKIP no-vote-data | 0001110783 | 0001110783-17-000014 | tables=14 errors=6 | https://www.sec.gov/Archives/edgar/data/1110783/000111078317000014/form8-k.htm
+INFO      ... 300/3040 filings processed
+INFO      checkpoint: 3553 rows from 300/3040 filings -> rdd_data.partial.csv
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/78003/000007800318000041/a8k_votingxresultsx2018.htm
+WARNING SKIP no-vote-data | 0001286681 | 0001193125-18-139051 | tables=8 errors=4 | https://www.sec.gov/Archives/edgar/data/1286681/000119312518139051/d574317d8k.htm
+WARNING SKIP no-vote-data | 0000049938 | 0001193125-18-139436 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/49938/000119312518139436/d472006d8k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/14272/000114036118021522/s002260x1_8k.htm
+INFO      ... 350/3040 filings processed
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1800/000110465918028644/a18-12422_18k.htm
+WARNING SKIP no-vote-data | 0000914208 | 0000914208-18-000309 | tables=4 errors=0 | https://www.sec.gov/Archives/edgar/data/914208/000091420818000309/form8k05102018.htm
+WARNING SKIP no-vote-data | 0001115222 | 0001115222-18-000009 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1115222/000111522218000009/a2018q1form8-k.htm
+WARNING SKIP no-vote-data | 0001530721 | 0001530721-18-000068 | tables=4 errors=4 | https://www.sec.gov/Archives/edgar/data/1530721/000153072118000068/item5078118.htm
+INFO      ... 400/3040 filings processed
+INFO      checkpoint: 4814 rows from 400/3040 filings -> rdd_data.partial.csv
+WARNING SKIP no-vote-data | 0000074260 | 0000074260-18-000064 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/74260/000007426018000064/form8kdatedaugust232018.htm
+INFO      ... 450/3040 filings processed
+WARNING SKIP no-vote-data | 0000915389 | 0000915389-18-000028 | tables=8 errors=0 | https://www.sec.gov/Archives/edgar/data/915389/000091538918000028/a20180508annualshareholder.htm
+WARNING SKIP no-vote-data | 0000070145 | 0001193125-18-080830 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/70145/000119312518080830/d518216d8k.htm
+INFO      ... 500/3040 filings processed
+INFO      checkpoint: 6069 rows from 500/3040 filings -> rdd_data.partial.csv
+WARNING SKIP no-vote-data | 0001476963 | 0001553350-18-000833 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1476963/000155335018000833/htbx_8k.htm
+WARNING SKIP no-vote-data | 0000096021 | 0001193125-18-329023 | tables=5 errors=5 | https://www.sec.gov/Archives/edgar/data/96021/000119312518329023/d657229d8k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/47217/000004721718000017/a8-k42718filing.htm
+INFO      ... 550/3040 filings processed
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1645590/000164559018000008/form8-k49docx.htm
+WARNING SKIP no-vote-data | 0000063276 | 0001193125-18-170919 | tables=12 errors=0 | https://www.sec.gov/Archives/edgar/data/63276/000119312518170919/d551807d8k.htm
+WARNING SKIP no-vote-data | 0000075362 | 0001193125-18-152947 | tables=4 errors=0 | https://www.sec.gov/Archives/edgar/data/75362/000119312518152947/d555135d8k.htm
+WARNING SKIP no-vote-data | 0000773840 | 0000930413-18-001430 | tables=14 errors=0 | https://www.sec.gov/Archives/edgar/data/773840/000093041318001430/c91069_8k.htm
+WARNING SKIP no-vote-data | 0001110783 | 0001110783-18-000037 | tables=8 errors=4 | https://www.sec.gov/Archives/edgar/data/1110783/000111078318000037/form8-k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/78003/000007800319000018/a8_kxvoting2019.htm
+INFO      ... 600/3040 filings processed
+INFO      checkpoint: 7244 rows from 600/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0000859070 | 0001437749-19-010912 | tables=3 errors=2 | https://www.sec.gov/Archives/edgar/data/859070/000143774919010912/fcbc20190521_8k.htm
+WARNING SKIP no-vote-data | 0001627223 | 0001564590-19-015602 | tables=8 errors=4 | https://www.sec.gov/Archives/edgar/data/1627223/000156459019015602/cc-8k_20190430.htm
+WARNING SKIP no-vote-data | 0000794367 | 0000794367-19-000066 | tables=10 errors=0 | https://www.sec.gov/Archives/edgar/data/794367/000079436719000066/form8k-5212019.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1800/000110465919025282/a19-9055_18k.htm
+INFO      ... 650/3040 filings processed
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/14272/000114036119010115/nc10002326x1_8k.htm
+INFO      ... 700/3040 filings processed
+INFO      checkpoint: 8453 rows from 700/3040 filings -> rdd_data.partial.csv
+WARNING SKIP no-vote-data | 0000042582 | 0001193125-19-104667 | tables=1 errors=0 | https://www.sec.gov/Archives/edgar/data/42582/000119312519104667/d735114d8k.htm
+INFO      ... 750/3040 filings processed
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0000915389 | 0000915389-19-000024 | tables=5 errors=0 | https://www.sec.gov/Archives/edgar/data/915389/000091538919000024/a20190506annualshareholder.htm
+INFO      ... 800/3040 filings processed
+INFO      checkpoint: 9707 rows from 800/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0000096021 | 0001193125-19-293520 | tables=4 errors=4 | https://www.sec.gov/Archives/edgar/data/96021/000119312519293520/d834169d8k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1645590/000164559019000010/form8-k2019annualmeetingre.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/47217/000004721719000021/a8-k42419filing.htm
+INFO      ... 850/3040 filings processed
+WARNING SKIP no-vote-data | 0000075362 | 0001193125-19-136791 | tables=2 errors=0 | https://www.sec.gov/Archives/edgar/data/75362/000119312519136791/d716034d8k.htm
+WARNING SKIP no-vote-data | 0000063276 | 0001193125-19-152707 | tables=5 errors=0 | https://www.sec.gov/Archives/edgar/data/63276/000119312519152707/d686153d8k.htm
+WARNING SKIP no-vote-data | 0000773840 | 0000930413-19-001411 | tables=12 errors=0 | https://www.sec.gov/Archives/edgar/data/773840/000093041319001411/c93527_8k.htm
+WARNING SKIP no-vote-data | 0001018724 | 0001018724-20-000015 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1018724/000101872420000015/amznx2020x05x29x8k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1800/000110465920052424/tm2017882-1_8k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/78003/000007800320000031/a8-kcover42320.htm
+INFO      ... 900/3040 filings processed
+INFO      checkpoint: 10880 rows from 900/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0001627223 | 0001564590-20-019790 | tables=8 errors=4 | https://www.sec.gov/Archives/edgar/data/1627223/000156459020019790/cc-8k_20200428.htm
+INFO      ... 950/3040 filings processed
+WARNING SKIP no-vote-data | 0000063908 | 0000063908-20-000048 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/63908/000006390820000048/form8k.pdf
+WARNING SKIP no-vote-data | 0000315189 | 0001104659-20-027293 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/315189/000110465920027293/tm2011321d1_8k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/93556/000119312520113707/d925936d8k.htm
+INFO      ... 1000/3040 filings processed
+INFO      checkpoint: 12113 rows from 1000/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0000042582 | 0001193125-20-102287 | tables=1 errors=0 | https://www.sec.gov/Archives/edgar/data/42582/000119312520102287/d916570d8k.htm
+INFO      ... 1050/3040 filings processed
+WARNING SKIP no-vote-data | 0000915389 | 0000915389-20-000037 | tables=5 errors=0 | https://www.sec.gov/Archives/edgar/data/915389/000091538920000037/emn-20200507.htm
+WARNING SKIP no-vote-data | 0001495584 | 0001398344-20-013299 | tables=3 errors=2 | https://www.sec.gov/Archives/edgar/data/1495584/000139834420013299/fp0055204_8k.htm
+WARNING SKIP no-vote-data | 0001133818 | 0001104659-20-137431 | tables=6 errors=0 | https://www.sec.gov/Archives/edgar/data/1133818/000110465920137431/tm2038927d1_8k.htm
+WARNING SKIP no-vote-data | 0001014473 | 0001014473-20-000021 | tables=4 errors=0 | https://www.sec.gov/Archives/edgar/data/1014473/000101447320000021/form8-kx05x21x2020xann.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1645590/000164559020000011/a2020annualmeetingresu.htm
+WARNING SKIP no-vote-data | 0000070145 | 0001193125-20-074445 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/70145/000119312520074445/d856042d8k.htm
+INFO      ... 1100/3040 filings processed
+INFO      checkpoint: 13339 rows from 1100/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0000088121 | 0000088121-20-000040 | tables=4 errors=0 | https://www.sec.gov/Archives/edgar/data/88121/000008812120000040/seb-20200427x8k.htm
+INFO      ... 1150/3040 filings processed
+WARNING SKIP no-vote-data | 0000063276 | 0001193125-20-170431 | tables=5 errors=0 | https://www.sec.gov/Archives/edgar/data/63276/000119312520170431/d944413d8k.htm
+WARNING SKIP no-vote-data | 0001099941 | 0001140361-20-012828 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1099941/000114036120012828/form8k.htm
+WARNING SKIP no-vote-data | 0000075362 | 0001193125-20-118696 | tables=4 errors=0 | https://www.sec.gov/Archives/edgar/data/75362/000119312520118696/d920234d8k.htm
+WARNING SKIP no-vote-data | 0000860730 | 0001193125-20-135015 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/860730/000119312520135015/d923149d8k.htm
+WARNING SKIP no-vote-data | 0001359931 | 0001104659-20-003115 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1359931/000110465920003115/tm201618d1_8k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1090727/000109072720000025/ups-20200514.htm
+WARNING SKIP no-vote-data | 0000773840 | 0000773840-20-000019 | tables=10 errors=0 | https://www.sec.gov/Archives/edgar/data/773840/000077384020000019/c917648k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1800/000110465921054917/tm2114110d1_8k.htm
+INFO      ... 1200/3040 filings processed
+INFO      checkpoint: 14521 rows from 1200/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/78003/000007800321000059/pfe-20210422.htm
+WARNING SKIP no-vote-data | 0001560905 | 0001548123-21-000013 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1560905/000154812321000013/f8-kannuals-hmtgtgc03-20-202.htm
+WARNING SKIP no-vote-data | 0000016875 | 0001193125-21-129141 | tables=5 errors=5 | https://www.sec.gov/Archives/edgar/data/16875/000119312521129141/d24034d8k.htm
+INFO      ... 1250/3040 filings processed
+WARNING SKIP no-vote-data | 0000713676 | 0000713676-21-000057 | tables=5 errors=0 | https://www.sec.gov/Archives/edgar/data/713676/000071367621000057/pnc-20210427.htm
+WARNING SKIP no-vote-data | 0000923120 | 0001193125-21-005219 | tables=5 errors=0 | https://www.sec.gov/Archives/edgar/data/923120/000119312521005219/d931159d8k.htm
+WARNING SKIP no-vote-data | 0001142750 | 0001142750-21-000014 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1142750/000114275021000014/amn-20210421.htm
+INFO      ... 1300/3040 filings processed
+INFO      checkpoint: 15777 rows from 1300/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0000042582 | 0001193125-21-118797 | tables=1 errors=0 | https://www.sec.gov/Archives/edgar/data/42582/000119312521118797/d141352d8k.htm
+WARNING SKIP no-vote-data | 0001666700 | 0001666700-21-000024 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1666700/000166670021000024/dd-20210427.htm
+INFO      ... 1350/3040 filings processed
+WARNING SKIP no-vote-data | 0000915389 | 0000915389-21-000032 | tables=6 errors=0 | https://www.sec.gov/Archives/edgar/data/915389/000091538921000032/emn-20210506.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1579298/000156459021029783/burl-8k_20210519.htm
+WARNING SKIP no-vote-data | 0000088121 | 0000088121-21-000025 | tables=3 errors=0 | https://www.sec.gov/Archives/edgar/data/88121/000008812121000025/seb-20210426x8k.htm
+INFO      ... 1400/3040 filings processed
+INFO      checkpoint: 16992 rows from 1400/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0001459200 | 0001459200-21-000023 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1459200/000145920021000023/alrm-20210609.htm
+WARNING SKIP no-vote-data | 0000096021 | 0001193125-21-338587 | tables=4 errors=4 | https://www.sec.gov/Archives/edgar/data/96021/000119312521338587/d247263d8k.htm
+WARNING SKIP no-vote-data | 0000055785 | 0000055785-21-000043 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/55785/000005578521000043/pre-20210429.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/47217/000004721721000018/hpq-20210413.htm
+WARNING SKIP no-vote-data | 0000047217 | 0000047217-21-000018 | tables=7 errors=0 | https://www.sec.gov/Archives/edgar/data/47217/000004721721000018/hpq-20210413.htm
+INFO      ... 1450/3040 filings processed
+WARNING SKIP no-vote-data | 0000075362 | 0001193125-21-144228 | tables=2 errors=0 | https://www.sec.gov/Archives/edgar/data/75362/000119312521144228/d107682d8k.htm
+WARNING SKIP no-vote-data | 0001018724 | 0001104659-22-065872 | tables=1 errors=0 | https://www.sec.gov/Archives/edgar/data/1018724/000110465922065872/tm2215904d1_8k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1800/000110465922054704/tm2214206d1_8k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/63908/000006390822000028/form8k.pdf
+WARNING SKIP no-vote-data | 0000063908 | 0000063908-22-000028 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/63908/000006390822000028/form8k.pdf
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/78003/000007800322000066/pfe-20220428.htm
+INFO      ... 1500/3040 filings processed
+INFO      checkpoint: 18189 rows from 1500/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+INFO      ... 1550/3040 filings processed
+WARNING SKIP no-vote-data | 0000713676 | 0000713676-22-000042 | tables=5 errors=0 | https://www.sec.gov/Archives/edgar/data/713676/000071367622000042/pnc-20220427.htm
+INFO      ... 1600/3040 filings processed
+INFO      checkpoint: 19489 rows from 1600/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1124140/000112414022000042/exas-20220609.htm
+WARNING SKIP no-vote-data | 0000042582 | 0001193125-22-106881 | tables=1 errors=0 | https://www.sec.gov/Archives/edgar/data/42582/000119312522106881/d284901d8k.htm
+WARNING SKIP no-vote-data | 0000096021 | 0001193125-22-291227 | tables=5 errors=5 | https://www.sec.gov/Archives/edgar/data/96021/000119312522291227/d205504d8k.htm
+WARNING SKIP no-vote-data | 0000807882 | 0001157523-22-000300 | tables=6 errors=0 | https://www.sec.gov/Archives/edgar/data/807882/000115752322000300/a52590811.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1543151/000155278122000401/e22307_uber-8k.htm
+INFO      ... 1650/3040 filings processed
+WARNING SKIP no-vote-data | 0000915389 | 0000915389-22-000026 | tables=6 errors=0 | https://www.sec.gov/Archives/edgar/data/915389/000091538922000026/emn-20220505.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1915657/000191565722000023/dino-20220608.htm
+INFO      ... 1700/3040 filings processed
+INFO      checkpoint: 20763 rows from 1700/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0001811074 | 0001104659-22-001496 | tables=7 errors=6 | https://www.sec.gov/Archives/edgar/data/1811074/000110465922001496/tm2136642d1_8k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1362468/000136246822000033/algt-20220622.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/701288/000110465922064576/tm2216907d1_8k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/1645590/000164559022000018/hpe-20220405.htm
+INFO      ... 1750/3040 filings processed
+WARNING SKIP no-vote-data | 0000063276 | 0001193125-22-162361 | tables=5 errors=0 | https://www.sec.gov/Archives/edgar/data/63276/000119312522162361/d245477d8k.htm
+WARNING SKIP no-vote-data | 0000047217 | 0001140361-22-015595 | tables=5 errors=0 | https://www.sec.gov/Archives/edgar/data/47217/000114036122015595/brhc10036624_8k.htm
+WARNING SKIP no-vote-data | 0000075362 | 0001193125-22-134022 | tables=3 errors=0 | https://www.sec.gov/Archives/edgar/data/75362/000119312522134022/d352167d8k.htm
+WARNING SKIP no-vote-data | 0000895728 | 0001193125-23-135947 | tables=12 errors=6 | https://www.sec.gov/Archives/edgar/data/895728/000119312523135947/d530024d8k.htm
+INFO      ... 1800/3040 filings processed
+INFO      checkpoint: 21992 rows from 1800/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/78003/000162828023014368/pfe-20230427.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/49938/000004993823000040/imo-20230502.htm
+INFO      ... 1850/3040 filings processed
+WARNING SKIP no-vote-data | 0000023217 | 0001437749-23-026333 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/23217/000143774923026333/cag20230918_8k.htm
+INFO      ... 1900/3040 filings processed
+INFO      checkpoint: 23364 rows from 1900/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0001527166 | 0001527166-23-000068 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1527166/000152716623000068/cg-20230530.htm
+WARNING SKIP no-vote-data | 0000042582 | 0001193125-23-101686 | tables=1 errors=0 | https://www.sec.gov/Archives/edgar/data/42582/000119312523101686/d473933d8k.htm
+WARNING SKIP no-vote-data | 0001163165 | 0001104659-23-061988 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1163165/000110465923061988/tm2316025d1_8k.htm
+WARNING SKIP no-vote-data | 0000831001 | 0001104659-23-050368 | tables=1 errors=1 | https://www.sec.gov/Archives/edgar/data/831001/000110465923050368/c-20230425x8k.htm
+INFO      ... 1950/3040 filings processed
+WARNING SKIP no-vote-data | 0000096021 | 0000096021-23-000208 | tables=5 errors=4 | https://www.sec.gov/Archives/edgar/data/96021/000009602123000208/syy-20231117.htm
+WARNING SKIP no-vote-data | 0000937556 | 0000937556-23-000172 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/937556/000093755623000172/masi-20230626.htm
+WARNING SKIP no-vote-data | 0001065088 | 0001552781-23-000306 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1065088/000155278123000306/e23289_ebay-8k.htm
+INFO      ... 2000/3040 filings processed
+INFO      checkpoint: 24590 rows from 2000/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0000075362 | 0001193125-23-126902 | tables=6 errors=0 | https://www.sec.gov/Archives/edgar/data/75362/000119312523126902/d466569d8k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/47217/000004721723000023/hpq-20230424.htm
+WARNING SKIP no-vote-data | 0000047217 | 0000047217-23-000023 | tables=9 errors=0 | https://www.sec.gov/Archives/edgar/data/47217/000004721723000023/hpq-20230424.htm
+WARNING SKIP no-vote-data | 0000063276 | 0001193125-23-148148 | tables=5 errors=0 | https://www.sec.gov/Archives/edgar/data/63276/000119312523148148/d406335d8k.htm
+INFO      ... 2050/3040 filings processed
+WARNING SKIP no-vote-data | 0001090012 | 0001193125-23-165308 | tables=14 errors=0 | https://www.sec.gov/Archives/edgar/data/1090012/000119312523165308/d518538d8k.htm
+WARNING SKIP no-vote-data | 0001641601 | 0000950170-23-022951 | tables=7 errors=7 | https://www.sec.gov/Archives/edgar/data/1641601/000095017023022951/ck0001641601-20230516.htm
+WARNING SKIP no-vote-data | 0001404644 | 0001193125-23-298152 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1404644/000119312523298152/d648703d8k.htm
+WARNING SKIP no-vote-data | 0000055067 | 0001628280-23-014868 | tables=1 errors=1 | https://www.sec.gov/Archives/edgar/data/55067/000162828023014868/k-20230428.htm
+INFO      ... 2100/3040 filings processed
+INFO      checkpoint: 25772 rows from 2100/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/78003/000007800324000101/pfe-20240425.htm
+WARNING SKIP no-vote-data | 0000016875 | 0001193125-24-113921 | tables=5 errors=5 | https://www.sec.gov/Archives/edgar/data/16875/000119312524113921/d760152d8k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/49938/000004993824000026/imo-20240430.htm
+WARNING SKIP no-vote-data | 0001286681 | 0001193125-24-122303 | tables=8 errors=4 | https://www.sec.gov/Archives/edgar/data/1286681/000119312524122303/d831804d8k.htm
+INFO      ... 2150/3040 filings processed
+WARNING SKIP no-vote-data | 0000807882 | 0000807882-24-000009 | tables=4 errors=0 | https://www.sec.gov/Archives/edgar/data/807882/000080788224000009/jack-20240301.htm
+WARNING SKIP no-vote-data | 0000713676 | 0000713676-24-000041 | tables=6 errors=0 | https://www.sec.gov/Archives/edgar/data/713676/000071367624000041/pnc-20240424.htm
+INFO      ... 2200/3040 filings processed
+INFO      checkpoint: 27181 rows from 2200/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0000914208 | 0000914208-24-000316 | tables=6 errors=0 | https://www.sec.gov/Archives/edgar/data/914208/000091420824000316/ivz-20240523.htm
+INFO      ... 2250/3040 filings processed
+WARNING SKIP no-vote-data | 0000080661 | 0000080661-24-000022 | tables=1 errors=1 | https://www.sec.gov/Archives/edgar/data/80661/000008066124000022/pgr-20240510.htm
+WARNING SKIP no-vote-data | 0000910073 | 0001193125-24-157842 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/910073/000119312524157842/d830699d8k.htm
+WARNING SKIP no-vote-data | 0000798941 | 0000798941-24-000024 | tables=4 errors=0 | https://www.sec.gov/Archives/edgar/data/798941/000079894124000024/fcnca-20240501.htm
+INFO      ... 2300/3040 filings processed
+INFO      checkpoint: 28528 rows from 2300/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0001601046 | 0001601046-24-000019 | tables=7 errors=7 | https://www.sec.gov/Archives/edgar/data/1601046/000160104624000019/keys-20240321.htm
+INFO      ... 2350/3040 filings processed
+WARNING SKIP no-vote-data | 0001091667 | 0001091667-24-000087 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1091667/000109166724000087/chtr-20240423.htm
+WARNING SKIP no-vote-data | 0001090012 | 0001193125-24-156045 | tables=8 errors=0 | https://www.sec.gov/Archives/edgar/data/1090012/000119312524156045/d672405d8k.htm
+INFO      ... 2400/3040 filings processed
+INFO      checkpoint: 29678 rows from 2400/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0000063276 | 0001628280-24-026557 | tables=5 errors=0 | https://www.sec.gov/Archives/edgar/data/63276/000162828024026557/mat-20240529.htm
+WARNING SKIP no-vote-data | 0000096021 | 0000096021-24-000193 | tables=4 errors=4 | https://www.sec.gov/Archives/edgar/data/96021/000009602124000193/syy-20241115.htm
+WARNING SKIP no-vote-data | 0000010456 | 0001628280-24-022267 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/10456/000162828024022267/bax-20240507.htm
+WARNING SKIP no-vote-data | 0001059556 | 0001193125-24-102931 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1059556/000119312524102931/d810321d8k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/47217/000004721724000032/hpq-20240422.htm
+WARNING SKIP no-vote-data | 0000813672 | 0000813672-24-000100 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/813672/000081367224000100/cdns-20240502.htm
+WARNING SKIP no-vote-data | 0000075362 | 0001193125-24-130689 | tables=6 errors=0 | https://www.sec.gov/Archives/edgar/data/75362/000119312524130689/d756864d8k.htm
+INFO      ... 2450/3040 filings processed
+WARNING SKIP no-vote-data | 0000895421 | 0000950103-25-006128 | tables=1 errors=0 | https://www.sec.gov/Archives/edgar/data/895421/000095010325006128/dp228735_8k.htm
+WARNING SKIP no-vote-data | 0001286681 | 0001193125-25-096735 | tables=6 errors=6 | https://www.sec.gov/Archives/edgar/data/1286681/000119312525096735/d574686d8k.htm
+WARNING SKIP no-vote-data | 0001289460 | 0001558370-25-007926 | tables=8 errors=4 | https://www.sec.gov/Archives/edgar/data/1289460/000155837025007926/txrh-20250515x8k.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/78003/000007800325000109/pfe-20250424.htm
+INFO      ... 2500/3040 filings processed
+INFO      checkpoint: 30989 rows from 2500/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+INFO      ... 2550/3040 filings processed
+WARNING SKIP no-vote-data | 0000042582 | 0001193125-25-082853 | tables=1 errors=0 | https://www.sec.gov/Archives/edgar/data/42582/000119312525082853/d928318d8k.htm
+INFO      ... 2600/3040 filings processed
+INFO      checkpoint: 32304 rows from 2600/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0001601046 | 0001601046-25-000035 | tables=4 errors=4 | https://www.sec.gov/Archives/edgar/data/1601046/000160104625000035/keys-20250320.htm
+WARNING SKIP no-vote-data | 0001637207 | 0001637207-25-000063 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1637207/000163720725000063/plnt-20250506.htm
+WARNING SKIP no-vote-data | 0000860730 | 0001193125-25-103953 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/860730/000119312525103953/d899829d8k.htm
+INFO      ... 2650/3040 filings processed
+WARNING SKIP no-vote-data | 0000096021 | 0000096021-25-000161 | tables=4 errors=4 | https://www.sec.gov/Archives/edgar/data/96021/000009602125000161/syy-20251114.htm
+WARNING SKIP no-vote-data | 0001089063 | 0001089063-25-000088 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1089063/000108906325000088/dks-20250611.htm
+INFO      ... 2700/3040 filings processed
+INFO      checkpoint: 33425 rows from 2700/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0001835632 | 0001193125-25-140767 | tables=4 errors=4 | https://www.sec.gov/Archives/edgar/data/1835632/000119312525140767/d635388d8k.htm
+WARNING SKIP no-vote-data | 0000063276 | 0001193125-25-132211 | tables=5 errors=0 | https://www.sec.gov/Archives/edgar/data/63276/000119312525132211/d140462d8k.htm
+WARNING SKIP no-vote-data | 0000075362 | 0001193125-25-111679 | tables=6 errors=0 | https://www.sec.gov/Archives/edgar/data/75362/000119312525111679/d773272d8k.htm
+WARNING SKIP no-vote-data | 0001539838 | 0001539838-25-000072 | tables=4 errors=4 | https://www.sec.gov/Archives/edgar/data/1539838/000153983825000072/fang-20250521.htm
+INFO      ... 2750/3040 filings processed
+WARNING SKIP no-vote-data | 0000016160 | 0001562762-25-000030 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/16160/000156276225000030/8k20250225.htm
+WARNING SKIP no-vote-data | 0001286681 | 0001286681-26-000021 | tables=5 errors=5 | https://www.sec.gov/Archives/edgar/data/1286681/000128668126000021/dpz-20260421.htm
+INFO      ... 2800/3040 filings processed
+INFO      checkpoint: 34721 rows from 2800/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+INFO      ... 2850/3040 filings processed
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/723531/000072353126000008/payx-20261015.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/78003/000007800326000044/pfe-20260423.htm
+WARNING SKIP no-vote-data | 0000216877 | 0001062993-26-001148 | tables=5 errors=0 | https://www.sec.gov/Archives/edgar/data/216877/000106299326001148/form8k.htm
+INFO      ... 2900/3040 filings processed
+INFO      checkpoint: 35933 rows from 2900/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0001938046 | 0001493152-26-050533 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1938046/000149315226050533/form8-k.htm
+WARNING SKIP no-vote-data | 0000018926 | 0001193125-26-240338 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/18926/000119312526240338/d115129d8k.htm
+WARNING SKIP no-vote-data | 0000798941 | 0000798941-26-000020 | tables=4 errors=0 | https://www.sec.gov/Archives/edgar/data/798941/000079894126000020/fcnca-20260504.htm
+INFO      ... 2950/3040 filings processed
+INFO      ... 3000/3040 filings processed
+INFO      checkpoint: 37158 rows from 3000/3040 filings -> rdd_data.partial.csv
+/home/jokubas/rdd-paper/01_scrape_edgar.py:764: XMLParsedAsHTMLWarning: It looks like you're using an HTML parser to parse an XML document.
+
+Assuming this really is an XML document, what you're doing might work, but you should know that using an XML parser will be more reliable. To parse this document as XML, make sure you have the Python package 'lxml' installed, and pass the keyword argument `features="xml"` into the BeautifulSoup constructor.
+
+If you want or need to use an HTML parser on this document, you can make this warning go away by filtering it. To do that, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import XMLParsedAsHTMLWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
+
+  soup = BeautifulSoup(html, HTML_PARSER)
+WARNING SKIP no-vote-data | 0001835632 | 0001628280-26-045564 | tables=4 errors=4 | https://www.sec.gov/Archives/edgar/data/1835632/000162828026045564/mrvl-20260625.htm
+INFO    NOTE no 'Item 5.07' heading found, parsed whole document | https://www.sec.gov/Archives/edgar/data/47217/000004721726000019/hpq-20260416.htm
+WARNING SKIP no-vote-data | 0001369290 | 0001193125-26-285450 | tables=0 errors=0 | https://www.sec.gov/Archives/edgar/data/1369290/000119312526285450/myo-20260625.htm
+WARNING SKIP invalid-counts | 0000051143 | 0001104659-25-044116 | for=nan against=nan | Stockholder Proposal Requesting a Report on Hiring/Recruitment Discrimination wa
+
+==================================================================
+ EXECUTION SUMMARY
+==================================================================
+ Data source                     : EDGAR
+ Filings discovered (8-K, 5.07)  : 3040
+ Filings fetched                 : 3040
+ Filings parsed successfully     : 2905
+ Filings skipped (no vote data)  : 135
+ Fetch errors                    : 0
+ Proposal rows parsed (all)      : 37659
+ Shareholder-proposal rows       : 3813
+ Valid live observations         : 1818
+ HTTP requests / cache hits      : 0 / 3620
+ FINAL ROW COUNT                 : 1818  ->  rdd_data.csv
+ Vote share mean / median        : 0.293 / 0.224
+ Obs within +/-2pp of 15%        : 137
+ 15%-bar sample (2nd vote in 5y) : 312  (below: 95, at/above: 217)
+ Raw refiled_t1 rate below/above : 0.10 / 0.32   (not an RD estimate)
+ Covariate coverage (log_assets) : 99%
+ Log file                        : scraping_log.txt
+==================================================================
+INFO    Done in 380.0s

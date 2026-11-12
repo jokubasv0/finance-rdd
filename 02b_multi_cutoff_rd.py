@@ -120,10 +120,20 @@ def fit(y, x, covs=None, cluster=None, h=None, p=1, c=CUTOFF) -> dict:
     }
 
 
+# Minimum detectable effect at 80% power, two-sided 5% test:
+# (z_{0.975} + z_{0.80}) * SE = 2.802 * SE. Reported because a coefficient that
+# is smaller than its own MDE cannot be distinguished from zero by this design.
+MDE_Z = 1.959964 + 0.841621
+
+
+def mde(r: dict) -> float:
+    return MDE_Z * r["se_bc"]
+
+
 def fmt(r: dict) -> str:
     return (f"{r['tau_bc']:>7.3f}{_stars(r['p_bc']):<3} SE {r['se_bc']:>6.3f}  "
             f"p {r['p_bc']:>5.3f}  95% CI [{r['ci_lo_bc']:>6.3f}, {r['ci_hi_bc']:>6.3f}]  "
-            f"n {r['n_left']}/{r['n_right']}")
+            f"n {r['n_left']}/{r['n_right']}  MDE {mde(r):>5.3f}")
 
 
 # ---------------------------------------------------------------------------
@@ -232,6 +242,17 @@ def main(argv: list[str] | None = None) -> int:
     per = pd.DataFrame(per_rows)
     per.to_csv(outdir / "12_per_threshold.csv", index=False)
 
+    # The pooled estimate is NOT a weighted average of the per-bar jumps: it
+    # imposes one common bandwidth and one common polynomial across groups whose
+    # running-variable distributions differ. Report the inverse-variance weighted
+    # average alongside it so any contradiction between the two is visible.
+    w = 1.0 / per.se_bc.to_numpy(float) ** 2
+    wa = float(np.sum(w * per.tau_bc.to_numpy(float)) / np.sum(w))
+    wa_se = float(np.sqrt(1.0 / np.sum(w)))
+    print(f"\n inverse-variance weighted average of the per-bar jumps: "
+          f"{wa:>7.3f} (SE {wa_se:.3f})")
+    print(f" -> the pooled estimate should be read against this number, not as an average of it")
+
     # ---- 5. bandwidth sensitivity, pooled ----
     h_star = specs["pooled, FE"].get("h", 0.08)
     print("\n" + "-" * 84)
@@ -294,17 +315,21 @@ def main(argv: list[str] | None = None) -> int:
         md.append(f"| {r.group} | {int(r.n)} | {int(r.firms)} | {int(r.near_2pp)} | "
                   f"{r.refile_rate:.3f} |")
     md += ["", "## Pooled estimates", "",
-           "| Specification | tau | SE | p | 95% CI | n (L/R) |", "|---|---|---|---|---|---|"]
+           "| Specification | tau | SE | p | 95% CI | n (L/R) | MDE |", "|---|---|---|---|---|---|---|"]
     for name, r in specs.items():
         md.append(f"| {name} | {r['tau_bc']:.3f} | {r['se_bc']:.3f} | {r['p_bc']:.3f} | "
                   f"[{r['ci_lo_bc']:.3f}, {r['ci_hi_bc']:.3f}] | "
-                  f"{r['n_left']}/{r['n_right']} |")
+                  f"{r['n_left']}/{r['n_right']} | {mde(r):.3f} |")
     md += ["", "## Per-threshold estimates", "",
-           "| Group | tau | SE | p | 95% CI | n (L/R) |", "|---|---|---|---|---|---|"]
+           "| Group | tau | SE | p | 95% CI | n (L/R) | MDE |", "|---|---|---|---|---|---|---|"]
     for _, r in per.iterrows():
         md.append(f"| {r.group} | {r.tau_bc:.3f} | {r.se_bc:.3f} | {r.p_bc:.3f} | "
                   f"[{r.ci_lo_bc:.3f}, {r.ci_hi_bc:.3f}] | "
-                  f"{int(r.n_left)}/{int(r.n_right)} |")
+                  f"{int(r.n_left)}/{int(r.n_right)} | {mde(r):.3f} |")
+    md += ["", f"Inverse-variance weighted average of the per-bar jumps: "
+           f"**{wa:.3f}** (SE {wa_se:.3f}). The pooled estimate imposes a common "
+           f"bandwidth and polynomial across bars and is not an average of these "
+           f"jumps; the two should be read together.", ""]
     md += ["", "## Density tests", "", "| Sample | t | p |", "|---|---|---|"]
     for _, r in dens.iterrows():
         md.append(f"| {r['sample']} | {r['test_stat']:.3f} | {r['p_value']:.3f} |")

@@ -509,6 +509,30 @@ SP_RE = re.compile(
     r"|\bproponents?\b",
     re.I,
 )
+# A description that is nothing but a personal name is a director nominee in a
+# vote table, not a proposal. Enriching such a row with the surrounding
+# paragraph is what let director elections inherit the words "shareholder
+# proposal" from a neighbouring sentence and enter the sample with the
+# director's ~97% approval as the vote share.
+_PERSON_NAME_RE = re.compile(r"^[A-Z][a-zA-Z.'’\-]+(?:\s+[A-Z][a-zA-Z.'’\-]+){1,3}$")
+
+# Two-word descriptions that are shaped like names but are proposal subjects.
+_NON_NAME_WORDS = {
+    "proposal", "board", "committee", "policy", "report", "diversity",
+    "disclosure", "executive", "compensation", "climate", "environment",
+    "human", "rights", "political", "lobbying", "audit", "tax", "governance",
+    "shareholder", "stockholder", "meeting", "special", "proxy", "vote",
+    "voting", "director", "directors", "independent", "chair", "chairman",
+    "animal", "welfare", "privacy", "health", "charitable", "giving",
+    "emissions", "targets", "equity", "justice", "sustainability", "reporting",
+}
+
+
+def _is_person_name(desc_row: str) -> bool:
+    """True for a bare personal name, i.e. a director nominee vote row."""
+    if not _PERSON_NAME_RE.match(desc_row):
+        return False
+    return not any(w.lower() in _NON_NAME_WORDS for w in desc_row.split())
 ITEM_507_RE = re.compile(r"item\s*5\s*\.\s*07", re.I)
 SECTION_END_RE = re.compile(r"^\s*(?:item\s*(?!5\s*\.\s*07)\d{1,2}\s*\.\s*\d{2}\b|signatures?\b|exhibit\s+index\b)", re.I)
 
@@ -570,7 +594,12 @@ def _context_description(context: list[str]) -> str:
 def _make_obs(desc_row: str, context: list[str], values: dict, method: str) -> dict:
     ctx = _context_description(context)
     desc_row = _clean(desc_row)
-    if len(desc_row.split()) >= 4:
+    if _is_person_name(desc_row):
+        # Director nominee row: keep the bare name so it cannot pick up a
+        # "shareholder proposal" phrase from the surrounding paragraph and be
+        # mistaken for a proposal. Such rows are dropped downstream.
+        desc = desc_row
+    elif len(desc_row.split()) >= 4:
         desc = desc_row
     elif desc_row:                       # e.g. "Proposal 5" -> enrich with paragraph
         desc = f"{desc_row} | {ctx}" if ctx else desc_row
@@ -872,9 +901,22 @@ def add_resubmission_variables(df: pd.DataFrame, data_start: date, data_end: dat
             d, tok = df.at[i, "_date"], df.at[i, "_tok"]
             prior = g[(g["_date"] <= d - pd.Timedelta(days=MIN_GAP_DAYS)) &
                       (g["_date"] >= d - pd.Timedelta(days=LOOKBACK_DAYS))]
-            n_prior = sum(topic_similarity(tok, t) >= TOPIC_SIMILARITY_MIN for t in prior["_tok"])
-            df.at[i, "vote_number_5y"] = 1 + int(n_prior)
-            df.at[i, "history_complete"] = bool(d - pd.Timedelta(days=LOOKBACK_DAYS) >= ts_start)
+            # Count distinct MEETINGS, not rows. The rule counts the number of
+            # times the proposal has been voted on; one meeting can yield many
+            # similar rows (a director slate, the same vote parsed from both a
+            # table and a paragraph, an 8-K/A amendment), and counting rows
+            # pushed proposals into the 25% bar on a single meeting's evidence.
+            matched_dates = {
+                dt for dt, t in zip(prior["_date"], prior["_tok"])
+                if topic_similarity(tok, t) >= TOPIC_SIMILARITY_MIN
+            }
+            df.at[i, "vote_number_5y"] = 1 + len(matched_dates)
+            # Complete history means we actually observe this firm far enough
+            # back to cover the whole look-back window, not merely that the
+            # analysis start date precedes it.
+            df.at[i, "history_complete"] = bool(
+                g["_date"].min() <= d - pd.Timedelta(days=LOOKBACK_DAYS)
+            )
             nxt = g[(g["_date"] >= d + pd.Timedelta(days=MIN_GAP_DAYS)) &
                     (g["_date"] <= d + pd.Timedelta(days=NEXT_MEETING_MAX_DAYS))]
             if any(topic_similarity(tok, t) >= TOPIC_SIMILARITY_MIN for t in nxt["_tok"]):
