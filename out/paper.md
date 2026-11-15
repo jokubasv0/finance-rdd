@@ -6,7 +6,7 @@
 
 ## Abstract
 
-On 12 April 2026 Hungary elected a government that ended sixteen years of Fidesz rule. Using daily data on eight Central European sovereign bond markets and the full price history of a $101 million Polymarket contract on whether Viktor Orbán would remain prime minister, we document two facts. First, Hungary's ten-year yield fell 138 basis points over the nine months surrounding the election while every other Central European yield rose or was flat, compressing Hungary's spread over a six-country peer average by 157 basis points. Hungary is the only one of eight countries whose yield fell. Two-thirds of that compression occurred after the result, and the pre-election part was driven by the long end while the short end rose — the opposite of what monetary easing would produce. Second, prediction markets and bond markets disagreed about timing: three days before the vote Polymarket had priced 69 per cent of the eventual move while the bond spread had priced about 35 per cent. The prediction market moved first and the bond market followed. Our identification comes from a difference-in-differences design against four neighbouring markets on a 2024–2026 panel, with country and calendar-date fixed effects and a country-specific trend fitted before the treatment date and held flat afterwards. It puts the repricing at 109 basis points against donors (Driscoll–Kraay t = −11.3), and the three possible trend treatments span five basis points on that sample. We are equally careful about what this does not show. The 2022 data are excluded because a placebo-date test shows they manufacture a spurious effect at any date, not because they are inconvenient; the pre-treatment leads are individually precise and jointly non-zero, though they do not trend; With one treated unit, randomisation inference bottoms out at p = 0.125, the smallest value attainable with eight units, and the daily relationship between the probability series and the spread is indistinguishable from zero. We therefore report the DiD as a conditional estimate alongside the descriptive facts it rests on: the magnitude, the timing, the cross-country uniqueness, and a lead–lag pattern between the prediction market and the bond market that has not previously been documented for a European regime change.
+On 12 April 2026 Hungary elected a government that ended sixteen years of Fidesz rule. Using daily data on eight Central European sovereign bond markets and the full price history of a $101 million Polymarket contract on whether Viktor Orbán would remain prime minister, we document two facts. First, Hungary's ten-year yield fell 138 basis points over the nine months surrounding the election while every other Central European yield rose except Romania's, which fell 21 basis points, compressing Hungary's spread over a six-country peer average by 157 basis points. Hungary is the only country to fall by more than 21 basis points. Two-thirds of that compression occurred after the result, and the pre-election part was driven by the long end while the short end rose — the opposite of what monetary easing would produce. Second, prediction markets and bond markets disagreed about timing: three days before the vote Polymarket had priced 69 per cent of the eventual move while the bond spread had priced about 35 per cent. The prediction market moved first and the bond market followed. Our identification comes from a difference-in-differences design against four neighbouring markets on a 2024–2026 panel, with country and calendar-date fixed effects and a country-specific trend fitted before the treatment date and held flat afterwards. It puts the repricing at 109 basis points against donors (Driscoll–Kraay t = −11.3), and the three possible trend treatments span five basis points on that sample. We are equally careful about what this does not show. The 2022 data are excluded because a placebo-date test shows they manufacture a spurious effect at any date, not because they are inconvenient; the pre-treatment leads are individually precise and jointly non-zero, though they do not trend. With one treated unit, randomisation inference bottoms out at p = 0.125, the smallest value attainable with eight units, and the daily relationship between the probability series and the spread is indistinguishable from zero. We therefore report the DiD as a conditional estimate alongside the descriptive facts it rests on: the magnitude, the timing, the cross-country uniqueness, and a lead–lag pattern between the prediction market and the bond market that has not previously been documented for a European regime change.
 
 **JEL codes:** G12, G14, G15, H63, P16
 
@@ -30,7 +30,7 @@ We use these three features to ask two questions. How large was the Hungary-spec
 
 The answers are as follows.
 
-Hungary's ten-year yield fell from 7.13 to 5.75 per cent between 25 July 2025 and 8 May 2026, a decline of 138 basis points. Over the same window the six-country peer average rose 19 basis points, the German yield rose 29, and the Czech yield rose 47. Hungary's spread over the peer average fell from 274 to 116 basis points, a compression of 157 basis points. Hungary is the only one of the eight countries whose yield fell, and in a placebo exercise that treats each country in turn as the candidate event, Hungary's spread deviation is more than three times the largest peer's.
+Hungary's ten-year yield fell from 7.13 to 5.75 per cent between 25 July 2025 and 8 May 2026, a decline of 138 basis points. Over the same window the six-country peer average rose 19 basis points, the German yield rose 29, and the Czech yield rose 47. Hungary's spread over the peer average fell from 274 to 116 basis points, a compression of 157 basis points. Hungary is the only country to fall by more than 21 basis points — Romania's yield fell 21 — and in a placebo exercise that treats each country in turn as the candidate event, Hungary's spread deviation is more than three times the largest peer's.
 
 The compression is not evenly distributed in time. Splitting the window at the election, 56 basis points — about 35 per cent — occurred before the vote and 102 basis points — about 65 per cent — occurred between the result and the inauguration. This matters because the earlier version of this literature, and our own first pass at the data, treated the pre-election move as the whole story. It is not. The larger part came after the outcome was known.
 
@@ -76,13 +76,13 @@ Two-year Hungarian yields are not available from this source; this is a limitati
 
 ### 3.2 Prediction market
 
-The full daily price history of the Polymarket contract "Will the next Prime Minister of Hungary be Viktor Orbán?", retrieved from the CLOB prices-history endpoint. The series contains 197 prints over 287 calendar days. We define the treatment variable as
+The full daily price history of the Polymarket contract "Will the next Prime Minister of Hungary be Viktor Orbán?", retrieved from the CLOB prices-history endpoint. The series contains 257 prints over 288 calendar days, from 25 July 2025 to 9 May 2026. The contract prints at weekends as well, and those prints are kept rather than aligned onto the weekday yield grid, because one of the two largest moves in the whole series is a Saturday. We define the treatment variable as
 
 $$P_t = 1 − Price(Orbán next PM)_t$$
 
 the market-implied probability that Orbán does not remain prime minister.
 
-Two properties of this series must be stated plainly because they drive the results in Section 6. First, the contract prints only on days on which it trades. Second, it has essentially two large jumps: +20.0 percentage points on 27 July 2025, in the first days of the contract's life, and +30.9 percentage points on 22 April 2026, ten days after the election, when the outcome was already known. Neither is news about Hungarian politics.
+Two properties of this series must be stated plainly because they drive the results in Section 6. First, the contract prints only on days on which it trades, and 76 of the 257 prints fall on a Saturday or Sunday; we keep them, because one of the two largest moves in the whole series is a Saturday print. Second, the series has essentially two large jumps: +19.5 percentage points on Saturday 26 July 2025, in the first days of the contract's life, and +30.9 percentage points on 22 April 2026, ten days after the election, when the outcome was already known. Neither is news about Hungarian politics.
 
 ### 3.3 Control variables
 
@@ -421,7 +421,7 @@ treated in turn, 2025–2026, kinked trend.
 
 Hungary is the only negative coefficient of any size, and it is more than twice the largest positive in absolute value. Hungary ranks 1 of 8, so the randomisation-inference p-value is 0.125.
 
-That number cannot be smaller. With eight units and one treated there are eight possible assignments, so 1/8 is the floor. This is a property of the design and not of the data: adding days, adding controls, or estimating more precisely all leave it at 0.125. Only adding countries would move it. The point estimate is far from noise — Hungary is two and a half standard errors away from the next-ranked unit — but the *inference* is governed by the number of countries.
+That number cannot be smaller. With eight units and one treated there are eight possible assignments, so 1/8 is the floor. This is a property of the design and not of the data: adding days, adding controls, or estimating more precisely all leave it at 0.125. Only adding countries would move it. The point estimate is far from noise: the gap to the next-ranked country is ten standard errors, and the placebo coefficients have a cross-country standard deviation of 0.39, so Hungary sits two and a half of those away from the group. But the *inference* is governed by the number of countries.
 
 #### 5.7.2 Placebo treatment dates
 
@@ -444,7 +444,7 @@ This test is why 2022 is excluded rather than merely inconvenient. On a 2022 sam
 
 #### 5.7.3 Donor sensitivity
 
-Dropping any single donor from the 2024 sample gives −1.047 (drop Czechia), −1.061 (drop Germany), −1.058 (drop Poland) and −1.193 (drop Romania). One hundred and forty-six basis points of range across the four donors; the full-panel estimate sits in the middle. With four donors there is not much room for the result to hide.
+Dropping any single donor from the 2024 sample gives −1.047 (drop Czechia), −1.061 (drop Germany), −1.058 (drop Poland) and −1.193 (drop Romania). Fourteen and a half basis points of range across the four donors; the full-panel estimate sits in the middle. With four donors there is not much room for the result to hide.
 
 ### 5.8 Three numbers for one event
 
@@ -476,25 +476,30 @@ The natural design regresses daily changes in the spread on daily changes in the
 
 $$ΔS_t = α + β ΔP_t + γ′ΔX_t + ε_t$$
 
-with β < 0 expected. It does not work. Without controls, $β̂ = +0.007$ with a t-statistic of 0.12 over 193 observations. With controls, $β̂ = -0.047$, t = −0.75 over 184. The coefficient is indistinguishable from zero, and its sign is not stable across the two specifications.
+with β < 0 expected. It does not work. Without controls, $β̂ = +0.001$ with a t-statistic of 0.02 over 170 observations. With controls, $β̂ = -0.034$, t = −0.66 over 163. The coefficient is indistinguishable from zero, and its sign is not stable across the two specifications.
 
-The reason is visible in the probability series itself. Of 197 prints, only two move by more than 10 percentage points: +20.0 on 27 July 2025 and +30.9 on 22 April 2026. Only five move by more than 5. The first of the two is the contract's opening-week liquidity discovery, when the implied probability moved from 0.385 to 0.585 in four days while the Hungarian spread did not move at all. The second occurred ten days after the election, when the contract had already stopped trading on news. Everything else is noise of a few percentage points.
+The reason is visible in the probability series itself. Of 257 prints, only two move by more than 10 percentage points: +19.5 on Saturday 26 July 2025 and +30.9 on 22 April 2026. Only five move by more than 5. The first of the two is the contract's opening-week liquidity discovery, when the implied probability moved from 0.385 on Friday to 0.580 on Saturday and 0.635 by the following Tuesday, while the Hungarian spread did not move at all. The second occurred ten days after the election, when the contract had already stopped trading on news. Everything else is noise of a few percentage points.
 
 A treatment variable with two effective observations, both of which are mechanical artefacts, cannot support a dose–response estimate. We report the regression because a reader will ask for it, not because it supports the paper.
 
-The aggregate version of the same idea looks better and should not be trusted more. Running the continuous DiD in the panel — the Hungarian yield on Hungary × P_t, with country and date fixed effects — gives a coefficient of −2.68 percentage points per unit of P with a t-statistic of −11.8. We report the number and decline to build on it. Because P_t is common to all countries, that specification is algebraically Hungary's idiosyncratic residual regressed on P_t, and it inherits both artefactual jumps. Its standard error shrinks with the number of days rather than the number of countries, so the t-statistic measures sample length, not identification. The binary design in Section 5.6 is the more defensible one because the treatment date is a fact rather than a price.
+The obvious alternative is a continuous DiD: the Hungarian yield on Hungary × P_t, with country and date fixed effects. We do not report a coefficient for it, and the reason is not modesty. Because P_t is common to all countries, that specification is algebraically Hungary's idiosyncratic residual regressed on P_t, and it inherits both artefactual jumps. Its standard error shrinks with the number of days rather than the number of countries, so the t-statistic measures sample length, not identification. The binary design in Section 5.6 is the more defensible one because the treatment date is a fact rather than a price.
 
-### 6.2 Random-date placebos
+### 6.2 Random-date placebos: withdrawn
 
-We draw 204 random 194-day windows from the 2022–2025 Hungary–(CZ, PL, RO) spread series, excluding the actual window. The distribution has mean −29 basis points, standard deviation 98, minimum −212, maximum +278. The actual window's −150 basis points lies at the 15th percentile. Fifteen per cent of arbitrary windows in the pre-election sample are at least as negative.
+We ran this test, it produced a number, and we are withdrawing the number rather than repairing it.
 
-For a single-country event study this is the binding constraint. It means the aggregate compression, taken alone, cannot be distinguished from ordinary spread volatility. What rescues the analysis is not the size of the number but its cross-country uniqueness (Table 4) and its timing relative to the probability series (Table 8). Magnitude alone is not enough.
+The design is to draw 204 overlapping 194-day windows from the Hungary–(CZ, PL, RO) spread series and ask where the observed window falls in the distribution of 194-day changes. On the full series, thirty of the 204 windows end after 10 April 2026, and the observed window is among the draws. Fifteen per cent of windows are at least as negative as the observed −150 basis points; restricting to windows that end before the election drops that to 4 per cent.
 
-Figure 4 plots the distribution.
-![](fig4_placebo.png)
+Neither number is a p-value for the election, and the fix is not to clean the sample. The series trends down across the whole period under study, so a 194-day change is not a stationary quantity: its distribution is determined by where the window sits relative to the trend, and the observed window sits at the end. Restricting draws to the pre-election period makes the problem worse rather than better, because it then compares a window that contains the endpoint of the trend against windows that by construction cannot. Both statistics describe the shape of the series. Neither describes the election, and the fact that the print moves from 15 per cent to 4 per cent when the sample is cleaned is a demonstration of that, not a repair.
 
-**Figure 4.** Distribution of 194-day spread changes from 204 random start dates in 2022 to 2025, with the actual window marked.
+The distinction matters because an earlier draft of this paper reported the 15 per cent as though it were informative, in the direction of caution. It was not caution; it was the wrong test.
 
+What replaces it in the argument is the placebo evidence in Section 5.7, which is constructive rather than asymptotic: treatment dates that never happened, applied to a panel truncated before the event, return approximately zero (Table 13); and treatment units that never happened, applied to the same specification, return zero for every donor but Hungary (Table 12). Those are tests of the design. A percentile of overlapping windows in a trending series is not.
+
+Figure 4 now reports the fact that motivated the sample restriction instead: Hungary's spread over Czechia, Poland and Romania by quarter. It halves between the 2022 energy crisis and the first quarter of 2024, sits flat for nine quarters, and then collapses.
+![](fig4_spread_path.png)
+
+**Figure 4.** Hungary's ten-year spread over the equal-weighted Czech, Polish and Romanian yields, quarterly mean, 2022–2026, in basis points (2026Q4 is partial, to 13 November). The plateau from 2024Q1 to 2026Q1 is the reason the difference-in-differences sample starts in 2024.
 
 ### 6.3 The ceiling on inference
 
@@ -526,11 +531,11 @@ The same constraint explains why we report the design as difference-in-differenc
 
 ## 8. Limitations
 
-**One treated unit.** This is the fundamental constraint and everything else follows from it. The DiD in Section 5.6 is a legitimate estimator — country and date fixed effects, a treatment date that is a fact, eight countries and five years of data — but its inference has a floor at p = 0.125 that no additional data can lower. Standard errors that rely on time-series asymptotics will report t-statistics in the twenties and are, for this purpose, meaningless. The design supports a conditional estimate of 109 basis points on the election window, not an identified causal effect.
+**One treated unit.** This is the fundamental constraint and everything else follows from it. The DiD in Section 5.6 is a legitimate estimator — country and date fixed effects, a treatment date that is a fact, either eight countries over eleven months or five countries over two and a half years — but its inference has a floor at p = 0.125 that no additional data can lower. Standard errors that rely on time-series asymptotics will report t-statistics in the twenties and are, for this purpose, meaningless. The design supports a conditional estimate of 109 basis points on the election window, not an identified causal effect.
 
 **The pre-trend is not flat.** Table 11. The pre-treatment leads are individually precise and jointly non-zero, though they do not trend: the mean is +0.07 and the range is −0.27 to +0.37. A reader who wants a design with no trend assumption should read the no-trends column of Table 9, −1.039, and note that it differs from the headline by five basis points on this sample — which is the honest reason to think the trend is not doing the work. On a 2022 sample the same choice matters enormously, and that is the real cost of the restriction.
 
-**The probability series is mechanically contaminated.** Two of the 197 prints account for most of the variance and both are artefacts. A better treatment variable would be built from polling data, which is available at higher frequency and does not suffer from liquidity discovery. We did not build one, and the paper's lead–lag result would be stronger if we had.
+**The probability series is mechanically contaminated.** Two of the 257 prints account for most of the variance and both are artefacts. A better treatment variable would be built from polling data, which is available at higher frequency and does not suffer from liquidity discovery. We did not build one, and the paper's lead–lag result would be stronger if we had.
 
 **No Hungarian two-year yield.** The term-structure test uses the five-year point, which is an imperfect substitute. A two-year series would sharpen the distinction between expectations and term premium. The data exist at the National Bank of Hungary but not in the machine-readable source used here.
 
@@ -546,7 +551,7 @@ The same constraint explains why we report the design as difference-in-differenc
 
 ## 9. Conclusion
 
-Hungary's 2026 election coincided with a 157 basis point compression in its sovereign spread over a six-country peer average. Hungary was the only one of eight Central European countries whose ten-year yield fell. Two-thirds of the compression occurred after the result rather than before it. The pre-election component was concentrated at the long end of the curve, which rules out a rate-expectations explanation.
+Hungary's 2026 election coincided with a 157 basis point compression in its sovereign spread over a six-country peer average. Hungary was the only one of eight Central European countries whose ten-year yield fell by more than 21 basis points; every other yield rose except Romania's, which fell 21. Two-thirds of the compression occurred after the result rather than before it. The pre-election component was concentrated at the long end of the curve, which rules out a rate-expectations explanation.
 
 A prediction market on whether Orbán would remain prime minister moved ahead of the bond market, reaching 69 per cent by three days before the vote while bonds had priced about 35 per cent of the eventual move.
 

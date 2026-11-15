@@ -17,8 +17,9 @@ the repricing with a Polymarket contract on whether Viktor Orbán would remain p
 | DiD through November 2026 | −172 bp |
 | Randomisation inference, 8 units | p = 0.125 (floor of 1/8) |
 | Share of compression before the vote | 35% (−56 bp), 65% after the result |
-| Countries in the sample whose yield fell | 1 of 8 (Hungary) |
-| Placebo-date p-value | 0.15 |
+| Countries whose yield fell more than 21 bp | 1 of 8 (Hungary); Romania −21 bp |
+| Placebo treatment dates, panel truncated before the event | −0.31 to +0.18 pp, none near −1.09 |
+| Random-window placebo | withdrawn as invalid (trending series) |
 | 9 Apr 2026 (3 days before vote): Polymarket vs bond-implied | 69% vs 35% |
 
 ## What the paper claims

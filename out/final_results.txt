@@ -20,7 +20,6 @@ Non-missing observations in the event window:
   SP_PEER    194
   SP_DE      194
   SP_CZ      194
-  P          197
 
 Peer group = equal-weighted Czechia, Poland, Romania, Slovenia, Croatia, Austria.
 Romania enters with the highest level (~7%) and the highest volatility, so the
@@ -122,13 +121,28 @@ The model explains movements in the Hungarian yield, not the spread. Its residua
 is the part of the Hungarian move not matched by its peers.
 
 ============================================================================
-8. PLACEBO: RANDOM DATES
+8. PLACEBO: RANDOM WINDOWS (WITHDRAWN, NOT REPAIRED)
 ============================================================================
-Random 194-day windows in the pre-election series (204 draws):
-  mean -29 bp, sd 98, min -212, max +278
+Draws: 204 of 194 days, series 2022-01-03 to 2026-11-13
+  windows ending after the real event: 30 of 204
   observed window change: -150 bp
-  share of placebo windows at least as negative: 15%
-  => cannot reject that the window is drawn from the same distribution.
+  share at least as negative, all draws          : 15%
+  share at least as negative, pre-event draws only: 4%
+
+WHY THIS IS WITHDRAWN RATHER THAN CORRECTED.
+The series trends down across the whole sample. A 194-day change is therefore
+not a stationary quantity: its distribution depends entirely on where the
+window sits relative to the trend, and the observed window sits at the end.
+Restricting draws to windows that end before the election does not fix this,
+it makes the comparison worse -- it compares the observed window, which
+contains the trend's endpoint, against windows that by construction cannot.
+The p-value that comes out is a statement about the shape of the series, not
+about the election. It is reported here, and in the paper, as a failed test.
+The placebo evidence the paper relies on is the placebo-date test on a panel
+truncated before the event, which is a real test and passes.
+
+Hungary minus (CZ, PL, RO), quarterly mean, bp -- the reason 2022 is excluded:
+  2022Q1 +83  2022Q2 +104  2022Q3 +250  2022Q4 +244  2023Q1 +225  2023Q2 +207  2023Q3 +177  2023Q4 +143  2024Q1 +112  2024Q2 +140  2024Q3 +118  2024Q4 +106  2025Q1 +102  2025Q2 +127  2025Q3 +136  2025Q4 +132  2026Q1 +133  2026Q2 -3  2026Q3 -43  2026Q4 -71
 
 ============================================================================
 9. PLACEBO: COUNTRIES
@@ -144,25 +158,29 @@ Each country's spread over the peer average, same window (should be ~0):
 ============================================================================
 10. THE POLYMARKET SERIES
 ============================================================================
-Prints: 197 over 287 calendar days
+Prints: 257 over 288 calendar days
+  prints inside the event window 2025-07-25 to 2026-05-08: 256, of which 181 on weekdays
+  prints falling on a weekend: 76
 Largest single-day moves in P:
-  2026-04-22   +30.9 pp   (from 99.4 pp above)
-  2025-07-27   +20.0 pp   (from 58.5 pp above)
-  2025-08-05    -5.0 pp   (from 57.5 pp above)
-  2025-07-29    +4.5 pp   (from 63.5 pp above)
-  2025-11-25    +4.5 pp   (from 60.5 pp above)
-  2025-12-22    +3.5 pp   (from 59.0 pp above)
-  2025-09-05    -3.5 pp   (from 58.5 pp above)
-  2025-11-26    -3.5 pp   (from 57.0 pp above)
+  2026-04-22 Wed   +30.9 pp   (68.5 -> 99.4)
+  2025-07-26 Sat   +19.5 pp   (38.5 -> 58.0)
+  2026-02-22 Sun    +6.0 pp   (58.5 -> 64.5)
+  2025-08-05 Tue    +5.0 pp   (62.5 -> 57.5)
+  2026-02-23 Mon    +5.0 pp   (64.5 -> 59.5)
+  2025-07-29 Tue    +4.5 pp   (59.0 -> 63.5)
+  2025-11-25 Tue    +4.5 pp   (56.0 -> 60.5)
+  2025-09-05 Fri    +3.5 pp   (62.0 -> 58.5)
+
+Moves larger than 10 pp: 2.  Larger than 5 pp: 5.
 
 Daily regression of the peer spread on dP (P carried forward between prints):
-  no controls    beta = +0.0068  (t = +0.12, N = 193)
-  with controls  beta = -0.0473  (t = -0.75, N = 184)
+  no controls    beta = +0.0012  (t = +0.02, N = 170)
+  with controls  beta = -0.0338  (t = -0.66, N = 163)
 
-The coefficient is positive, i.e. the wrong sign: when the market raised the
-probability of regime change, the spread widened. It is noise, but it is the
-wrong noise, and no specification recovers the expected negative relation.
-The contract stops trading on 9 April and prints nothing until 22 April, by which
+Neither coefficient is distinguishable from zero and the sign is not stable
+across the two specifications, so the daily design cannot estimate the dose-
+response at all. It is reported because a reader will ask for it.
+The contract prints on 9 April and then not again until 22 April, by which
 time the spread had already fallen. It cannot support a daily treatment variable.
 
 ============================================================================

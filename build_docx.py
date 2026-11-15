@@ -12,7 +12,7 @@ OUT = Path(__file__).resolve().parent / "out"
 SRC = OUT / "paper.md"
 DST = OUT / "Pricing_Regime_Change.docx"
 
-INLINE = re.compile(r"(\*\*.+?\*\*|\*[^*]+?\*|\$[^$]+\$)")
+INLINE = re.compile(r"(\*\*.+?\*\*|\*[^*]+?\*|\$(?![0-9])[^$\n]{1,60}\$)")
 
 
 def add_runs(par, text):
@@ -23,7 +23,7 @@ def add_runs(par, text):
             continue
         if chunk.startswith("**") and chunk.endswith("**"):
             par.add_run(chunk[2:-2]).bold = True
-        elif chunk.startswith("$") and chunk.endswith("$"):
+        elif chunk.startswith("$") and chunk.endswith("$") and not chunk[1].isdigit():
             r = par.add_run(chunk[1:-1])
             r.italic = True
         elif chunk.startswith("*") and chunk.endswith("*"):
@@ -73,7 +73,7 @@ def build():
 
     # sober academic palette: near-black headings, not the Word default blue
     from docx.shared import RGBColor
-    for name in ("Title", "Heading 1", "Heading 2", "Heading 3"):
+    for name in ("Title", "Heading 1", "Heading 2", "Heading 3", "Heading 4"):
         try:
             style = doc.styles[name]
         except KeyError:
@@ -83,6 +83,7 @@ def build():
     doc.styles["Heading 1"].font.size = Pt(16)
     doc.styles["Heading 2"].font.size = Pt(13)
     doc.styles["Heading 3"].font.size = Pt(11.5)
+    doc.styles["Heading 4"].font.size = Pt(11)
 
     lines = SRC.read_text().splitlines()
     i = 0
@@ -183,7 +184,10 @@ def build():
             continue
 
         # headings
-        if line.startswith("### "):
+        if line.startswith("#### "):
+            h = doc.add_heading(level=4)
+            add_runs(h, line[5:])
+        elif line.startswith("### "):
             h = doc.add_heading(level=3)
             add_runs(h, line[4:])
         elif line.startswith("## "):
@@ -204,6 +208,20 @@ def build():
                 if line.startswith("**Table"):
                     par.paragraph_format.keep_with_next = True
         i += 1
+
+    # Guard: every "$" in the source that is followed by a digit is a currency
+    # amount and must survive literally; no other dollar sign should survive.
+    want = len(re.findall(r"\$\d", SRC.read_text()))
+    got = 0
+    for par in doc.paragraphs:
+        got += sum(r.text.count("$") for r in par.runs)
+    for tbl in doc.tables:
+        for row in tbl.rows:
+            for cell in row.cells:
+                for par in cell.paragraphs:
+                    got += sum(r.text.count("$") for r in par.runs)
+    assert got == want, f"dollar signs mangled: {got} in output, {want} expected"
+    print(f"dollar signs preserved: {got}")
 
     doc.save(DST)
     words = len(re.findall(r"\b\w+\b", SRC.read_text()))

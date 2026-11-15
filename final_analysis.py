@@ -51,11 +51,17 @@ G = pd.concat([inv("long", n) for n in LONG]
               + [yh("long_yh", n) for n in ["US10Y", "VIX", "BRENT"]],
               axis=1, sort=True).apply(pd.to_numeric, errors="coerce").sort_index()
 
+# The prediction-market series keeps its OWN index. It prints on weekends, and
+# aligning it onto the weekday yield grid (S.index) silently deletes every
+# Saturday and Sunday print -- including the 26 July 2025 repricing from 0.385
+# to 0.580. PM is therefore the 257-print series, and P_s is the version carried
+# forward onto the weekday close, used only where a daily yield comparison is
+# genuinely being made.
 pm = pd.Series({pd.to_datetime(x["t"], unit="s").normalize(): x["p"]
                 for x in json.loads((RAW / "pm_orban.json").read_text())["history"]}
                ).sort_index()
-S["orban"] = pm
-S["P"] = 1 - S["orban"]
+PM = (1 - pm).rename("P")          # P(Orban does not remain PM), 257 prints
+S["P"] = PM.reindex(S.index).ffill()   # as of each weekday close
 
 PEERS = ["CZ10Y", "PL10Y", "RO10Y", "SI10Y", "HR10Y", "AT10Y"]
 # Peer aggregation: forward-fill each peer up to 5 business days so the average
@@ -79,7 +85,7 @@ p(f"Event window     : {w.index.min().date()} to {w.index.max().date()}  ({len(w
 p(f"Long sample      : {G.index.min().date()} to {G.index.max().date()}  ({len(G)} days)")
 p("")
 p("Non-missing observations in the event window:")
-for c in SHORT + ["CEE", "SP_PEER", "SP_DE", "SP_CZ", "P"]:
+for c in SHORT + ["CEE", "SP_PEER", "SP_DE", "SP_CZ"]:
     p(f"  {c:9s} {w[c].notna().sum():4d}")
 p("")
 p("Peer group = equal-weighted Czechia, Poland, Romania, Slovenia, Croatia, Austria.")
@@ -209,20 +215,40 @@ p("The model explains movements in the Hungarian yield, not the spread. Its resi
 p("is the part of the Hungarian move not matched by its peers.")
 
 # ---------------------------------------------------------------- 8
-hdr("8. PLACEBO: RANDOM DATES")
+hdr("8. PLACEBO: RANDOM WINDOWS (WITHDRAWN, NOT REPAIRED)")
 sp = G.SP.dropna()
 n = 194
-vals = []
+rows = []
 for i in range(0, len(sp) - n, 5):
     seg = sp.iloc[i:i + n]
-    vals.append(100 * (seg.iloc[-1] - seg.iloc[0]))
-vals = np.array(vals)
-obs = 100 * (sp.loc[W1] - sp.loc[W0]) if W0 in sp.index else np.nan
-p(f"Random {n}-day windows in the pre-election series ({len(vals)} draws):")
-p(f"  mean {vals.mean():+.0f} bp, sd {vals.std():.0f}, min {vals.min():+.0f}, max {vals.max():+.0f}")
+    rows.append((seg.index[0], seg.index[-1], 100 * (seg.iloc[-1] - seg.iloc[0])))
+rnd = pd.DataFrame(rows, columns=["start", "end", "chg"])
+obs = 100 * (sp.loc[W1] - sp.loc[W0])
+late = rnd[rnd.end > pd.Timestamp("2026-04-10")]
+pre = rnd[rnd.end <= pd.Timestamp("2026-04-10")]
+p(f"Draws: {len(rnd)} of {n} days, series {sp.index.min().date()} to {sp.index.max().date()}")
+p(f"  windows ending after the real event: {len(late)} of {len(rnd)}")
 p(f"  observed window change: {obs:+.0f} bp")
-p(f"  share of placebo windows at least as negative: {100*(vals<=obs).mean():.0f}%")
-p("  => cannot reject that the window is drawn from the same distribution.")
+p(f"  share at least as negative, all draws          : {100*(rnd.chg <= obs).mean():.0f}%")
+p(f"  share at least as negative, pre-event draws only: {100*(pre.chg <= obs).mean():.0f}%")
+p("")
+p("WHY THIS IS WITHDRAWN RATHER THAN CORRECTED.")
+p("The series trends down across the whole sample. A 194-day change is therefore")
+p("not a stationary quantity: its distribution depends entirely on where the")
+p("window sits relative to the trend, and the observed window sits at the end.")
+p("Restricting draws to windows that end before the election does not fix this,")
+p("it makes the comparison worse -- it compares the observed window, which")
+p("contains the trend's endpoint, against windows that by construction cannot.")
+p("The p-value that comes out is a statement about the shape of the series, not")
+p("about the election. It is reported here, and in the paper, as a failed test.")
+p("The placebo evidence the paper relies on is the placebo-date test on a panel")
+p("truncated before the event, which is a real test and passes.")
+p("")
+# What replaces it descriptively: the quarterly path that motivated the 2024 start
+Q = (100 * G.SP.dropna()).resample("QE").mean()
+Q.index = [f"{d.year}Q{(d.month-1)//3+1}" for d in Q.index]
+p("Hungary minus (CZ, PL, RO), quarterly mean, bp -- the reason 2022 is excluded:")
+p("  " + "  ".join(f"{k} {v:+.0f}" for k, v in Q.items() if k >= "2022Q1"))
 
 # ---------------------------------------------------------------- 9
 hdr("9. PLACEBO: COUNTRIES")
@@ -236,15 +262,22 @@ for c, lab in [("CZ10Y", "Czechia"), ("PL10Y", "Poland"), ("RO10Y", "Romania"),
 
 # ---------------------------------------------------------------- 10
 hdr("10. THE POLYMARKET SERIES")
-p(f"Prints: {S.orban.notna().sum()} over {(S.orban.dropna().index[-1]-S.orban.dropna().index[0]).days} calendar days")
-dP = S.P.dropna().diff().dropna()
+p(f"Prints: {len(PM)} over {(PM.index[-1]-PM.index[0]).days} calendar days")
+p(f"  prints inside the event window {W0} to {W1}: {len(PM.loc[W0:W1])}, "
+  f"of which {sum(d.weekday() < 5 for d in PM.loc[W0:W1].index)} on weekdays")
+p(f"  prints falling on a weekend: {sum(d.weekday() >= 5 for d in PM.index)}")
+dP = PM.diff().dropna()
 p(f"Largest single-day moves in P:")
 for dte, v in (dP.abs().sort_values(ascending=False).head(8)).items():
-    p(f"  {dte.date()}  {100*dP.loc[dte]:+6.1f} pp   (from {100*(1-S.orban.loc[dte]):.1f} pp above)")
+    prev = PM.loc[:dte].iloc[-2]
+    p(f"  {dte.date()} {dte.day_name()[:3]}  {100*v:+6.1f} pp   "
+      f"({100*prev:.1f} -> {100*PM.loc[dte]:.1f})")
+p("")
+p(f"Moves larger than 10 pp: {(dP.abs() > 0.10).sum()}.  Larger than 5 pp: {(dP.abs() > 0.05).sum()}.")
 p("")
 p("Daily regression of the peer spread on dP (P carried forward between prints):")
-base = pd.DataFrame({"S": w.SP_PEER, "P": w.P}).dropna(subset=["S"])
-base["P"] = base.P.ffill()
+base = pd.DataFrame({"S": w.SP_PEER})
+base["P"] = PM.reindex(w.index).ffill()
 base["dS"] = base.S.diff(); base["dP"] = base.P.diff()
 ch = base.dropna()
 ch["dDE"] = w.DE10Y.reindex(ch.index).diff()
@@ -256,10 +289,10 @@ for cols, lab in [(["dP"], "no controls"), (["dP", "dDE", "dUS", "dVIX", "dB"], 
         cov_type="HAC", cov_kwds={"maxlags": 5})
     p(f"  {lab:14s} beta = {mm2.params.dP:+.4f}  (t = {mm2.tvalues.dP:+.2f}, N = {int(mm2.nobs)})")
 p("")
-p("The coefficient is positive, i.e. the wrong sign: when the market raised the")
-p("probability of regime change, the spread widened. It is noise, but it is the")
-p("wrong noise, and no specification recovers the expected negative relation.")
-p("The contract stops trading on 9 April and prints nothing until 22 April, by which")
+p("Neither coefficient is distinguishable from zero and the sign is not stable")
+p("across the two specifications, so the daily design cannot estimate the dose-")
+p("response at all. It is reported because a reader will ask for it.")
+p("The contract prints on 9 April and then not again until 22 April, by which")
 p("time the spread had already fallen. It cannot support a daily treatment variable.")
 
 # ---------------------------------------------------------------- 11
@@ -275,7 +308,7 @@ p("")
 p(f"{'date':12s} {'spread':>8s} {'Polymarket':>11s} {'bonds(May)':>11s} {'bonds(Nov)':>11s}")
 for d in ["2025-07-25", "2026-02-26", "2026-04-09", "2026-05-08", "2026-11-13"]:
     sp = S.SP_PEER.loc[:d].dropna()
-    pp = S.P.loc[:d].dropna()
+    pp = PM.loc[:d].dropna()
     if len(sp) == 0:
         continue
     v = [impl[k].loc[:d].dropna() for k in impl]
@@ -318,14 +351,16 @@ ax.set_ylabel("cumulative residual, bp")
 ax.set_title("Hungary-specific yield move after removing global factors")
 fig.tight_layout(); fig.savefig(OUT / "fig3_residual.png", dpi=170); plt.close(fig)
 
-fig, ax = plt.subplots(figsize=(7.2, 4.2))
-ax.hist(vals, bins=32, color="#1f4e79", alpha=0.85, edgecolor="white")
-ax.axvline(obs, color="#c00000", lw=2.2, label=f"actual window ({obs:.0f} bp)")
-ax.set_xlabel("change in HU-peer spread over 194 days, bp")
-ax.set_ylabel("frequency")
-ax.set_title("Placebo windows, 2022-2025")
-ax.legend(frameon=False)
-fig.tight_layout(); fig.savefig(OUT / "fig4_placebo.png", dpi=170); plt.close(fig)
+fig, ax = plt.subplots(figsize=(8.6, 4.2))
+Qs = Q[Q.index >= "2022Q1"]
+x = np.arange(len(Qs))
+ax.bar(x, Qs.values, color="#1f4e79", alpha=0.85, width=0.7)
+ax.axhline(0, color="black", lw=0.8)
+ax.set_xticks(x)
+ax.set_xticklabels(Qs.index, rotation=90, fontsize=7)
+ax.set_ylabel("HU minus (CZ, PL, RO), bp")
+ax.set_title("Hungary's spread over Czechia, Poland and Romania, quarterly")
+fig.tight_layout(); fig.savefig(OUT / "fig4_spread_path.png", dpi=170); plt.close(fig)
 
 fig, ax = plt.subplots(figsize=(7.6, 4.0))
 seg = sl.loc["2026-01-01":"2026-05-08"].dropna()
@@ -338,7 +373,7 @@ ax.set_title("Hungarian curve slope around the election")
 fig.tight_layout(); fig.savefig(OUT / "fig5_slope.png", dpi=170); plt.close(fig)
 
 fig, ax = plt.subplots(figsize=(9.0, 4.4))
-Pp = S.P.dropna()
+Pp = PM.dropna()
 ax.plot(Pp.index, Pp, color="#c00000", lw=1.6, label="Polymarket: P(Orban leaves)")
 for k, c, ls in [("terminal = May 8", "#1f4e79", "-"), ("terminal = Nov 13", "#1f4e79", ":")]:
     s = impl[k].dropna()

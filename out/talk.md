@@ -35,7 +35,7 @@ Rule for the whole talk: **say the number, then say what it means.** Never read 
 ## Slide 3 — Data (1:25–2:15)
 
 **On slide**
-- Polymarket: P(Orbán not PM), daily, 197 prints
+- Polymarket: P(Orbán not PM), daily, 257 prints (weekends kept)
 - Ten-year yields: HU, CZ, PL, RO, SI, HR, AT, DE
 - Also 5Y, EUR/HUF, US 10Y, VIX, Brent
 - Window 25 Jul 2025 → 8 May 2026; panel 2022–2026
@@ -121,14 +121,14 @@ Rule for the whole talk: **say the number, then say what it means.** Never read 
 **On slide**
 - Daily design: Δspread on ΔP
 - β ≈ 0, |t| < 1, with and without controls
-- Cause: of 197 prints, only **two** move more than 10 pp
+- Cause: of 257 prints, only **two** move more than 10 pp
 - Both artefacts: opening week, and a print 10 days *after* the result
 - **No dose–response, so the DiD is binary, not intensity-based**
 
 **Say**
 > The design I originally wanted was to regress daily changes in the spread on daily changes in the probability. It does not work, and I show why rather than hide it.
 
-> Of 197 prints, only two move by more than ten points: plus 20 in the contract's first week, when liquidity was being discovered, and plus 31 on 22 April, ten days after the election, when the contract had stopped trading on news. Everything else is noise of a few points.
+> Of 257 prints, only two move by more than ten points: plus 19.5 on a Saturday in the contract's first week, when liquidity was being discovered, and plus 31 on 22 April, ten days after the election, when the contract had stopped trading on news. Everything else is noise of a few points.
 
 > So the treatment variable is flat through the campaign and then jumps when the outcome is known. There is no intensity to exploit. That is why the DiD uses a date, not a price.
 
