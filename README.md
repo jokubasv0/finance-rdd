@@ -12,6 +12,9 @@ the repricing with a Polymarket contract on whether Viktor Orbán would remain p
 |---|---|
 | HU 10Y yield, 25 Jul 2025 → 8 May 2026 | 7.13% → 5.75% (**−138 bp**) |
 | HU 10Y minus six-peer average | 2.74 → 1.16 pp (**−157 bp**) |
+| DiD vs seven neighbours, country trends | **−129 bp** (DK t = −7.9) |
+| DiD, no trends | −177 bp |
+| Randomisation inference, 8 units | p = 0.125 (floor of 1/8) |
 | Share of compression before the vote | 35% (−56 bp), 65% after the result |
 | Countries in the sample whose yield fell | 1 of 8 (Hungary) |
 | Placebo-date p-value | 0.15 |
@@ -19,15 +22,24 @@ the repricing with a Polymarket contract on whether Viktor Orbán would remain p
 
 ## What the paper claims
 
-Descriptive, not causal. The regression of daily spread changes on daily changes in the
-probability returns β ≈ 0 and is reported as a null, because the probability series has only
-two moves above 10 pp — one from opening-week liquidity discovery, one from a print ten days
-after the result. With one treated country there is no credible inference, and the paper says so.
+A conditional estimate, not an identified treatment effect.
+
+The identification is a two-way fixed-effects difference-in-differences against the seven other
+countries, with country and calendar-date fixed effects and country-specific linear trends. It
+gives −129 bp. The event study is reported in full: the pre-treatment leads are not flat, a joint
+test rejects them, and the trend specification exists because of that. With one treated unit,
+randomisation inference cannot go below p = 0.125, and the paper says so where the estimate is
+reported.
+
+The daily design — spread changes on changes in the Polymarket probability — returns β ≈ 0 and
+is reported as a null, because the probability series has only two moves above 10 bp of
+substance: opening-week liquidity discovery, and a print ten days after the result.
 
 ## Layout
 
 ```
-final_analysis.py     all results and figures; writes out/final_results.txt
+final_analysis.py     descriptive results and figures; writes out/final_results.txt
+did_analysis.py       difference-in-differences, event study, placebos; writes out/did_results.txt
 build_docx.py         renders out/paper.md to out/Pricing_Regime_Change.docx
 raw/                  archived API responses (Investing.com, Yahoo Finance, Polymarket)
 out/                  paper.md, talk.md, figures, results, panel
@@ -37,8 +49,9 @@ out/                  paper.md, talk.md, figures, results, panel
 
 ```bash
 python3 -m venv .venv
-uv pip install --python .venv/bin/python numpy pandas statsmodels matplotlib scipy python-docx
-.venv/bin/python final_analysis.py     # numbers + six figures
+uv pip install --python .venv/bin/python numpy pandas statsmodels matplotlib scipy python-docx linearmodels
+.venv/bin/python final_analysis.py     # descriptive numbers + six figures
+.venv/bin/python did_analysis.py       # DiD, event study, placebos + two figures
 .venv/bin/python build_docx.py         # paper docx
 ```
 

@@ -1,0 +1,106 @@
+
+==========================================================================
+1. SAMPLE
+==========================================================================
+8-country panel : 2025-06-02 to 2026-11-13, 3040 country-days, 8 countries
+5-country panel : 2022-01-01 to 2026-11-13, 7010 country-days, 5 countries
+
+Treatment dates tested: campaign start 2026-02-27, result 2026-04-10, inauguration 2026-05-09. 
+Standard errors: Driscoll-Kraay (kernel, bandwidth 10), robust to serial and cross-sectional correlation.
+
+
+==========================================================================
+2. BINARY DiD: y_it = a_i + l_t + b (HU_i x Post_t) + e_it
+==========================================================================
+result (10 Apr 2026), 8-country panel, 2025-06 to 2026-11
+  no trends, DK                      b =  -1.765 pp   se 0.089   t -19.76   p 0.000   N 3040
+  country trends, DK                 b =  -1.290 pp   se 0.164   t  -7.88   p 0.000   N 3040
+  no trends, cluster(8)              b =  -1.765 pp   se 0.076   t -23.19   p 0.000   N 3040
+
+campaign (27 Feb 2026), 8-country panel, 2025-06 to 2026-11
+  no trends, DK                      b =  -1.496 pp   se 0.180   t  -8.30   p 0.000   N 3040
+  country trends, DK                 b =  -0.337 pp   se 0.369   t  -0.91   p 0.361   N 3040
+  no trends, cluster(8)              b =  -1.496 pp   se 0.080   t -18.81   p 0.000   N 3040
+
+inauguration (9 May 2026), 8-country panel, 2025-06 to 2026-11
+  no trends, DK                      b =  -1.774 pp   se 0.089   t -19.96   p 0.000   N 3040
+  country trends, DK                 b =  -1.158 pp   se 0.222   t  -5.21   p 0.000   N 3040
+  no trends, cluster(8)              b =  -1.774 pp   se 0.080   t -22.27   p 0.000   N 3040
+
+Same, 5-country panel, 2022-01 to 2026-11 (long pre-period)
+  no trends, DK                      b =  -2.085 pp   se 0.108   t -19.24   p 0.000   N 7006
+  country trends, DK                 b =  -1.344 pp   se 0.123   t -10.91   p 0.000   N 7006
+  no trends, cluster(5)              b =  -2.085 pp   se 0.231   t  -9.02   p 0.000   N 7006
+  no trends, DK                      b =  -1.819 pp   se 0.195   t  -9.32   p 0.000   N 7006
+  country trends, DK                 b =  -1.034 pp   se 0.205   t  -5.04   p 0.000   N 7006
+  no trends, cluster(5)              b =  -1.819 pp   se 0.232   t  -7.84   p 0.000   N 7006
+
+
+==========================================================================
+3. EVENT STUDY, MONTHLY BINS RELATIVE TO APRIL 2026
+==========================================================================
+Base month: February 2026 (m = -2). Coefficients are percentage points.
+month       rel     coef      se       t
+Jun 25      -10   +0.376   0.021  +17.64
+Jul          -9   +0.390   0.026  +15.22
+Aug          -8   +0.392   0.029  +13.64
+Sep          -7   +0.306   0.078   +3.91
+Oct          -6   +0.202   0.029   +7.07
+Nov          -5   +0.417   0.052   +8.01
+Dec          -4   +0.260   0.039   +6.65
+Jan 26       -3   +0.118   0.028   +4.19
+Feb          -2   +0.000    base        
+Mar          -1   +0.306   0.055   +5.53
+Apr          +0   -0.534   0.203   -2.63
+May          +1   -1.247   0.094  -13.21
+Jun+         +2   -1.633   0.045  -36.50
+
+Joint test that all pre-treatment leads (Oct 2025 - Jan 2026) are zero: chi2 = 445.35, p = 0.000
+
+==========================================================================
+4. CONTINUOUS DiD: y_it = a_i + l_t + b (HU_i x P_t) + e_it
+==========================================================================
+P is the Polymarket probability that Orban does not remain PM, carried forward between prints.
+Window 2025-07-25 to 2026-05-08, 8-country panel.
+  Driscoll-Kraay             b =   -2.679 pp per unit P   se 0.227   t -11.79   N 1648
+  clustered by country (8)   b =   -2.679 pp per unit P   se 0.078   t -34.18   N 1648
+
+A coefficient of -1.0 means: going from P = 0 to P = 1 lowers Hungary's yield by 1 pp
+relative to its donors, i.e. a full repricing of regime change is worth 100 bp.
+
+==========================================================================
+5. PLACEBO TREATED UNITS AND RANDOMISATION INFERENCE
+==========================================================================
+Each country is treated in turn, result date 2026-04-10, same panel and specification.
+  AT   b =  +0.232 pp   se 0.029   t  +7.98   p 0.000
+  CZ   b =  +0.405 pp   se 0.042   t  +9.58   p 0.000
+  DE   b =  +0.308 pp   se 0.039   t  +7.79   p 0.000
+  HR   b =  +0.310 pp   se 0.048   t  +6.41   p 0.000
+  HU   b =  -1.765 pp   se 0.089   t -19.76   p 0.000
+  PL   b =  +0.392 pp   se 0.058   t  +6.72   p 0.000
+  RO   b =  -0.256 pp   se 0.083   t  -3.09   p 0.002
+  SI   b =  +0.375 pp   se 0.027   t +13.86   p 0.000
+
+Hungary ranks 1 of 8 (more negative = lower yield).
+Randomisation-inference p-value: 0.125
+With 8 units the smallest attainable p-value is 0.125.
+
+==========================================================================
+6. LEAVE-ONE-DONOR-OUT, 8-country panel, result date
+==========================================================================
+  drop CZ   b =  -1.743 pp   se 0.089   t -19.56
+  drop DE   b =  -1.757 pp   se 0.090   t -19.52
+  drop PL   b =  -1.745 pp   se 0.089   t -19.67
+  drop RO   b =  -1.839 pp   se 0.099   t -18.67
+  drop SI   b =  -1.747 pp   se 0.089   t -19.55
+  drop HR   b =  -1.757 pp   se 0.087   t -20.18
+  drop AT   b =  -1.768 pp   se 0.091   t -19.51
+
+==========================================================================
+7. WINDOW SENSITIVITY, 8-country panel, result date
+==========================================================================
+  2025-06-01 to 2026-11-13  b =  -1.765 pp   se 0.089   t -19.76   N 3040
+  2025-07-25 to 2026-05-08  b =  -1.079 pp   se 0.091   t -11.92   N 1648
+  2025-10-01 to 2026-11-13  b =  -1.703 pp   se 0.094   t -18.19   N 2344
+  2026-01-01 to 2026-11-13  b =  -1.626 pp   se 0.100   t -16.28   N 1816
+  2025-06-01 to 2026-06-30  b =  -1.499 pp   se 0.142   t -10.55   N 2256

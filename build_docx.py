@@ -162,6 +162,23 @@ def build():
                     for cell in cells:
                         for cp in cell.paragraphs:
                             cp.paragraph_format.keep_with_next = True
+            # fixed layout: wide label column, 2.15 cm for each numeric column
+            NUM = 2.15
+            if ncol >= 2:
+                cw = [max(3.5, 16.0 - NUM * (ncol - 1))] + [NUM] * (ncol - 1)
+            else:
+                cw = [16.0]
+            table.autofit = False
+            from docx.oxml import OxmlElement
+            from docx.oxml.ns import qn
+            layout = OxmlElement("w:tblLayout")
+            layout.set(qn("w:type"), "fixed")
+            table._tbl.tblPr.append(layout)
+            for ci, w in enumerate(cw):
+                table.columns[ci].width = Cm(w)
+                for row in table.rows:
+                    row.cells[ci].width = Cm(w)
+
             doc.add_paragraph().paragraph_format.space_after = Pt(4)
             continue
 
