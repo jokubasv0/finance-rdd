@@ -160,17 +160,22 @@ para(tf, "November 2026", 13, GREY, before=4)
 # -------------------------------------------------------------------- slide 2
 s = slide()
 eyebrow(s, "Data and the fact")
-headline(s, "Hungary's yield fell.\nEvery neighbour's rose.", 30, y=0.88, w=5.2)
+headline(s, "One country repriced.\nThe others did not.", 30, y=0.88, w=5.2)
 
-kpi(s, ML, 2.55, 4.6, "−138 bp", "Hungary's ten-year yield, 7.13% → 5.75%", RED, 36)
-kpi(s, ML, 3.72, 4.6, "+19 bp", "Six-peer average", NAVY, 36)
-kpi(s, ML, 4.89, 4.6, "−21 bp", "Romania — the only other fall, and less than a sixth as large", GREY, 36)
+kpi(s, ML, 2.40, 4.7, "−138 bp", "Hungary's ten-year yield, 7.13% → 5.75%", RED, 36)
+kpi(s, ML, 3.50, 4.7, "+19 bp", "Average of the six peers (Germany is shown separately)",
+    NAVY, 36)
+kpi(s, ML, 4.60, 4.7, "−21 bp", "Romania — the only other faller", GREY, 36)
 
 picture(s, "fig1_levels.png", 6.25, 1.72, 6.3, 3.35,
         cap="Hungary in dark blue, the peer average in grey. The fall opens in two "
             "steps — before the vote, and after it.")
 
-tf = box(s, ML, 5.98, CW, 0.6)
+tf = box(s, ML, 5.74, CW, 0.32)
+para(tf, "Hungary and seven peers: Czechia, Poland, Romania, Germany, Austria, "
+         "Slovenia, Croatia.", 10.5, GREY, first=True)
+
+tf = box(s, ML, 6.16, CW, 0.55)
 para(tf, "That shape is the whole paper: not that yields fell, but where and when.",
      17, NAVY, bold=True, first=True, line=1.2)
 footer(s, 2)
@@ -222,10 +227,10 @@ tf = box(s, ML, 4.78, CW, 0.7)
 para(tf, "A panel averages over events. The expectation that made each event "
          "matter is the one thing it discards.", 15, INK, first=True, line=1.25)
 
-band(s, ML, 5.42, CW, 1.18)
-tf = box(s, ML + 0.4, 5.54, CW - 0.8, 0.98, anchor=MSO_ANCHOR.MIDDLE)
+band(s, ML, 5.38, CW, 1.24)
+tf = box(s, ML + 0.4, 5.52, CW - 0.8, 1.0, anchor=MSO_ANCHOR.MIDDLE)
 para(tf, "THE GAP   Nobody has put a contract and a sovereign spread on the same "
-         "daily axis around a European election.", 15, NAVY, bold=True, first=True,
+         "daily axis around a European election.", 15, RED, bold=True, first=True,
      line=1.2)
 para(tf, "OUR CONTRIBUTION   That joint daily measurement, which is what lets the "
          "timing question be asked at all.", 14, INK, before=7, line=1.2)
@@ -239,9 +244,11 @@ headline(s, "Difference-in-differences against\nneighbouring markets", 30, y=0.8
 tf = box(s, ML, 2.34, CW, 0.45)
 para(tf, "yᵢₜ = αᵢ + λₜ + β(HUᵢ × Postₜ) + γᵢ · min(t, t_cut) + εᵢₜ", 21, NAVY,
      first=True)
-tf = box(s, ML, 2.95, CW, 0.4)
+tf = box(s, ML, 2.87, CW, 0.8)
 para(tf, "country effects  ·  date effects  ·  a country trend fitted before the "
          "vote and held flat after it", 12, GREY, first=True)
+para(tf, "Postₜ switches on 13 April 2026, the first trading day after the vote; "
+         "t_cut is the same date.", 12, GREY, before=4)
 
 kpi(s, ML, 3.62, 3.4, "−1.04", "no trend", NAVY, 38)
 kpi(s, ML + 3.7, 3.62, 3.4, "−1.09", "kinked trend — the headline", RED, 38)
@@ -257,10 +264,12 @@ para(tf, "On a sample reaching back to 2022 the same three specifications span "
          "starts in 2024 — a test, not a preference.", 13, GREY, first=True,
      line=1.35)
 
-tf = box(s, 10.55, 5.58, 2.0, 0.9)
-para(tf, "t = −11.3", 13, INK, bold=True, first=True, align=PP_ALIGN.RIGHT)
-para(tf, "N = 3,200", 12, GREY, before=5, align=PP_ALIGN.RIGHT)
-para(tf, "2024–2026", 12, GREY, before=4, align=PP_ALIGN.RIGHT)
+tf = box(s, 10.45, 5.5, 2.1, 1.4)
+para(tf, "t = −11.3", 12, INK, bold=True, first=True, align=PP_ALIGN.RIGHT)
+para(tf, "N = 3,200", 11, GREY, before=4, align=PP_ALIGN.RIGHT)
+para(tf, "one treated country,", 10, GREY, before=7, align=PP_ALIGN.RIGHT)
+para(tf, "so t is not the", 10, GREY, before=2, align=PP_ALIGN.RIGHT)
+para(tf, "binding statistic", 10, GREY, before=2, align=PP_ALIGN.RIGHT)
 footer(s, 5)
 
 # -------------------------------------------------------------------- slide 6
@@ -268,19 +277,29 @@ s = slide()
 eyebrow(s, "Robustness")
 headline(s, "Four checks. One nearly\nkills the design.", 29, y=0.86, w=5.4)
 
-y = 2.42
-for name, claim in [("Pre-trend", "Leads oscillate, they do not trend. Mean +0.07."),
-                    ("Fake election dates", "On a panel cut before the event: ≈ 0."),
-                    ("Every country in turn", "Hungary −0.97. The next is +0.44."),
-                    ("The ceiling", "p = 0.125 — the floor with eight units.")]:
+y = 2.40
+for name, claim, hot in [
+        ("Pre-trend", "Leads oscillate, mean +0.07, no drift — but jointly "
+                      "non-zero, so the trend carries weight.", False),
+        ("Fake election dates", "On a panel cut before the event: ≈ 0.", False),
+        ("Every country in turn", "Hungary −0.97. The next is +0.44.", False),
+        ("The ceiling", "p = 0.125 — the floor with eight units.", True)]:
+    if hot:
+        band(s, ML - 0.2, y - 0.14, 5.55, 1.06)
+        solid(s.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(ML - 0.2),
+                                 Inches(y - 0.14), Inches(0.055), Inches(1.06)), RED)
     tf = box(s, ML, y, 5.2, 0.95)
-    para(tf, name.upper(), 9.5, GREY, bold=True, first=True, spc=150)
-    para(tf, claim, 13.5, INK, before=4, line=1.25)
+    para(tf, name.upper(), 9.5, RED if hot else GREY, bold=True, first=True, spc=150)
+    para(tf, claim, 12.5, INK, before=4, line=1.25)
     y += 1.07
 
-picture(s, "fig7_event_study.png", 6.4, 1.85, 6.3, 3.2,
+picture(s, "fig7_event_study.png", 6.4, 1.8, 6.3, 3.0,
         cap="Pre-treatment leads oscillate around zero; the break lands after "
             "the vote, not before it.")
+
+tf = box(s, ML, 6.66, 7.4, 0.3)
+para(tf, "Alternative estimator, intensity (Hungary × P): −1.12 — three basis "
+         "points from −1.09.", 10.5, NAVY, bold=True, first=True)
 footer(s, 6)
 
 # -------------------------------------------------------------------- slide 7
@@ -288,17 +307,18 @@ s = slide()
 eyebrow(s, "What fails")
 headline(s, "What fails, and what surprised us", 30, y=0.88)
 
-tf = box(s, ML, 2.28, 4.9, 1.5)
-para(tf, "DAILY DESIGN", 9.5, GREY, bold=True, first=True, spc=150)
+tf = box(s, ML, 2.28, 4.9, 1.8)
+para(tf, "DAILY CHANGES", 9.5, GREY, bold=True, first=True, spc=150)
 para(tf, "β ≈ 0", 34, MUTED, bold=True, before=2)
-para(tf, "Only two of 257 prints move more than ten points, so there is no "
-         "intensity to exploit.", 13, INK, before=8, line=1.3)
+para(tf, "Two of 257 prints move more than ten points, so a regression on daily "
+         "changes is mostly regression on staleness.", 13, INK, before=8,
+     line=1.3)
 
-tf = box(s, ML, 4.42, 4.9, 1.5)
-para(tf, "CONTINUOUS DIFFERENCE-IN-DIFFERENCES", 9.5, GREY, bold=True, first=True, spc=150)
-para(tf, "Not identified", 26, MUTED, bold=True, before=4)
-para(tf, "The probability is the same for every country, so the date effects "
-         "absorb it entirely.", 13, INK, before=8, line=1.3)
+tf = box(s, ML, 4.62, 4.9, 1.6)
+para(tf, "NOT MONETARY POLICY", 9.5, GREY, bold=True, first=True, spc=150)
+para(tf, "The ten-year fell 40 bp while the five-year rose 13, and the forint "
+         "gained 10 per cent. Long-end risk, not rate cuts.", 13, INK,
+     before=6, line=1.3)
 
 tf = box(s, 6.1, 2.15, 6.4, 0.35)
 para(tf, "9 APRIL  —  THREE DAYS BEFORE THE VOTE", 10, GREY, bold=True,
@@ -308,15 +328,15 @@ para(tf, "69%  vs  35%", 40, RED, bold=True, first=True)
 
 picture(s, "fig6_implied.png", 6.1, 3.35, 6.4, 2.6)
 
-tf = box(s, 6.1, 6.06, 6.4, 0.7)
-para(tf, "They disagreed less about the level of risk than about when to price it.",
-     14, NAVY, bold=True, first=True, line=1.25)
+tf = box(s, 6.1, 6.18, 6.6, 0.5)
+para(tf, "They agreed on the level of risk, not on when to price it.",
+     14.5, NAVY, bold=True, first=True)
 footer(s, 7)
 
 # -------------------------------------------------------------------- slide 8
 s = slide()
 eyebrow(s, "Conclusion")
-headline(s, "A real repricing, priced early")
+headline(s, "A real repricing. The contract saw it first.")
 
 kpi(s, ML, 2.45, 3.6, "−109 bp", "relative to neighbours, over the election window", RED, 38)
 kpi(s, ML + 3.9, 2.45, 3.6, "65%", "of it came after the result, not before", RED, 38)
@@ -331,9 +351,9 @@ para(tf, "Hungarian sovereign risk fell about 109 basis points relative to its "
 
 band(s, ML, 5.45, CW, 0.95)
 tf = box(s, ML + 0.4, 5.58, CW - 0.8, 0.7, anchor=MSO_ANCHOR.MIDDLE)
-para(tf, "CONDITIONAL ESTIMATE   One treated country, a pre-trend that cannot be "
-         "removed, and a p-value floored at one in eight.", 14, NAVY, bold=True,
-     first=True, line=1.2)
+para(tf, "CONDITIONAL ESTIMATE   One treated country, a pre-trend only a trend "
+         "control absorbs, and a p-value floored at one in eight.", 14, NAVY,
+     bold=True, first=True, line=1.2)
 footer(s, 8)
 
 # ---------------------------------------------------------------- validation

@@ -151,8 +151,8 @@ running late, drop slide 4 (literature) to two sentences; it is the only cuttabl
 > Hungarian sovereign risk fell about 109 basis points relative to its neighbours — 157 comparing
 > endpoints — and two thirds of it came after the result. The prediction market moved first.
 
-> The estimate is conditional. One treated country, a pre-trend I cannot remove, and a p-value
-> floored at one in eight.
+> The estimate is conditional. One treated country, a pre-trend that only a trend control
+> absorbs, and a p-value floored at one in eight.
 
 > Thank you.
 

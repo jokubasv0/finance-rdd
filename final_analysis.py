@@ -328,16 +328,22 @@ p("reports only the four dates up to 8 May for this reason.")
 
 # ---------------------------------------------------------------- figures
 fig, ax = plt.subplots(figsize=(9.4, 4.8))
-ax.plot(w.index, w.HU10Y, color="#1f4e79", lw=1.8, label="Hungary 10Y")
+# The Hungarian series has single-day holiday gaps; fill them inside the window
+# only, so the line is continuous without inventing values at the edges.
+hu = w.HU10Y.interpolate(limit=5, limit_area="inside")
+ax.plot(w.index, hu, color="#1f4e79", lw=1.9, label="Hungary 10Y")
 ax.plot(w.index, w.CEE, color="#7f7f7f", lw=1.6, label="Peer average 10Y")
 ax.plot(w.index, w.DE10Y, color="#bfbfbf", lw=1.2, ls="--", label="Germany 10Y")
+ax.margins(y=0.16)                      # room for the labels, before anchoring them
+ax.set_xlim(pd.Timestamp("2025-07-25"), pd.Timestamp("2026-05-09"))
 for x_, lab in [("2026-02-26", "campaign"), ("2026-04-12", "election"),
                 ("2026-05-09", "inauguration")]:
     ax.axvline(pd.Timestamp(x_), color="black", lw=0.8, ls=":")
     ax.annotate(lab, (pd.Timestamp(x_), ax.get_ylim()[1]), fontsize=8, rotation=90,
-                va="top", ha="right")
+                va="top", ha="right", xytext=(0, -3), textcoords="offset points")
 ax.set_ylabel("yield, %"); ax.legend(frameon=False, fontsize=9, loc="lower left")
 ax.set_title("Hungarian and peer sovereign yields, July 2025 - May 2026")
+ax.xaxis.set_major_locator(mdates.MonthLocator(bymonthday=25))
 ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %y"))
 fig.tight_layout(); fig.savefig(OUT / "fig1_levels.png", dpi=170); plt.close(fig)
 
@@ -377,15 +383,23 @@ ax.set_ylabel("slope, bp"); ax.legend(frameon=False)
 ax.set_title("Hungarian curve slope around the election")
 fig.tight_layout(); fig.savefig(OUT / "fig5_slope.png", dpi=170); plt.close(fig)
 
-fig, ax = plt.subplots(figsize=(9.0, 4.4))
+fig, ax = plt.subplots(figsize=(9.0, 4.6))
 Pp = PM.dropna()
-ax.plot(Pp.index, Pp, color="#c00000", lw=1.6, label="Polymarket: P(Orban leaves)")
-for k, c, ls in [("terminal = May 8", "#1f4e79", "-"), ("terminal = Nov 13", "#1f4e79", ":")]:
-    s = impl[k].dropna()
-    s = s.loc["2025-07-25":"2026-05-08"]
-    ax.plot(s.index, s, color=c, lw=1.5, ls=ls, label=f"Bond-implied, {k[11:]}")
-ax.set_ylim(-0.05, 1.05); ax.set_ylabel("probability")
-ax.set_title("Market-implied versus bond-implied probability of regime change")
+ax.plot(Pp.index, Pp, color="#c00000", lw=1.7, label="Polymarket: P(Orbán leaves)")
+for k, ls, lab in [("terminal = May 8", "-", "Bond-implied, anchored at 8 May"),
+                   ("terminal = Nov 13", ":", "Bond-implied, anchored at 13 Nov")]:
+    s = impl[k].dropna().loc["2025-07-25":"2026-05-08"]
+    ax.plot(s.index, s, color="#1f4e79", lw=1.5, ls=ls, label=lab)
+# the divergence the paper is about
+d9 = pd.Timestamp("2026-04-09")
+ax.axvline(d9, color="black", lw=0.9, ls=":")
+ax.annotate("9 Apr: 69% vs 35%", (d9, 0.5), fontsize=9.5, ha="right", va="center",
+            xytext=(-7, 0), textcoords="offset points")
+ax.axhline(0, color="black", lw=0.6)
+ax.set_ylim(-0.14, 1.10); ax.set_ylabel("probability"); ax.margins(x=0.01)
+ax.set_title("Market-implied versus bond-implied probability of regime change\n"
+             "bond-implied P = (s_t − s_0)/(s_T − s_0); below zero means the spread "
+             "widened past its 25 July level", fontsize=10.5)
 ax.legend(fontsize=8.5, loc="upper left", facecolor="white", framealpha=0.92,
           edgecolor="#d9dde3")
 fig.tight_layout(); fig.savefig(OUT / "fig6_implied.png", dpi=170); plt.close(fig)

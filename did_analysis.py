@@ -303,6 +303,67 @@ p("")
 p("Only four donors are available on a 2024 sample. Every drop moves the")
 p("estimate by a few basis points.")
 
+# ---------------------------------------------------------------- 9
+hdr("9. CONTINUOUS DIFFERENCE-IN-DIFFERENCES")
+import json as _json
+_pmr = _json.loads((RAW / "pm_orban.json").read_text())["history"]
+PMs = pd.Series({pd.to_datetime(x["t"], unit="s").normalize(): 1.0 - x["p"]
+                 for x in _pmr}).sort_index()
+
+def cont(panel, post_only=True):
+    """HU_i x P_t with the same fixed effects and trends as the binary design.
+
+    Date effects absorb P_t itself; they do not absorb HU_i x P_t, which varies
+    across countries within a date. So this is identified. What it cannot do is
+    use the 2024-2025 pre-period, because the contract only begins in July 2025.
+    """
+    d = panel.copy()
+    dates = d.index.get_level_values("date")
+    d = d[(dates >= PMs.index.min()) & (dates <= END)]
+    d = d[d.y.notna()]
+    dates = d.index.get_level_values("date")
+    grid = pd.Index(np.sort(dates.unique()))
+    # P as of each close: the contract does not print every day, so carry the
+    # last print forward across trading days rather than dropping the gaps.
+    Pg = pd.Series(grid.map(PMs).astype(float), index=grid).ffill()
+    d["P"] = pd.Series(dates.map(Pg).astype(float), index=d.index)
+    d = d[d.P.notna()]
+    dates = d.index.get_level_values("date")
+    d["hu"] = (d.index.get_level_values("country") == "HU10Y").astype(float)
+    d["post"] = (dates >= CUT).astype(float)
+    d["huP"] = d["hu"] * d["P"]
+    d["huPpost"] = d["hu"] * d["P"] * d["post"]
+    uniq = np.sort(dates.unique()); pos = {x: i for i, x in enumerate(uniq)}
+    d["t"] = pd.Series(dates.map(pos).astype(float), index=d.index)
+    tc = float(pos[uniq[uniq.searchsorted(CUT) - 1]])
+    d["t_kink"] = np.minimum(d["t"], tc)
+    key = "huPpost" if post_only else "huP"
+    exog = [key]
+    countries = sorted(d.index.get_level_values("country").unique())
+    for c in countries:
+        col = f"t_kink_{c}"
+        d[col] = (d.index.get_level_values("country") == c) * d["t_kink"]
+        if c != countries[0]:
+            exog.append(col)
+    res = PanelOLS(d.y, d[exog], entity_effects=True, time_effects=True,
+                   drop_absorbed=False).fit(cov_type="kernel", kernel="bartlett",
+                                            bandwidth=10)
+    return res, key
+
+p(f"{'specification':30s} {'beta':>9s} {'se':>8s} {'t':>8s} {'N':>7s}")
+for lab, po in [("HU x P x Post", True), ("HU x P, all periods", False)]:
+    r_, key_ = cont(P5, po)
+    p(f"{lab:30s} {r_.params[key_]:+9.3f} {r_.std_errors[key_]:8.3f} "
+      f"{r_.tstats[key_]:+8.2f} {int(r_.nobs):7d}")
+p("")
+p("This design is identified. The date effects absorb P_t, which is common to")
+p("every country on a given day, but not HU_i x P_t, which is not. What it")
+p("surrenders is history: the contract begins on 2025-07-25, so the panel runs")
+p("for 1,030 country-days instead of 3,200 and the nine flat quarters that make")
+p("the binary design credible are simply absent. Within that shorter window the")
+p("continuous estimate is -1.12 against the binary -1.09: three basis points")
+p("apart. The two designs agree; the continuous one has less behind it.")
+
 # ---------------------------------------------------------------- figures
 import matplotlib
 matplotlib.use("Agg")
@@ -317,7 +378,8 @@ for i, m in enumerate(EV_MONTHS):
     c = f"m_{m}"
     xs.append(i); ys.append(EV.params[c]); es.append(1.96 * EV.std_errors[c])
 ax.axhline(0, color="black", lw=0.8)
-ax.axvline(len([m for m in EV_MONTHS if m <= EV_BASE]) - 0.5, color="#c00000", lw=1.0, ls=":")
+ax.axvline(len([m for m in EV_MONTHS if m < pd.Period("2026-04", "M")]) - 0.5,
+           color="#c00000", lw=1.2, ls=":")
 ax.errorbar(xs, ys, yerr=es, fmt="o", ms=4, lw=1.2, color="#1f4e79", ecolor="#9dc3e6")
 ax.set_xticks(xs[::3])
 ax.set_xticklabels([str(m) for m in EV_MONTHS][::3], rotation=45, ha="right", fontsize=8)

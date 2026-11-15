@@ -159,3 +159,18 @@ RO10Y           -1.193   -11.81
 
 Only four donors are available on a 2024 sample. Every drop moves the
 estimate by a few basis points.
+
+==============================================================================
+9. CONTINUOUS DIFFERENCE-IN-DIFFERENCES
+==============================================================================
+specification                       beta       se        t       N
+HU x P x Post                     -1.119    0.072   -15.59    1030
+HU x P, all periods               -2.353    0.267    -8.82    1030
+
+This design is identified. The date effects absorb P_t, which is common to
+every country on a given day, but not HU_i x P_t, which is not. What it
+surrenders is history: the contract begins on 2025-07-25, so the panel runs
+for 1,030 country-days instead of 3,200 and the nine flat quarters that make
+the binary design credible are simply absent. Within that shorter window the
+continuous estimate is -1.12 against the binary -1.09: three basis points
+apart. The two designs agree; the continuous one has less behind it.

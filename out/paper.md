@@ -407,11 +407,11 @@ Dropping any single donor from the 2024 sample gives −1.047 (drop Czechia), �
 
 The natural next step is to identify the effect at daily frequency from the probability series itself: regress the change in the spread on the change in P. It does not work, and the reason is not the sample size.
 
-P is a single time series, identical for every country on a given day. A continuous difference-in-differences — Hungarian yield on Hungary × P_t with country and date effects — therefore has no cross-sectional variation in the interaction that survives the date effects: P_t is absorbed by λ_t, and the interaction collapses onto the treated unit's own time path. The aggregate design in Section 5.6 avoids this by dating the treatment, not by measuring its intensity.
+Run on 257 prints carried forward to trading days, the change in the spread on the change in P gives β = +0.0012 (t = 0.02, N = 170) without controls and β = −0.034 (t = −0.66, N = 163) with the US ten-year, VIX and Brent changes added. Neither coefficient is distinguishable from zero and the sign is not stable across the two specifications.
 
-Run as a regression anyway, the result is a null. On 257 prints carried forward to trading days, the change in the spread on the change in P gives β = +0.0012 (t = 0.02, N = 170) with no controls and β = −0.034 (t = −0.66, N = 163) with the US ten-year, VIX and Brent changes added. Neither coefficient is distinguishable from zero and the sign is not stable across the two specifications.
+The reason is the print frequency rather than the specification. Two of 257 prints move the contract by more than ten percentage points and most move by less than one, so a daily regression on that series is mostly regression on staleness. The 69-versus-35 comparison in Section 5.5 is a comparison of cumulative repricing at a single decision-relevant date, and it is the version of the lead-lag question that these data can answer.
 
-This is unsurprising once the print frequency is considered. Two of 257 prints move the contract by more than ten percentage points and most move by less than one; a daily regression on that series is mostly regression on staleness. The 69-versus-35 comparison in Section 5.5 is a comparison of cumulative repricing at a single decision-relevant date, and it is the version of the lead-lag question that the data can answer.
+The daily change regression is the wrong instrument for a separate reason as well. It differences away the level relationship the paper is about: if the spread and the probability both trend through the window, their changes are dominated by noise on both sides, and a null on differences says little about a level reallocation. Section 6 reports the level version, where the probability enters as an intensity rather than as a differenced regressor.
 
 ### 5.9 After the inauguration
 
@@ -421,7 +421,9 @@ The compression did not reverse. Had the May level been an overreaction, mean re
 
 ## 6. Robustness
 
-Four checks that are not already in Section 5.
+Five checks that are not already in Section 5.
+
+**Continuous difference-in-differences.** Replacing the binary treatment with Hungary × P_t, switched on at the vote, gives −1.12 with a Driscoll–Kraay t-statistic of −15.6 on 1,030 country-days: three basis points from the binary −1.09 in Table 9. The date effects absorb P_t, which is common to every country on a given day, but not the interaction, which varies across countries within a date. What this design surrenders is history, because the contract begins on 25 July 2025, so it covers ten months rather than the two and a half years of the headline sample. Where the two overlap, the binary and intensity versions agree.
 
 **Trend adjustment.** Hungary's spread over Czechia, Poland and Romania was narrowing before the election. Fitting a linear trend to January 2022 to June 2025 gives −0.086 basis points per trading day, or −22 basis points per year; over a 194-day window it predicts 17 basis points of the compression. Subtracting it gives a trend-adjusted estimate of −133 basis points, so the defensible range for the headline is −133 to −157.
 
