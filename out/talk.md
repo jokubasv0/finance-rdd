@@ -1,6 +1,6 @@
 # Pricing Regime Change — 6-minute talk
 
-Eight slides. Spoken text is about 660 words, which is **6:00 at 110 words per minute** — a slow,
+Eight slides. Spoken text is about 675 words, which is **6:10 at 110 words per minute** — a slow,
 deliberate pace — and about 5:30 at a normal one. Leave the rest of the ten minutes unused.
 
 Rule for the whole talk: **say the number, then say what it means.** Never read a table. If you are
@@ -21,15 +21,34 @@ running late, drop slide 4 (literature) to two sentences; it is the only cuttabl
 
 ---
 
-## Slide 2 — The question (0:25–1:05)
+## Slide 2 — Data and the fact (0:25–1:10) — **Figure 1**
+
+**On slide**
+- Polymarket P(Orbán not PM), 257 daily prints; eight sovereign ten-year yields; July 2025 → May 2026
+- HU 7.13 → 5.75 (**−138 bp**); six-peer average +19; Romania −21
+
+**Say**
+> Everything is public: Investing.com for yields, Polymarket's API for the probability, Yahoo
+> Finance for controls.
+
+> Between July 2025 and May 2026 the Hungarian ten-year fell 138 basis points. Every other market
+> was flat or rose. Romania fell 21, less than a sixth as much. So this is not global duration. It is
+> Hungary.
+
+> The dark blue line is Hungary, the grey is the peer average. Look at the shape — it opens in two
+> steps. That shape is the whole paper.
+
+---
+
+## Slide 3 — The question (1:10–1:55)
 
 **On slide**
 - **Question:** how much did the risk premium reprice, and when relative to the vote?
 - Why Hungary: sixteen years of one government; EU funds frozen; a prediction market on the exact event
 
 **Say**
-> Two halves. How much Hungarian sovereign risk did the market remove, and when — before the
-> result or after?
+> That is the fact. The question it raises has two halves. How much Hungarian sovereign risk
+> did the market remove, and when — before the result or after?
 
 > Hungary suits the question. Sixteen years of one government makes this regime risk, not a
 > rotation. EU funds were frozen, so the result had a fiscal consequence. And there was a
@@ -38,26 +57,7 @@ running late, drop slide 4 (literature) to two sentences; it is the only cuttabl
 
 ---
 
-## Slide 3 — Data and the fact (1:05–1:50) — **Figure 1**
-
-**On slide**
-- Polymarket P(Orbán not PM), 257 daily prints; eight sovereign ten-year yields; July 2025 → May 2026
-- HU 7.13 → 5.75 (**−138 bp**); peers +19; Czechia +47; Romania −21
-
-**Say**
-> Everything is public: Investing.com for yields, Polymarket's API for the probability, Yahoo
-> Finance for controls.
-
-> Between July 2025 and May 2026 the Hungarian ten-year fell 138 basis points. Every other market
-> was flat or rose. Romania fell 21, one sixth as much. So this is not global duration. It is
-> Hungary.
-
-> The red line is Hungary, the grey is the peer average. Look at the shape — it opens in two
-> steps. That shape is the whole paper.
-
----
-
-## Slide 4 — The literature gap (1:50–2:40)
+## Slide 4 — The literature gap (1:55–2:45)
 
 **On slide**
 - Sign is contested: Block & Vaaler 2004 (falls into the vote), Balding 2011 (rises), Eichler 2014 (nothing)
@@ -78,7 +78,7 @@ running late, drop slide 4 (literature) to two sentences; it is the only cuttabl
 
 ---
 
-## Slide 5 — Identification (2:40–3:30) — **Table 9**
+## Slide 5 — Identification (2:45–3:35) — **Table 9**
 
 **On slide**
 - Two-way fixed effects: country effects, date effects, country trend kinked at the treatment date
@@ -98,7 +98,7 @@ running late, drop slide 4 (literature) to two sentences; it is the only cuttabl
 
 ---
 
-## Slide 6 — Does it survive? (3:30–4:45) — **Figures 7 and 8**
+## Slide 6 — Does it survive? (3:35–4:50) — **Figures 7 and 8**
 
 **On slide**
 - Leads oscillate, they do not trend (mean +0.07)
@@ -123,7 +123,7 @@ running late, drop slide 4 (literature) to two sentences; it is the only cuttabl
 
 ---
 
-## Slide 7 — What fails, and what surprised me (4:45–5:35) — **Figure 6**
+## Slide 7 — What fails, and what surprised me (4:50–5:40) — **Figure 6**
 
 **On slide**
 - Daily dose–response: β ≈ 0. Only two of 257 prints move more than 10 points
@@ -140,7 +140,7 @@ running late, drop slide 4 (literature) to two sentences; it is the only cuttabl
 
 ---
 
-## Slide 8 — Conclusion (5:35–6:00)
+## Slide 8 — Conclusion (5:40–6:10)
 
 **On slide**
 - **−109 bp** relative to neighbours; two thirds of it after the result

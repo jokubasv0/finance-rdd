@@ -321,6 +321,7 @@ ax.axvline(len([m for m in EV_MONTHS if m <= EV_BASE]) - 0.5, color="#c00000", l
 ax.errorbar(xs, ys, yerr=es, fmt="o", ms=4, lw=1.2, color="#1f4e79", ecolor="#9dc3e6")
 ax.set_xticks(xs[::3])
 ax.set_xticklabels([str(m) for m in EV_MONTHS][::3], rotation=45, ha="right", fontsize=8)
+ax.margins(y=0.12)
 ax.set_ylabel("coefficient, pp")
 ax.set_title("Event study: monthly Hungary effect relative to February 2026")
 fig.tight_layout(); fig.savefig(OUT / "fig7_event_study.png", dpi=170); plt.close(fig)

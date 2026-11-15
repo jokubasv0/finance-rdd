@@ -386,7 +386,8 @@ for k, c, ls in [("terminal = May 8", "#1f4e79", "-"), ("terminal = Nov 13", "#1
     ax.plot(s.index, s, color=c, lw=1.5, ls=ls, label=f"Bond-implied, {k[11:]}")
 ax.set_ylim(-0.05, 1.05); ax.set_ylabel("probability")
 ax.set_title("Market-implied versus bond-implied probability of regime change")
-ax.legend(frameon=False, fontsize=8, loc="upper left")
+ax.legend(fontsize=8.5, loc="upper left", facecolor="white", framealpha=0.92,
+          edgecolor="#d9dde3")
 fig.tight_layout(); fig.savefig(OUT / "fig6_implied.png", dpi=170); plt.close(fig)
 
 (OUT / "final_results.txt").write_text("\n".join(L))
