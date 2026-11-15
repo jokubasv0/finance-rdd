@@ -13,6 +13,22 @@ SRC = OUT / "paper.md"
 DST = OUT / "Pricing_Regime_Change.docx"
 
 INLINE = re.compile(r"(\*\*.+?\*\*|\*[^*]+?\*|\$(?![0-9])[^$\n]{1,60}\$)")
+# Inline maths in prose: y_it, alpha_i, t_cut. Short tokens only, and never
+# followed by another word character, so image filenames such as
+# fig1_levels.png are left alone.
+SUB = re.compile(r"_([A-Za-z0-9]{1,4})(?![A-Za-z0-9])")
+
+
+def add_text(par, chunk):
+    """Add plain text, turning _tokens into real subscripts."""
+    pos = 0
+    for m in SUB.finditer(chunk):
+        if m.start() > pos:
+            par.add_run(chunk[pos:m.start()])
+        par.add_run(m.group(1)).font.subscript = True
+        pos = m.end()
+    if pos < len(chunk):
+        par.add_run(chunk[pos:])
 
 
 def add_runs(par, text):
@@ -29,7 +45,7 @@ def add_runs(par, text):
         elif chunk.startswith("*") and chunk.endswith("*"):
             par.add_run(chunk[1:-1]).italic = True
         else:
-            par.add_run(chunk)
+            add_text(par, chunk)
 
 
 def add_math_runs(par, text):

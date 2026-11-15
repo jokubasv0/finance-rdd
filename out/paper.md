@@ -114,7 +114,7 @@ Because there is one treated unit, the choice of standard error is not cosmetic.
 
 The probability implied by the bond spread is backed out as
 
-$$π_t = (S₀ − S_t) / (S₀ − S_T)$$
+$$π_t = (S_0 − S_t) / (S_0 − S_T)$$
 
 with the initial spread S₀ taken on 25 July 2025 and the terminal spread taken on 8 May 2026. This is a linear interpolation along the path and assumes the spread would not have moved absent the election; it is a descriptive device, not an estimate.
 
@@ -155,7 +155,7 @@ Against an equal-weighted average of six peers the spread fell 157 basis points,
 
 ![](fig1_levels.png)
 
-**Figure 1.** Hungarian and peer ten-year yields, 25 July 2025 to 8 May 2026 (per cent). Hungary falls while every peer rises or is flat.
+**Figure 1.** Hungarian and peer ten-year yields, 25 July 2025 to 8 May 2026 (per cent). Hungary falls while the peer average rises.
 
 ![](fig2_spread.png)
 
@@ -473,7 +473,7 @@ Wolfers, Justin and Eric Zitzewitz (2004). "Prediction Markets." *Journal of Eco
 
 Three sources. Ten-year sovereign yields come from the Investing.com historical data API: eight countries from June 2025 and five from January 2022, with the Hungarian five-year yield over the same shorter span. The Orbán contract comes from Polymarket's price history, which records a daily print on each day the market trades, from July 2025 to May 2026. The US ten-year yield, the VIX, Brent, EUR/USD and USD/HUF come from the Yahoo Finance chart API, January 2022 to November 2026.
 
-Two properties of the data matter for interpretation. The yield files contain a complete business-day grid with no market holidays removed, which no real bond market produces; the series are therefore a reconstruction consistent with daily closes rather than a tick-level record, and holidays are carried flat. And sixteen of the 206 trading days in the event window have a missing peer yield, which is forward-filled for up to five business days so that the peer average keeps a constant composition; without this the average drops mechanically when a high-yielding market is absent and the spread acquires spurious spikes. The average was checked against a skip-missing version, which differs by at most 57 basis points on a single holiday date.
+Two properties of the data matter for interpretation. The yield files hold a row for every business day and no market holidays are removed, which no real bond market produces; individual series are simply blank on their own market's holidays, twelve days for Hungary, so the series are a reconstruction consistent with daily closes rather than a tick-level record. Peer blanks are carried flat for up to five business days, and the Hungarian blanks are filled for plotting only. Sixteen of the 206 trading days in the event window have at least one blank peer yield, which is forward-filled so that the peer average keeps a constant composition, with at least four peers required on any day the average is used; without this the average drops mechanically when a high-yielding market is absent and the spread acquires spurious spikes. The average was checked against a skip-missing version, which differs by at most 57 basis points on a single holiday date.
 
 All series are freely available without registration.
 

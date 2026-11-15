@@ -102,7 +102,7 @@ def did(panel, cut=None, sample=None, end=None, trend="kink", treated="HU10Y"):
         for c in countries:
             col = f"{trendcol}_{c}"
             d[col] = (d.index.get_level_values("country") == c) * d[trendcol]
-            if c != countries[0]:      # AT10Y is the reference trend; its coefficient is 0
+            if c != countries[0]:      # first country by name is the reference trend (coefficient 0)
                 exog.append(col)
 
     try:

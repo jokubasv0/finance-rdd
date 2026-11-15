@@ -68,7 +68,12 @@ PEERS = ["CZ10Y", "PL10Y", "RO10Y", "SI10Y", "HR10Y", "AT10Y"]
 # keeps a CONSTANT composition. Without this, a missing Polish or Romanian print
 # mechanically drags the average down by 50-80bp and creates spurious spread spikes.
 for df in (S,):
-    df["CEE"] = df[PEERS].ffill(limit=5).mean(axis=1, skipna=True)
+    _pe = df[PEERS].ffill(limit=5)
+    # The paper says the average requires at least four non-missing peers.
+    # Enforce it, so the sentence describes the code rather than a coincidence of
+    # this window: the three days with only three peers are also days on which
+    # Hungary is missing, so no reported spread moves.
+    df["CEE"] = _pe.mean(axis=1, skipna=True).where(_pe.notna().sum(axis=1) >= 4)
     df["SP_PEER"] = df.HU10Y - df.CEE
     df["SP_DE"] = df.HU10Y - df.DE10Y
     df["SP_CZ"] = df.HU10Y - df.CZ10Y
@@ -347,13 +352,22 @@ ax.xaxis.set_major_locator(mdates.MonthLocator(bymonthday=25))
 ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %y"))
 fig.tight_layout(); fig.savefig(OUT / "fig1_levels.png", dpi=170); plt.close(fig)
 
-fig, ax = plt.subplots(figsize=(9.4, 4.4))
+fig, ax = plt.subplots(figsize=(9.4, 4.6))
 ax.axhline(0, color="black", lw=0.8)
-ax.plot(G.index, G.SP, color="#1f4e79", lw=1.4, label="HU minus (CZ,PL,RO)")
-ax.plot(w.index, w.SP_PEER, color="#c00000", lw=1.8, label="HU minus peer average")
-ax.set_ylabel("spread, pp")
-ax.set_title("Hungary's spread over peers, 2022-2026")
-ax.legend(frameon=False, fontsize=9)
+# The three controls Table 2 reports, on one axis and in the paper's own units.
+# Hungarian holidays leave single-day blanks in all three series; fill them
+# inside the window only, as in Figure 1, so the lines are continuous.
+for col, colour, ls, lab in [("SP_PEER", "#c00000", "-", "Over the six-peer average"),
+                             ("SP_DE", "#1f4e79", "-", "Over Germany (Bunds)"),
+                             ("SP_CZ", "#7f7f7f", "--", "Over Czechia")]:
+    s = (100 * w[col]).interpolate(limit=5, limit_area="inside")
+    ax.plot(w.index, s, color=colour, lw=1.7, ls=ls, label=lab)
+ax.set_ylabel("spread, basis points")
+ax.set_title("Hungary's ten-year spread over three controls, July 2025 - May 2026")
+ax.xaxis.set_major_locator(mdates.MonthLocator(bymonthday=25))
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %y"))
+ax.legend(frameon=False, fontsize=9, loc="lower left")
+ax.margins(y=0.10)
 fig.tight_layout(); fig.savefig(OUT / "fig2_spread.png", dpi=170); plt.close(fig)
 
 fig, ax = plt.subplots(figsize=(9.4, 4.2))

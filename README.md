@@ -76,7 +76,8 @@ All series are freely available without registration.
 `raw/` contains the exact responses used, so the pipeline reproduces without refetching. It is
 a **frozen snapshot**: there is no fetch script in this repository. The endpoints are undocumented
 and the Polymarket contract has since resolved, so a fetch step would not be reproducible even if
-one were shipped. `build.py` reads only the archived JSON, and `out/panel_daily.csv` is its output.
+one were shipped. `build.py` reads only the archived JSON, and `out/panel_daily.csv` is its output: an
+export for inspection, not an input, since both analysis scripts load `raw/` directly.
 
 ## Known gaps
 
