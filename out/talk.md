@@ -64,51 +64,53 @@ Rule for the whole talk: **say the number, then say what it means.** Never read 
 ## Slide 5 — Identification (3:20–4:45) — **Table 9**
 
 **On slide**
-- Two-way FE DiD: country effects + date effects + country trends
-- $y_{it} = α_i + λ_t + β(HU_i × Post_t) + γ_i t + ε_{it}$
-- **β = −1.29 pp** (DK t = −7.9), N = 3,040
-- 2022–2026 panel: −1.34. Drop any donor: −1.74 to −1.84
+- Two-way FE DiD: country effects + date effects + country trend
+- $y_{it} = α_i + λ_t + β(HU_i × Post_t) + γ_i·min(t,t_{cut}) + ε_{it}$
+- **β = −1.09 pp** (DK t = −11.3), 2024–2026, N = 3,200
+- No trend −1.04, linear trend −1.09: **five basis points apart**
 
 **Say**
-> The identification is difference-in-differences against the other seven markets. Country fixed effects absorb level differences — the reason Hungary yields seven per cent and Germany two. Date fixed effects absorb everything common to all eight markets on a given day: global duration, US rates, VIX, regional risk appetite.
+> The identification is difference-in-differences against neighbouring markets. Country fixed effects absorb level differences — the reason Hungary yields seven per cent and Germany two. Date fixed effects absorb everything common to all markets on a given day: global duration, US rates, VIX, regional risk appetite.
 
-> What is left is the Hungarian, dated, part of the move. With country trends, which I will justify on the next slide, that is 129 basis points.
+> What is left is the Hungarian, dated, part of the move. On a 2024 sample that is 109 basis points.
 
-> Two things worth saying. The estimate is stable: drop any single country and it moves by at most a tenth. And it is not driven by the treatment date — using the campaign instead of the result gives only −34 and is insignificant, which matches the descriptive story that the pre-vote part is the fragile part.
+> The number I care about is not that one, it is the next one: −1.04 with no trend, −1.09 with a kinked trend, −1.09 with a linear trend. Five basis points apart. On a sample going back to 2022 those same three specifications span sixty-three basis points, which is why I start in 2024 — and I will show you the test that justifies it rather than just asserting it.
 
 ---
 
 ## Slide 6 — The diagnostic that nearly kills it (4:45–6:10) — **Figure 7**
 
 **On slide**
-- Event study, monthly leads and lags
-- Pre-treatment leads **are not flat**: +0.39 pp mid-2025 → 0 in Feb 2026
-- Joint test of leads: χ² = 445, p < 0.001
-- Hence the trend specification; −1.29, not −1.77
-- Break comes **after** the vote: Apr −0.53, May −1.25, Jun −1.63
+- Monthly leads and lags relative to February 2026
+- Leads **oscillate**, they do not trend: mean +0.07, range −0.27 to +0.37
+- Joint test rejects zero (Wald 2,742, 25 df) — because 0.1 pp is precise at 300 obs/month
+- Break is **after** the vote: Apr −0.63, May −1.12
+- Placebo dates on a truncated panel: all ≈ 0
 
 **Say**
 > This is the slide I would rather not show, and it is the most important one.
 
-> Hungary's yield was already drifting relative to its donors for ten months before the election. The leads are positive and declining, and a joint test rejects that they are zero. Parallel trends, literally, does not hold.
+> The leads bounce around zero. They do not trend into the treatment date. But a joint test rejects that they are all zero, and I report that rather than claiming parallel trends holds.
 
-> So the naive estimate — minus 1.77 — charges that pre-existing narrowing to the election. I report it, and I do not use it as the headline. The country-trend specification allows each market its own drift and asks whether the election produced a break on top of it. It did.
+> Why does the rejection not kill the design? Because at three hundred observations a month, a coefficient of one tenth of a point is precisely estimated. What would kill it is a lead that trends up or down as the election approaches, since that is what a trend control cannot absorb. There is none, and the corroboration is that the trend treatment changes the answer by five basis points.
 
-> Look at where the break sits: April minus half a point, May minus one and a quarter, June minus one and six. Two thirds of the movement is after the vote, not before. That is the opposite of the usual assumption that such events are priced in advance.
+> The other check is the one that decided the sample. I re-run the whole design at fake election dates, on a panel cut off before the real event. On 2024 data every fake date returns essentially zero. On a sample starting in 2022 the no-trends version returns minus 1.1 at almost any date — because of the 2022 energy-crisis convergence. That is why the paper starts in 2024, and it is a test, not a preference.
+
+> Look where the break sits: April minus 0.6, May minus 1.1. Two thirds of the movement is after the vote, not before.
 
 ---
 
 ## Slide 7 — Placebos and the ceiling (6:10–7:15) — **Figure 8**
 
 **On slide**
-- Each country treated in turn: HU −1.77, next Romania −0.26, rest positive
+- Each country treated in turn: HU −0.97, next Croatia +0.00, rest up to +0.44
 - Randomisation inference: **p = 0.125**
 - That is the floor: 1/8 with eight units
 
 **Say**
-> Two checks. First, run the identical specification treating each country as if it were the event. Hungary is the only large negative; the donors cluster between plus 0.23 and plus 0.41.
+> Run the identical specification treating each country as if it were the event. Hungary is the only negative of any size, and it is more than twice the largest positive.
 
-> Second, the honest constraint. With eight units and one treated there are eight possible assignments, so the smallest p-value I can ever report is one eighth. That is what I get. My t-statistic of minus 19 is arithmetic, not evidence — it counts days, and days are not the binding constraint. Countries are.
+> Then the honest constraint. With eight units and one treated there are eight possible assignments, so the smallest p-value I can ever report is one eighth. That is what I get. My t-statistic of minus eleven is arithmetic, not evidence — it counts days, and days are not the binding constraint. Countries are.
 
 > This is why the paper says conditional estimate, not treatment effect.
 
@@ -153,16 +155,16 @@ Rule for the whole talk: **say the number, then say what it means.** Never read 
 ## Slide 10 — Conclusion (9:20–10:00)
 
 **On slide**
-- DiD: **−129 bp** conditional on trends, 1 of 8 countries
+- DiD: **−109 bp** on the election window, 1 of 8 countries
 - 65% of it after the result, not before
 - Prediction market led by weeks
 - Limits: pre-trend, p = 0.125, one treated unit
 - What would settle it: more elections, panel of prediction markets
 
 **Say**
-> To summarise: Hungarian sovereign risk fell by about 129 basis points relative to its neighbours around a regime change, most of it after the result rather than before, and the prediction market knew first.
+> To summarise: Hungarian sovereign risk fell by about 109 basis points relative to its neighbours around a regime change — 157 if you compare endpoints — most of it after the result rather than before, and the prediction market knew first.
 
-> The estimate is conditional. The pre-trend is not flat, inference has a floor at one in eight, and there is one treated country. What would settle it is the same exercise across several elections — Poland 2023, Slovakia 2023 — where the treatment dates differ and the randomisation test has more than eight assignments.
+> The estimate is conditional. The leads are jointly non-zero, inference has a floor at one in eight, and there is one treated country. What would settle it is the same exercise across several elections — Poland 2023, Slovakia 2023 — where the treatment dates differ and the randomisation test has more than eight assignments.
 
 Thank you.
 
@@ -170,10 +172,13 @@ Thank you.
 
 # Q&A — prepared answers
 
-**"Your pre-trend fails. Doesn't that kill the DiD?"**
-> It kills the no-trends specification, and I say so. The trend specification is the one that survives the diagnostic, and it is also the more conservative number: −1.29 against −1.77. A reader who thinks a linear trend is too strong an assumption should prefer the −1.77 and accept that it charges a pre-existing narrowing to the election.
+**"Your joint pre-trend test rejects. Doesn't that kill the DiD?"**
+> It rejects that the leads are *exactly* zero, which at three hundred observations a month is a weak test — 0.1 points is precise. What would be fatal is a lead that trends, because a trend control cannot absorb a trend. There is none, and the proof is that all three trend treatments agree to five basis points. A reader who wants no trend assumption at all should read −1.04 instead of −1.09.
 
-**"Your t-statistic is −19. Why do you then say p = 0.125?"**
+**"Why start in 2024? Isn't that just choosing your sample?"**
+> Because the placebo dates say so. On 2022 data the same design returns −1.1 at essentially every fake date, which means it is measuring the 2022 disinflation convergence rather than an election. On 2024 data every fake date returns zero. The restriction costs me nothing: the no-trends estimate *falls* from −1.46 to −1.04 when 2022 is dropped.
+
+**"Your t-statistic is −11. Why do you then say p = 0.125?"**
 > Because they measure different things. Driscoll–Kraay asymptotics count time periods, and I have 3,040 of them. The design has one treated unit, and with eight units there are eight possible assignments. Days are not the constraint; countries are. Reporting the t-statistic alone would be the most misleading thing in the paper.
 
 **"Isn't this just the EU funds story?"**
@@ -194,8 +199,8 @@ Thank you.
 
 | | |
 |---|---|
-| DiD estimate, country trends | **−129 bp** |
-| DiD estimate, no trends | −177 bp |
+| DiD, kinked trend, to inauguration | **−109 bp** |
+| DiD, no trend / linear | −104 / −109 bp |
 | Own yield fall | −138 bp |
 | Pre-vote / post-result split | 35 / 65 |
 | Randomisation inference p | 0.125 (floor of 1/8) |

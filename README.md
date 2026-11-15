@@ -12,8 +12,9 @@ the repricing with a Polymarket contract on whether Viktor Orbán would remain p
 |---|---|
 | HU 10Y yield, 25 Jul 2025 → 8 May 2026 | 7.13% → 5.75% (**−138 bp**) |
 | HU 10Y minus six-peer average | 2.74 → 1.16 pp (**−157 bp**) |
-| DiD vs seven neighbours, country trends | **−129 bp** (DK t = −7.9) |
-| DiD, no trends | −177 bp |
+| DiD vs neighbours, 2024–2026, kinked trend | **−109 bp** (DK t = −11.3) |
+| DiD, no trend / linear trend | −104 / −109 bp |
+| DiD through November 2026 | −172 bp |
 | Randomisation inference, 8 units | p = 0.125 (floor of 1/8) |
 | Share of compression before the vote | 35% (−56 bp), 65% after the result |
 | Countries in the sample whose yield fell | 1 of 8 (Hungary) |
@@ -24,11 +25,17 @@ the repricing with a Polymarket contract on whether Viktor Orbán would remain p
 
 A conditional estimate, not an identified treatment effect.
 
-The identification is a two-way fixed-effects difference-in-differences against the seven other
-countries, with country and calendar-date fixed effects and country-specific linear trends. It
-gives −129 bp. The event study is reported in full: the pre-treatment leads are not flat, a joint
-test rejects them, and the trend specification exists because of that. With one treated unit,
-randomisation inference cannot go below p = 0.125, and the paper says so where the estimate is
+The identification is a two-way fixed-effects difference-in-differences against neighbouring
+markets on a 2024–2026 panel, with country and calendar-date fixed effects and a country trend
+fitted before the treatment date and held flat afterwards. It gives −109 bp, and the three possible
+trend treatments span five basis points on that sample.
+
+The sample starts in 2024 because of a placebo-date test, not a preference: on 2022 data the
+no-trends design returns −1.1 at almost every fake election date, because the 2022 energy-crisis
+convergence runs through every window. Truncating the panel before the real event and re-running at
+fake dates gives ≈0 throughout on 2024 data. The event study is reported in full: the pre-treatment
+leads oscillate without trending, but a joint test rejects that they are all zero. With one treated
+unit, randomisation inference cannot go below p = 0.125, and the paper says so where the estimate is
 reported.
 
 The daily design — spread changes on changes in the Polymarket probability — returns β ≈ 0 and
