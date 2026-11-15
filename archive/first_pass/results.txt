@@ -1,0 +1,181 @@
+
+==============================================================================
+1. SAMPLE AND HEADLINE NUMBERS
+==============================================================================
+Window: 2025-07-25 to 2026-05-08   N trading days = 194
+Polymarket P(Orban does not remain PM): 0.385 -> 1.000
+HU 10Y:      7.13% -> 5.75%  (-138 bp)
+CZ 10Y:      4.32% -> 4.79%  (+47 bp)
+HU-CZ spread:2.81pp -> 0.96pp (-185 bp)
+HU 5Y:       6.55% -> 5.64%  (-91 bp)
+USDHUF:      342.5 -> 302.9
+
+==============================================================================
+2. DATA QUALITY OF THE PREDICTION MARKET SERIES
+==============================================================================
+Trading days with a non-zero change in P: 138 of 193 (72%)
+Largest single-day change: 30.9 pp on 2026-04-22
+Polymarket daily candles only record days with trades. Long flat stretches mean
+stale prices, not unchanged beliefs. The market also stopped trading 9-22 April:
+            orban  HU10Y  CZ10Y
+2026-04-07    NaN   6.97  4.957
+2026-04-08    NaN   6.80  4.705
+2026-04-09  0.315   6.73  4.781
+2026-04-10    NaN   6.62  4.724
+2026-04-13    NaN   6.31  4.755
+2026-04-14    NaN   6.21  4.702
+2026-04-15    NaN   6.21  4.687
+2026-04-16    NaN   6.14  4.689
+2026-04-17    NaN   6.15  4.635
+2026-04-20    NaN   5.98  4.665
+2026-04-21    NaN   5.99  4.673
+2026-04-22  0.006   6.00  4.663
+2026-04-23  0.005   6.18  4.709
+2026-04-24  0.006   6.20  4.764
+
+==============================================================================
+3. EVENT WINDOWS (raw changes, bp)
+==============================================================================
+Jul-25 to Feb-26           HU-CZ     -69 bp | HU10Y     -66 bp | P 0.385->0.635
+poll shift to vote         HU-CZ     -18 bp | HU10Y     +26 bp | P 0.635->0.685
+full pre-election          HU-CZ     -86 bp | HU10Y     -40 bp | P 0.385->0.685
+vote to end-April          HU-CZ     -72 bp | HU10Y     -63 bp | P 0.685->0.996
+vote to inauguration       HU-CZ     -99 bp | HU10Y     -98 bp | P 0.685->1.000
+
+After the prediction market resolves (descriptive only, no P available):
+  inauguration to Nov-26     HU-CZ     -66 bp
+
+Slope check: bp of spread per 100 pp of P, across disjoint windows
+  Jul-25 to Feb-26            -275 bp/100pp
+  poll shift to vote          -354 bp/100pp
+  vote to inauguration        -314 bp/100pp
+
+==============================================================================
+4. DAILY-CHANGE REGRESSIONS  (yield in pp; x100 = bp)
+==============================================================================
+N = 193, sd(dP) = 0.0293, sd(dS) = 0.0697
+--- M1  d(HU-CZ) on dP ---
+         coef      se       t       p
+const -0.0098  0.0053 -1.8636  0.0624
+dP     0.0721  0.0579  1.2453  0.2130
+N = 193, R2 = 0.001
+--- M2  + global controls ---
+          coef      se       t       p
+const  -0.0092  0.0050 -1.8493  0.0644
+dP      0.0269  0.0631  0.4269  0.6694
+dDE    -0.3182  0.3215 -0.9899  0.3222
+dUS    -0.0873  0.2302 -0.3793  0.7045
+dVIX   -0.0011  0.0046 -0.2445  0.8068
+dBrent  0.2202  0.4170  0.5280  0.5975
+N = 185, R2 = 0.032
+--- M3  d(HU10Y) on dP + controls ---
+          coef      se       t       p
+const  -0.0087  0.0053 -1.6481  0.0993
+dP     -0.0322  0.0659 -0.4891  0.6247
+dDE     0.1242  0.2562  0.4847  0.6279
+dUS    -0.1875  0.2181 -0.8599  0.3899
+dVIX    0.0041  0.0038  1.0779  0.2811
+dBrent  0.8451  0.5112  1.6531  0.0983
+N = 185, R2 = 0.134
+--- M4  pre-election only ---
+          coef      se       t       p
+const  -0.0053  0.0046 -1.1497  0.2503
+dP     -0.0511  0.1098 -0.4658  0.6413
+dDE    -0.1065  0.3012 -0.3535  0.7237
+dUS    -0.2956  0.1766 -1.6743  0.0941
+dVIX   -0.0025  0.0045 -0.5596  0.5758
+dBrent  0.4472  0.4064  1.1004  0.2712
+N = 166, R2 = 0.066
+--- M5  post-election only ---
+          coef      se       t       p
+const  -0.0628  0.0153 -4.1106  0.0000
+dP      0.3715  0.0944  3.9341  0.0001
+dDE    -1.9972  0.4610 -4.3320  0.0000
+dUS     3.4392  0.4875  7.0554  0.0000
+dVIX   -0.0027  0.0113 -0.2390  0.8111
+dBrent -1.7912  0.6010 -2.9802  0.0029
+N = 19, R2 = 0.701
+--- M6  update days only (N=137) ---
+          coef      se       t       p
+const  -0.0041  0.0047 -0.8707  0.3839
+dP     -0.0145  0.0700 -0.2065  0.8364
+dDE    -0.1967  0.2780 -0.7075  0.4793
+dUS    -0.1765  0.2229 -0.7916  0.4286
+dVIX   -0.0030  0.0055 -0.5363  0.5918
+dBrent  0.4174  0.6661  0.6267  0.5309
+N = 130, R2 = 0.041
+
+VERDICT: beta on dP is never significantly negative. Daily dose-response is NOT
+identified. dP is zero on most days and the one large move (22 Apr, +31 pp) comes
+ten days AFTER the spread had already fallen.
+
+==============================================================================
+5. MONTHLY / WEEKLY CHANGES  (the only horizon with real variation in P)
+==============================================================================
+weekly: N = 41, beta = 0.189 (se 0.299, t 0.63), R2 = 0.007
+monthly: N = 10, beta = -2.687 (se 0.329, t -8.16), R2 = 0.624
+  leave-one-out:
+    drop 2025-08-31: beta = -2.680, t = -7.35, p = 0.000
+    drop 2025-09-30: beta = -2.844, t = -8.27, p = 0.000
+    drop 2025-10-31: beta = -2.641, t = -7.64, p = 0.000
+    drop 2025-11-30: beta = -2.623, t = -8.46, p = 0.000
+    drop 2025-12-31: beta = -2.691, t = -8.57, p = 0.000
+    drop 2026-01-31: beta = -2.828, t = -10.08, p = 0.000
+    drop 2026-02-28: beta = -2.840, t = -22.84, p = 0.000
+    drop 2026-03-31: beta = -2.630, t = -13.14, p = 0.000
+    drop 2026-04-30: beta = -0.505, t = -1.02, p = 0.308
+    drop 2026-05-31: beta = -2.738, t = -7.15, p = 0.000
+
+VERDICT: the monthly slope is large and significant ONLY because of April 2026.
+Drop that month and the relation vanishes (beta ~ -0.5, t ~ -1.0).
+
+==============================================================================
+6. PLACEBO COUNTRIES  (spread vs Germany on dP, same controls)
+==============================================================================
+         beta_dP      se       t    N
+country                              
+HU       -0.0322  0.0659 -0.4891  185
+CZ       -0.0592  0.0460 -1.2870  185
+PL       -0.1203  0.1899 -0.6334  185
+RO        0.1558  0.0960  1.6230  178
+SI        0.0149  0.0742  0.2001  185
+HR        0.0248  0.0217  1.1393  177
+AT       -0.0099  0.0365 -0.2716  185
+
+==============================================================================
+7. CONTINUOUS DiD PANEL  (country + date fixed effects)
+==============================================================================
+beta(P x HU) = -2.6939 pp per unit P  = -269 bp per 100pp (conventional se 0.1262)
+N = 1350, countries = 7
+Randomisation inference: re-label each country as 'treated' in turn
+  treated = HU: beta = -2.6939
+  treated = CZ: beta = +0.6646
+  treated = PL: beta = +0.6382
+  treated = RO: beta = +0.0308
+  treated = SI: beta = +0.7436
+  treated = HR: beta = +0.3062
+  treated = AT: beta = +0.3118
+  HU is rank 1 of 7 (most negative = strongest); RI p-value = 0.14
+
+==============================================================================
+8. MARKET MODEL  (estimate on 2023-2025, forecast the event window)
+==============================================================================
+Training window: 2022-01-04 to 2025-06-30 (N = 841)
+          coef      se       t
+const   0.0011  0.0047  0.2268
+dDE     0.2897  0.1034  2.8004
+dUS     0.3246  0.0918  3.5352
+dVIX    0.0031  0.0025  1.2039
+dBrent  0.1860  0.2133  0.8719
+R2 = 0.076
+
+Cumulative Hungary-specific residual (bp):
+  2025-07-25: -0 bp
+  2026-02-27: -68 bp
+  2026-04-09: -71 bp
+  2026-04-30: -142 bp
+  2026-05-08: -174 bp
+Total residual over the window: -174 bp
+Actual HU10Y change over the window: -121 bp
+
+Figures written to /home/jokubas/data/hu-election-polymarket/out
