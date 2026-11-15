@@ -40,12 +40,13 @@ unit, randomisation inference cannot go below p = 0.125, and the paper says so w
 reported.
 
 The daily design — spread changes on changes in the Polymarket probability — returns β ≈ 0 and
-is reported as a null, because the probability series has only two moves above 10 bp of
-substance: opening-week liquidity discovery, and a print ten days after the result.
+is reported as a null, because the probability series has only two moves above 10 percentage points
+of substance: opening-week liquidity discovery, and a print ten days after the result.
 
 ## Layout
 
 ```
+build.py              merges raw/ into out/panel_daily.csv
 final_analysis.py     descriptive results and figures; writes out/final_results.txt
 did_analysis.py       difference-in-differences, event study, placebos; writes out/did_results.txt
 build_docx.py         renders out/paper.md to out/Pricing_Regime_Change.docx
@@ -58,7 +59,8 @@ out/                  paper.md, talk.md, figures, results, panel
 ```bash
 python3 -m venv .venv
 uv pip install --python .venv/bin/python numpy pandas statsmodels matplotlib scipy python-docx linearmodels
-.venv/bin/python final_analysis.py     # descriptive numbers + six figures
+.venv/bin/python build.py              # merged daily panel -> out/panel_daily.csv
+.venv/bin/python final_analysis.py     # descriptive numbers + figures
 .venv/bin/python did_analysis.py       # DiD, event study, placebos + two figures
 .venv/bin/python build_docx.py         # paper docx
 ```
@@ -71,7 +73,10 @@ All series are freely available without registration.
 - **Polymarket** — CLOB `prices-history` endpoint for the Orbán next-PM contract
 - **US 10Y, VIX, Brent, EUR/USD, USD/HUF** — Yahoo Finance chart API
 
-`raw/` contains the exact responses used, so results reproduce without refetching.
+`raw/` contains the exact responses used, so the pipeline reproduces without refetching. It is
+a **frozen snapshot**: there is no fetch script in this repository. The endpoints are undocumented
+and the Polymarket contract has since resolved, so a fetch step would not be reproducible even if
+one were shipped. `build.py` reads only the archived JSON, and `out/panel_daily.csv` is its output.
 
 ## Known gaps
 

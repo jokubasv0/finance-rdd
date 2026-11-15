@@ -27,7 +27,6 @@ exercise, where the number of units is what matters.
 """
 
 import json
-import sys
 from pathlib import Path
 
 import numpy as np
@@ -77,7 +76,7 @@ def to_panel(wide):
     st.index = st.index.set_names(["date", "country"])
     return st.swaplevel("country", "date").sort_index().to_frame()
 
-def did(panel, cut=None, sample=None, end=None, trend="kink"):
+def did(panel, cut=None, sample=None, end=None, trend="kink", treated="HU10Y"):
     cut = CUT if cut is None else pd.Timestamp(cut)
     d = panel.copy()
     if sample is not None:
@@ -87,8 +86,7 @@ def did(panel, cut=None, sample=None, end=None, trend="kink"):
     d = d[d.y.notna()]
 
     dates = d.index.get_level_values("date")
-    d["treat"] = ((d.index.get_level_values("country") == "HU10Y") & (dates >= cut)).astype(float)
-    d["post"] = (dates >= cut).astype(float)
+    d["treat"] = ((d.index.get_level_values("country") == treated) & (dates >= cut)).astype(float)
 
     # day index and per-country trend terms
     uniq = np.sort(dates.unique())
@@ -104,12 +102,20 @@ def did(panel, cut=None, sample=None, end=None, trend="kink"):
         for c in countries:
             col = f"{trendcol}_{c}"
             d[col] = (d.index.get_level_values("country") == c) * d[trendcol]
-            if c != countries[0]:      # AT / HU omitted as base
+            if c != countries[0]:      # AT10Y is the reference trend; its coefficient is 0
                 exog.append(col)
 
-    res = PanelOLS(d.y, d[exog], entity_effects=True, time_effects=True,
-                   drop_absorbed=False).fit(
-        cov_type="kernel", kernel="bartlett", bandwidth=10)
+    try:
+        res = PanelOLS(d.y, d[exog], entity_effects=True, time_effects=True,
+                       drop_absorbed=False).fit(
+            cov_type="kernel", kernel="bartlett", bandwidth=10)
+    except Exception as exc:
+        # drop_absorbed=False makes linearmodels raise rather than quietly drop a
+        # collinear regressor. That is the behaviour we want, but the bare message
+        # does not say which specification failed, so name it here.
+        raise RuntimeError(
+            f"DiD fit failed for cut={cut.date()}, trend={trend}, "
+            f"n_exog={len(exog)}: {exc}") from exc
     return res, d
 
 def beta(res, name="treat"):
@@ -151,7 +157,6 @@ b, se, t, n = beta(res5)
 p(f"y_it = a_i + l_t + b(HU_i x Post_t) + g_i min(t,t_cut) + e_it")
 p(f"  2024-01 to {END.date()}, 5 countries, {n} observations")
 p(f"  beta = {b:+.4f} pp   se = {se:.4f}   t = {t:+.2f}   p = {res5.pvalues['treat']:.4f}")
-p(f"  within R2 = {res5.rsquared_within:.3f}")
 p("")
 p("Specification comparison on the same sample:")
 p(f"{'trend':10s} {'beta':>9s} {'se':>8s} {'t':>8s} {'N':>7s}")
@@ -185,6 +190,7 @@ p("otherwise the real collapse sits inside every post-window and every fake")
 p("date 'works'. Truncation date: 2026-04-10.")
 p("")
 p(f"{'fake cut':12s} {'none':>16s} {'kink':>16s}")
+_pd = []
 for fc in ["2024-07-01", "2024-10-01", "2025-01-06", "2025-04-01",
            "2025-07-01", "2025-10-01"]:
     row = []
@@ -192,10 +198,18 @@ for fc in ["2024-07-01", "2024-10-01", "2025-01-06", "2025-04-01",
         r, _ = did(P5, cut=fc, sample=SAMPLE, end="2026-04-10", trend=tr)
         bb, ss, tt, nn = beta(r)
         row.append(f"{bb:+.3f} ({tt:+.1f})")
+        _pd.append((fc, tr, bb))
     p(f"{fc:12s} {row[0]:>16s} {row[1]:>16s}")
 p("")
-p("All near zero. This is what the 2022 sample fails: there, the convergence")
-p("produces a spurious negative at almost any date.")
+_kink = [(fc, bb) for fc, tr, bb in _pd if tr == "kink"]
+_worst = min(_kink, key=lambda kv: kv[1])
+_rest = [abs(bb) for fc, bb in _kink if fc != _worst[0]]
+p(f"None of the six fake dates produces anything like {beta(res5)[0]:.2f}. The largest")
+p(f"in absolute value is {_worst[1]:+.2f} at {_worst[0]} under the kinked trend, which is")
+p(f"{abs(_worst[1]/beta(res5)[0])*100:.0f} per cent of the real estimate and sits inside the 2024")
+p(f"disinflation. The other five lie between -{max(_rest):.2f} and +{max(_rest):.2f}.")
+p("This is what the 2022 sample fails: there, the convergence produces a")
+p("spurious negative at almost any date.")
 
 # ---------------------------------------------------------------- 6
 hdr("6. PLACEBO COUNTRIES AND RANDOMISATION INFERENCE")
@@ -218,26 +232,7 @@ p("")
 p(f"{'treated':10s} {'beta':>9s} {'t':>8s}")
 plc = {}
 for c in names:
-    d = P8.copy()
-    dates = d.index.get_level_values("date")
-    d = d[d.index.get_level_values("date") >= pd.Timestamp("2025-06-01")]
-    d = d[d.index.get_level_values("date") <= END]
-    d = d[d.y.notna()]
-    dates = d.index.get_level_values("date")
-    d["treat"] = ((d.index.get_level_values("country") == c) & (dates >= CUT)).astype(float)
-    uniq = np.sort(dates.unique()); pos = {x: i for i, x in enumerate(uniq)}
-    d["t"] = dates.map(pos).astype(float)
-    tc = float(pos[uniq[uniq.searchsorted(CUT) - 1]])
-    d["tk"] = np.minimum(d["t"], tc)
-    ex = ["treat"]
-    cs = sorted(d.index.get_level_values("country").unique())
-    for cc in cs:
-        d[f"k_{cc}"] = (d.index.get_level_values("country") == cc) * d["tk"]
-        if cc != cs[0]:
-            ex.append(f"k_{cc}")
-    r = PanelOLS(d.y, d[ex], entity_effects=True, time_effects=True,
-                 drop_absorbed=False).fit(cov_type="kernel", kernel="bartlett",
-                                          bandwidth=10)
+    r, _ = did(P8, cut=CUT, sample="2025-06-01", end=END, trend="kink", treated=c)
     plc[c] = (r.params["treat"], r.tstats["treat"])
 for c, (bb, tt) in sorted(plc.items(), key=lambda kv: kv[1][0]):
     p(f"{c:10s} {bb:+9.3f} {tt:+8.1f}")

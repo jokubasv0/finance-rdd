@@ -23,12 +23,12 @@ Rule for the whole talk: **say the number, then say what it means.** Never read 
 **On slide**
 - 16 years of one government, supermajority result
 - EU cohesion funds frozen
-- A liquid prediction market on the exact event: $101 million
+- A prediction market on the exact event, printing daily from July 2025
 
 **Say**
 > Hungary is unusually good for this question. Sixteen years of one government means the election is genuine regime risk, not a rotation. EU funds were frozen, so the result had a direct fiscal consequence.
 
-> And uniquely there was a prediction market on the exact event — who becomes prime minister — with 101 million dollars of volume. Normally we infer beliefs from prices. Here we observe a probability directly, daily.
+> And uniquely there was a prediction market on the exact event — who becomes prime minister — printing a price every day for ten months. Normally we have to infer beliefs from spreads. Here we observe a probability directly.
 
 ---
 
@@ -51,11 +51,11 @@ Rule for the whole talk: **say the number, then say what it means.** Never read 
 
 **On slide**
 - HU 10Y: 7.13 → 5.75 (**−138 bp**)
-- Hungary is the **only one of eight** whose yield fell
+- Hungary is the only country to fall more than 21 bp (Romania falls 21)
 - Peer average rose 19 bp; Czechia +47; Bund +29
 
 **Say**
-> Between July 2025 and May 2026 the Hungarian ten-year fell 138 basis points. Every peer went the other way or stayed flat.
+> Between July 2025 and May 2026 the Hungarian ten-year fell 138 basis points. Every other market was flat or rose, with one exception: Romania fell 21. Hungary's fall was more than six times as large.
 
 > The red line is Hungary, the grey is the peer average. The divergence is not gradual — it opens in two steps, and that shape is the whole paper.
 

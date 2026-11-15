@@ -226,7 +226,7 @@ rnd = pd.DataFrame(rows, columns=["start", "end", "chg"])
 obs = 100 * (sp.loc[W1] - sp.loc[W0])
 late = rnd[rnd.end > pd.Timestamp("2026-04-10")]
 pre = rnd[rnd.end <= pd.Timestamp("2026-04-10")]
-p(f"Draws: {len(rnd)} of {n} days, series {sp.index.min().date()} to {sp.index.max().date()}")
+p(f"Draws: {len(rnd)} windows of {n} days, series {sp.index.min().date()} to {sp.index.max().date()}")
 p(f"  windows ending after the real event: {len(late)} of {len(rnd)}")
 p(f"  observed window change: {obs:+.0f} bp")
 p(f"  share at least as negative, all draws          : {100*(rnd.chg <= obs).mean():.0f}%")
@@ -319,6 +319,12 @@ p("")
 p("On 9 April, with the vote three days away, the bond market had priced roughly")
 p("a third of the eventual compression while Polymarket had priced about 69%.")
 p("Whichever terminal value is used, the prediction market moved first.")
+p("")
+p("Read the bonds(May) column as a ratio, not a probability. It exceeds one after")
+p("May 2026 because the spread keeps narrowing past the terminal value assumed for")
+p("it: 1.413 on 13 November means the spread overshot the 8 May level by 41 per cent")
+p("of the total fall. A probability cannot do that; a rescaled spread can. The paper")
+p("reports only the four dates up to 8 May for this reason.")
 
 # ---------------------------------------------------------------- figures
 fig, ax = plt.subplots(figsize=(9.4, 4.8))
@@ -364,7 +370,6 @@ fig.tight_layout(); fig.savefig(OUT / "fig4_spread_path.png", dpi=170); plt.clos
 
 fig, ax = plt.subplots(figsize=(7.6, 4.0))
 seg = sl.loc["2026-01-01":"2026-05-08"].dropna()
-seg2 = (w.HU5Y * 100).loc["2026-01-01":"2026-05-08"].dropna()
 ax.plot(seg.index, seg, color="#c00000", lw=1.8, label="10Y minus 5Y")
 ax.axhline(0, color="black", lw=0.8)
 ax.axvline(pd.Timestamp("2026-04-12"), color="black", lw=0.8, ls=":")

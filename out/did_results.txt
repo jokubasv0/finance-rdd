@@ -30,7 +30,6 @@ end                        none             kink           linear       N
 y_it = a_i + l_t + b(HU_i x Post_t) + g_i min(t,t_cut) + e_it
   2024-01 to 2026-05-08, 5 countries, 3200 observations
   beta = -1.0897 pp   se = 0.0962   t = -11.32   p = 0.0000
-  within R2 = -0.166
 
 Specification comparison on the same sample:
 trend           beta       se        t       N
@@ -70,8 +69,12 @@ fake cut                 none             kink
 2025-07-01      +0.090 (+2.0)    +0.087 (+1.2)
 2025-10-01      +0.034 (+0.7)    -0.024 (-0.4)
 
-All near zero. This is what the 2022 sample fails: there, the convergence
-produces a spurious negative at almost any date.
+None of the six fake dates produces anything like -1.09. The largest
+in absolute value is -0.31 at 2024-07-01 under the kinked trend, which is
+29 per cent of the real estimate and sits inside the 2024
+disinflation. The other five lie between -0.18 and +0.18.
+This is what the 2022 sample fails: there, the convergence produces a
+spurious negative at almost any date.
 
 ==============================================================================
 6. PLACEBO COUNTRIES AND RANDOMISATION INFERENCE

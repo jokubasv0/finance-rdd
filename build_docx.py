@@ -86,6 +86,25 @@ def build():
     doc.styles["Heading 4"].font.size = Pt(11)
 
     lines = SRC.read_text().splitlines()
+    # Join soft-wrapped caption continuations ("**Figure 8.** ... is" / "treated in turn")
+    # so a caption is one paragraph, not two centred fragments.
+    _joined, _k = [], 0
+    while _k < len(lines):
+        _ln = lines[_k]
+        if _ln.strip().startswith(("**Figure", "**Table")):
+            _buf = _ln.rstrip()
+            _k += 1
+            while _k < len(lines):
+                _nx = lines[_k].strip()
+                if (not _nx) or _nx.startswith(("**", "|", "!", "#", "$$", ">", "-", "*")):
+                    break
+                _buf += " " + _nx
+                _k += 1
+            _joined.append(_buf)
+            continue
+        _joined.append(_ln)
+        _k += 1
+    lines = _joined
     i = 0
     while i < len(lines):
         raw = lines[i]
@@ -121,7 +140,10 @@ def build():
             path = OUT / m.group(1)
             if path.exists():
                 doc.add_picture(str(path), width=Cm(15.5))
-                doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+                par = doc.paragraphs[-1]
+                par.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                # keep the caption on the same page as the picture
+                par.paragraph_format.keep_with_next = True
             i += 1
             continue
 

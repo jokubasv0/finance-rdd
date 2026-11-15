@@ -6,7 +6,7 @@
 
 ## Abstract
 
-On 12 April 2026 Hungary elected a government that ended sixteen years of Fidesz rule. Using daily data on eight Central European sovereign bond markets and the full price history of a $101 million Polymarket contract on whether Viktor Orbán would remain prime minister, we document two facts. First, Hungary's ten-year yield fell 138 basis points over the nine months surrounding the election while every other Central European yield rose except Romania's, which fell 21 basis points, compressing Hungary's spread over a six-country peer average by 157 basis points. Hungary is the only country to fall by more than 21 basis points. Two-thirds of that compression occurred after the result, and the pre-election part was driven by the long end while the short end rose — the opposite of what monetary easing would produce. Second, prediction markets and bond markets disagreed about timing: three days before the vote Polymarket had priced 69 per cent of the eventual move while the bond spread had priced about 35 per cent. The prediction market moved first and the bond market followed. Our identification comes from a difference-in-differences design against four neighbouring markets on a 2024–2026 panel, with country and calendar-date fixed effects and a country-specific trend fitted before the treatment date and held flat afterwards. It puts the repricing at 109 basis points against donors (Driscoll–Kraay t = −11.3), and the three possible trend treatments span five basis points on that sample. We are equally careful about what this does not show. The 2022 data are excluded because a placebo-date test shows they manufacture a spurious effect at any date, not because they are inconvenient; the pre-treatment leads are individually precise and jointly non-zero, though they do not trend. With one treated unit, randomisation inference bottoms out at p = 0.125, the smallest value attainable with eight units, and the daily relationship between the probability series and the spread is indistinguishable from zero. We therefore report the DiD as a conditional estimate alongside the descriptive facts it rests on: the magnitude, the timing, the cross-country uniqueness, and a lead–lag pattern between the prediction market and the bond market that has not previously been documented for a European regime change.
+On 12 April 2026 Hungary elected a government that ended sixteen years of Fidesz rule. Using daily data on eight Central European sovereign bond markets and the full price history of a Polymarket contract on whether Viktor Orbán would remain prime minister, we document two facts. First, Hungary's ten-year yield fell 138 basis points over the nine months surrounding the election while every other Central European yield rose except Romania's, which fell 21 basis points, compressing Hungary's spread over a six-country peer average by 157 basis points. Hungary is the only country to fall by more than 21 basis points. Two-thirds of that compression occurred after the result, and the pre-election part was driven by the long end while the short end rose — the opposite of what monetary easing would produce. Second, prediction markets and bond markets disagreed about timing: three days before the vote Polymarket had priced 69 per cent of the eventual move while the bond spread had priced about 35 per cent. The prediction market moved first and the bond market followed. Our identification comes from a difference-in-differences design against four neighbouring markets on a 2024–2026 panel, with country and calendar-date fixed effects and a country-specific trend fitted before the treatment date and held flat afterwards. It puts the repricing at 109 basis points against donors (Driscoll–Kraay t = −11.3), and the three possible trend treatments span five basis points on that sample. We are equally careful about what this does not show. The 2022 data are excluded because a placebo-date test shows they manufacture a spurious effect at any date, not because they are inconvenient; the pre-treatment leads are individually precise and jointly non-zero, though they do not trend. With one treated unit, randomisation inference bottoms out at p = 0.125, the smallest value attainable with eight units, and the daily relationship between the probability series and the spread is indistinguishable from zero. We therefore report the DiD as a conditional estimate alongside the descriptive facts it rests on: the magnitude, the timing, the cross-country uniqueness, and a lead–lag pattern between the prediction market and the bond market that has not previously been documented for a European regime change.
 
 **JEL codes:** G12, G14, G15, H63, P16
 
@@ -22,7 +22,7 @@ Hungary's April 2026 election is an unusually clean case for looking at this dir
 
 First, the outcome was a genuine regime change, not a rotation. Fidesz had governed since 2010. The election produced a Tisza supermajority of 141 seats, and Péter Magyar was sworn in on 9 May 2026. A change of this size is the kind of event that should move a risk premium.
 
-Second, the election was heavily traded in a prediction market. Polymarket ran a contract on whether Orbán would be the next prime minister, which traded $25.5 million inside a $101.1 million event and ran from July 2025 to April 2026. That gives a daily, forward-looking measure of the market's belief about the outcome, which is exactly the variable a bond investor would need.
+Second, the election was heavily traded in a prediction market. Polymarket ran a contract on whether Orbán would be the next prime minister, which printed 257 daily prices between July 2025 and May 2026. That gives a daily, forward-looking measure of the market's belief about the outcome, which is exactly the variable a bond investor would need.
 
 Third, Hungary has close, liquid comparators. Czechia, Poland, Romania, Slovenia, Croatia and Austria all issue euro- or local-currency benchmarks with daily quotes. A spread against those peers strips out the global and regional component of the yield move, which is the dominant source of variation in a nine-month window.
 
@@ -76,13 +76,19 @@ Two-year Hungarian yields are not available from this source; this is a limitati
 
 ### 3.2 Prediction market
 
-The full daily price history of the Polymarket contract "Will the next Prime Minister of Hungary be Viktor Orbán?", retrieved from the CLOB prices-history endpoint. The series contains 257 prints over 288 calendar days, from 25 July 2025 to 9 May 2026. The contract prints at weekends as well, and those prints are kept rather than aligned onto the weekday yield grid, because one of the two largest moves in the whole series is a Saturday. We define the treatment variable as
+The full daily price history of the Polymarket contract "Will the next Prime Minister of Hungary be Viktor Orbán?", retrieved from the CLOB prices-history endpoint. The series contains 257 prints over 288 calendar days, from 25 July 2025 to 9 May 2026. We define the treatment variable as
 
 $$P_t = 1 − Price(Orbán next PM)_t$$
 
 the market-implied probability that Orbán does not remain prime minister.
 
-Two properties of this series must be stated plainly because they drive the results in Section 6. First, the contract prints only on days on which it trades, and 76 of the 257 prints fall on a Saturday or Sunday; we keep them, because one of the two largest moves in the whole series is a Saturday print. Second, the series has essentially two large jumps: +19.5 percentage points on Saturday 26 July 2025, in the first days of the contract's life, and +30.9 percentage points on 22 April 2026, ten days after the election, when the outcome was already known. Neither is news about Hungarian politics.
+Three properties of this series must be stated plainly because they drive the results in Section 6.
+
+First, the contract prints only on days on which it trades, and 76 of the 257 prints fall on a Saturday or Sunday. We keep them rather than aligning the series onto the weekday yield grid, because one of the two largest moves in the whole series is a Saturday print; discarding weekends would move that jump onto a Friday and overstate the move the bond market had a chance to see.
+
+Second, the series has essentially two large jumps: +19.5 percentage points on Saturday 26 July 2025, in the first days of the contract's life, and +30.9 percentage points on 22 April 2026, ten days after the election, when the outcome was already known. Neither is news about Hungarian politics.
+
+Third, and this is a limitation rather than a property, we cannot archive the contract's turnover. The endpoint we used returns volume metadata only for listings that are still open, so the figures reported on the Polymarket page at the time of writing are not reproducible from the files in this repository and we do not quote them. What is archived is the print record, and it is thin in a way that matters: the contract printed on 257 of 288 calendar days, and did not print at all between 9 April and 22 April 2026, the thirteen days spanning the election itself. Probabilities from a market this shallow should be read as a proxy for belief, not as a measurement of it, and Section 8 says so alongside the other limitations.
 
 ### 3.3 Control variables
 
@@ -257,6 +263,11 @@ The Hungarian yield moves almost one-for-one with its regional peers once the pe
 ![](fig3_residual.png)
 
 **Figure 3.** Cumulative Hungary-specific residual from the market model of Table 6.
+
+One more view before leaving this section, because it motivates a choice made later. Figure 4 collapses the spread onto a quarter-average against a narrower donor set, Czechia, Poland and Romania, which removes the composition effect that the seven-country average carries when a market is missing. The path it shows is not a trend: the spread halves between the 2022 energy crisis and the first quarter of 2024, sits flat for nine quarters, and then collapses after the election. A series with that shape is a bad candidate for a difference-in-differences that reaches back to 2022, because for 2022 every level looks like it is heading somewhere. Section 5.6.1 returns to this as the justification for starting the sample in 2024.
+![](fig4_spread_path.png)
+
+**Figure 4.** Hungary's ten-year spread over the equal-weighted Czech, Polish and Romanian yields, quarterly mean, 2022–2026, in basis points (2026Q4 is partial, to 13 November). The plateau from 2024Q1 to 2026Q1 is the reason the difference-in-differences sample starts in 2024.
 
 
 ### 5.4 Not monetary policy
@@ -494,12 +505,9 @@ Neither number is a p-value for the election, and the fix is not to clean the sa
 
 The distinction matters because an earlier draft of this paper reported the 15 per cent as though it were informative, in the direction of caution. It was not caution; it was the wrong test.
 
-What replaces it in the argument is the placebo evidence in Section 5.7, which is constructive rather than asymptotic: treatment dates that never happened, applied to a panel truncated before the event, return approximately zero (Table 13); and treatment units that never happened, applied to the same specification, return zero for every donor but Hungary (Table 12). Those are tests of the design. A percentile of overlapping windows in a trending series is not.
+What replaces it in the argument is the placebo evidence in Section 5.7, which is constructive rather than asymptotic: treatment dates that never happened, applied to a panel truncated before the event, return between −0.31 and +0.18, the worst case being 29 per cent of the real estimate and sitting inside the 2024 disinflation (Table 13); and treatment units that never happened, applied to the same specification, return zero for every donor but Hungary (Table 12). Those are tests of the design. A percentile of overlapping windows in a trending series is not.
 
-Figure 4 now reports the fact that motivated the sample restriction instead: Hungary's spread over Czechia, Poland and Romania by quarter. It halves between the 2022 energy crisis and the first quarter of 2024, sits flat for nine quarters, and then collapses.
-![](fig4_spread_path.png)
-
-**Figure 4.** Hungary's ten-year spread over the equal-weighted Czech, Polish and Romanian yields, quarterly mean, 2022–2026, in basis points (2026Q4 is partial, to 13 November). The plateau from 2024Q1 to 2026Q1 is the reason the difference-in-differences sample starts in 2024.
+Figure 4, in Section 5.3, reports the fact that motivated the sample restriction instead.
 
 ### 6.3 The ceiling on inference
 

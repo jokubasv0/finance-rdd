@@ -123,7 +123,7 @@ is the part of the Hungarian move not matched by its peers.
 ============================================================================
 8. PLACEBO: RANDOM WINDOWS (WITHDRAWN, NOT REPAIRED)
 ============================================================================
-Draws: 204 of 194 days, series 2022-01-03 to 2026-11-13
+Draws: 204 windows of 194 days, series 2022-01-03 to 2026-11-13
   windows ending after the real event: 30 of 204
   observed window change: -150 bp
   share at least as negative, all draws          : 15%
@@ -199,3 +199,9 @@ date           spread  Polymarket  bonds(May)  bonds(Nov)
 On 9 April, with the vote three days away, the bond market had priced roughly
 a third of the eventual compression while Polymarket had priced about 69%.
 Whichever terminal value is used, the prediction market moved first.
+
+Read the bonds(May) column as a ratio, not a probability. It exceeds one after
+May 2026 because the spread keeps narrowing past the terminal value assumed for
+it: 1.413 on 13 November means the spread overshot the 8 May level by 41 per cent
+of the total fall. A probability cannot do that; a rescaled spread can. The paper
+reports only the four dates up to 8 May for this reason.
