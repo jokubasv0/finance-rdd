@@ -1,4 +1,4 @@
-# Pricing Regime Change — 10-minute talk
+# Pricing Regime Change — 9-minute talk (9:10, hard cap 10:00)
 
 Ten slides, 10 min 00 s with 30 s buffer. Cue times are cumulative.
 
@@ -6,7 +6,7 @@ Rule for the whole talk: **say the number, then say what it means.** Never read 
 
 ---
 
-## Slide 1 — Title (0:00–0:30)
+## Slide 1 — Title (0:00–0:20)
 
 **On slide**
 - Pricing Regime Change: Hungary's 2026 Election and Sovereign Risk
@@ -18,21 +18,42 @@ Rule for the whole talk: **say the number, then say what it means.** Never read 
 
 ---
 
-## Slide 2 — Why this case (0:30–1:25)
+## Slide 2 — Why this case (0:20–1:10)
 
 **On slide**
+- **Question:** how much did Hungary's risk premium reprice, and when relative to the vote?
 - 16 years of one government, supermajority result
 - EU cohesion funds frozen
 - A prediction market on the exact event, printing daily from July 2025
 
 **Say**
-> Hungary is unusually good for this question. Sixteen years of one government means the election is genuine regime risk, not a rotation. EU funds were frozen, so the result had a direct fiscal consequence.
+> The question is in two halves. How much Hungarian sovereign risk did the market remove around this election, and when did it remove it — before the result or after?
+
+> Hungary is unusually good for answering it. Sixteen years of one government means the election is genuine regime risk, not a rotation. EU funds were frozen, so the result had a direct fiscal consequence.
 
 > And uniquely there was a prediction market on the exact event — who becomes prime minister — printing a price every day for ten months. Normally we have to infer beliefs from spreads. Here we observe a probability directly.
 
 ---
 
-## Slide 3 — Data (1:25–2:15)
+## Slide 3 — What the literature says (1:10–2:10)
+
+**On slide**
+- Elections and sovereign spreads: **no consensus on sign**
+  - Block & Vaaler 2004: spreads high early, fall into the vote
+  - Balding 2011: daily CDS, opposite — risk priced *up* regardless of outcome
+  - Eichler 2014: nothing once governance quality is controlled
+  - Brooks, Cunha & Mosley 2022: no ideology effect, volatility around formation
+- Prediction markets forecast well — Wolfers & Zitzewitz 2004
+- **Gap:** the two instruments have never been on the same daily axis around a European election
+
+**Say**
+> The literature splits on the sign. Block and Vaaler find spreads fall into the vote. Balding, using daily CDS across thirteen emerging markets, finds the opposite — risk is priced up whatever the outcome. Eichler finds nothing once governance quality is controlled.
+
+> They are all multi-country panels, which is why they disagree: a panel averages across events and throws away the one thing that varies inside an event — what the market expected beforehand.
+
+> Prediction markets measure that expectation, and Wolfers and Zitzewitz find the prices are good forecasts. So the gap is specific: nobody has put a prediction market and a sovereign spread on the same daily axis around a European election. That is what lets me ask *when*, not just *whether*.
+
+## Slide 4 — Data (2:10–2:45)
 
 **On slide**
 - Polymarket: P(Orbán not PM), daily, 257 prints (weekends kept)
@@ -47,7 +68,7 @@ Rule for the whole talk: **say the number, then say what it means.** Never read 
 
 ---
 
-## Slide 4 — The fact (2:15–3:20) — **Figure 1**
+## Slide 5 — The fact (2:45–3:15) — **Figure 1**
 
 **On slide**
 - HU 10Y: 7.13 → 5.75 (**−138 bp**)
@@ -61,7 +82,7 @@ Rule for the whole talk: **say the number, then say what it means.** Never read 
 
 ---
 
-## Slide 5 — Identification (3:20–4:45) — **Table 9**
+## Slide 6 — Identification (3:15–4:15) — **Table 9**
 
 **On slide**
 - Two-way FE DiD: country effects + date effects + country trend
@@ -72,13 +93,13 @@ Rule for the whole talk: **say the number, then say what it means.** Never read 
 **Say**
 > The identification is difference-in-differences against neighbouring markets. Country fixed effects absorb level differences — the reason Hungary yields seven per cent and Germany two. Date fixed effects absorb everything common to all markets on a given day: global duration, US rates, VIX, regional risk appetite.
 
-> What is left is the Hungarian, dated, part of the move. On a 2024 sample that is 109 basis points.
+> What is left is the Hungarian, dated, part of the move: 109 basis points on a 2024 sample.
 
-> The number I care about is not that one, it is the next one: −1.04 with no trend, −1.09 with a kinked trend, −1.09 with a linear trend. Five basis points apart. On a sample going back to 2022 those same three specifications span sixty-three basis points, which is why I start in 2024 — and I will show you the test that justifies it rather than just asserting it.
+> The number I care about is the next one. No trend gives −1.04, a kinked trend −1.09, a linear trend −1.09. Five basis points apart. On a sample going back to 2022 those same three span sixty-three, which is why I start in 2024 — and I will show you the test, not just assert it.
 
 ---
 
-## Slide 6 — The diagnostic that nearly kills it (4:45–6:10) — **Figure 7**
+## Slide 7 — The diagnostic that nearly kills it (4:15–5:50) — **Figure 7**
 
 **On slide**
 - Monthly leads and lags relative to February 2026
@@ -92,15 +113,15 @@ Rule for the whole talk: **say the number, then say what it means.** Never read 
 
 > The leads bounce around zero. They do not trend into the treatment date. But a joint test rejects that they are all zero, and I report that rather than claiming parallel trends holds.
 
-> Why does the rejection not kill the design? Because at three hundred observations a month, a coefficient of one tenth of a point is precisely estimated. What would kill it is a lead that trends up or down as the election approaches, since that is what a trend control cannot absorb. There is none, and the corroboration is that the trend treatment changes the answer by five basis points.
+> Why does the rejection not kill the design? At three hundred observations a month, a tenth of a point is precisely estimated. What would kill it is a lead that trends into the election, since a trend control cannot absorb a trend. There is none, and the corroboration is that the trend treatment moves the answer by five basis points.
 
-> The other check is the one that decided the sample. I re-run the whole design at fake election dates, on a panel cut off before the real event. On 2024 data every fake date returns essentially zero. On a sample starting in 2022 the no-trends version returns minus 1.1 at almost any date — because of the 2022 energy-crisis convergence. That is why the paper starts in 2024, and it is a test, not a preference.
+> The check that decided the sample is this. I re-run the design at fake election dates on a panel cut off before the real event. On 2024 data every fake date returns about zero. On 2022 data the no-trends version returns minus 1.1 at almost any date, because of the 2022 energy-crisis convergence. That is why the paper starts in 2024 — a test, not a preference.
 
-> Look where the break sits: April minus 0.6, May minus 1.1. Two thirds of the movement is after the vote, not before.
+> And look where the break sits: April minus 0.6, May minus 1.1. Two thirds of the movement is after the vote.
 
 ---
 
-## Slide 7 — Placebos and the ceiling (6:10–7:15) — **Figure 8**
+## Slide 8 — Placebos and the ceiling (5:50–6:35) — **Figure 8**
 
 **On slide**
 - Each country treated in turn: HU −0.97, next Croatia +0.00, rest up to +0.44
@@ -116,7 +137,7 @@ Rule for the whole talk: **say the number, then say what it means.** Never read 
 
 ---
 
-## Slide 8 — What fails (7:15–8:15)
+## Slide 9 — What fails (6:35–7:35)
 
 **On slide**
 - Daily design: Δspread on ΔP
@@ -134,7 +155,7 @@ Rule for the whole talk: **say the number, then say what it means.** Never read 
 
 ---
 
-## Slide 9 — The finding I did not expect (8:15–9:20) — **Figure 6**
+## Slide 10 — The finding I did not expect (7:35–8:25) — **Figure 6**
 
 **On slide**
 - Back out the probability implied by the spread
@@ -152,7 +173,7 @@ Rule for the whole talk: **say the number, then say what it means.** Never read 
 
 ---
 
-## Slide 10 — Conclusion (9:20–10:00)
+## Slide 11 — Conclusion (8:25–9:10)
 
 **On slide**
 - DiD: **−109 bp** on the election window, 1 of 8 countries
@@ -173,13 +194,13 @@ Thank you.
 # Q&A — prepared answers
 
 **"Your joint pre-trend test rejects. Doesn't that kill the DiD?"**
-> It rejects that the leads are *exactly* zero, which at three hundred observations a month is a weak test — 0.1 points is precise. What would be fatal is a lead that trends, because a trend control cannot absorb a trend. There is none, and the proof is that all three trend treatments agree to five basis points. A reader who wants no trend assumption at all should read −1.04 instead of −1.09.
+> It rejects that the leads are *exactly* zero, which at three hundred observations a month is a weak test. What would be fatal is a lead that trends, because a trend control cannot absorb a trend. There is none, and the proof is that all three trend treatments agree to five basis points. A reader who wants no trend assumption should read −1.04, not −1.09.
 
 **"Why start in 2024? Isn't that just choosing your sample?"**
 > Because the placebo dates say so. On 2022 data the same design returns −1.1 at essentially every fake date, which means it is measuring the 2022 disinflation convergence rather than an election. On 2024 data every fake date returns zero. The restriction costs me nothing: the no-trends estimate *falls* from −1.46 to −1.04 when 2022 is dropped.
 
 **"Your t-statistic is −11. Why do you then say p = 0.125?"**
-> Because they measure different things. Driscoll–Kraay asymptotics count time periods, and I have 3,040 of them. The design has one treated unit, and with eight units there are eight possible assignments. Days are not the constraint; countries are. Reporting the t-statistic alone would be the most misleading thing in the paper.
+> Because they measure different things. Driscoll–Kraay asymptotics count time periods, and I have 3,200 of them. The design has one treated unit, and with eight units there are eight possible assignments. Days are not the constraint; countries are. Reporting the t-statistic alone would be the most misleading thing in the paper.
 
 **"Isn't this just the EU funds story?"**
 > Possibly, and I cannot separate the two. EU funds and political risk both predict a long-end compression, and both arrive in the same weeks, so they are observationally equivalent here. That is a limitation of one treated unit, not something a control group fixes.
@@ -190,7 +211,14 @@ Thank you.
 **"Is Polymarket reliable? It's banned in Hungary."**
 > No. It is thin, manipulable, and its users are self-selected foreign observers. I use it as a proxy for a probability, never as truth. The lead–lag result only needs the two series measured consistently, not for Polymarket to be right.
 
+**"Balding already did daily CDS around elections. What is new here?"**
+> Balding's finding is that risk is priced *up* around elections regardless of the outcome — that is the opposite sign to mine, and it is the reason the paper exists. His design has no measure of what the market expected, so it cannot tell anticipation from disappointment. I have the contract price, so I can. And he has thirteen countries over three years; I have one country over ten months, which is the reverse trade — far less external validity, but the timing question is answerable at all only in the second design.
+
+**"Why does the sign differ across the literature?"**
+> Probably because it is not one effect. If the market expected the incumbent to lose, a clear result resolves uncertainty downward. If the market expected continuity, the same result raises risk. Balding averages over events where both happen, and the average is what he reports. That is not a criticism of the design; it is why a single-event study with a probability measure is worth doing.
+
 **"What is the single biggest threat?"**
+
 > That the compression was the National Bank's easing cycle. The term structure argues against it: before the vote the ten-year fell 40 basis points while the five-year rose 13. Easing moves the short end. This moved the long end.
 
 ---
