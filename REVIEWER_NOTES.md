@@ -22,7 +22,10 @@ paper, the deck and the speech.
 0.615 (so P(Orbán leaves) = 0.385) and repriced to 0.645 by 1 August — 26 points
 across seven prints, on almost no volume. Over the same days the Hungarian ten-year
 *yield rose*, 7.13 to 7.24 per cent. That week is a price being found, not news, and
-including it loads the entire subsequent comparison.
+including it loads the entire subsequent comparison. We tested a second week of
+exclusion on 11 August 2025 and rejected it: the yield that day is 7.00, mid-fall, so
+the start date would be arbitrary rather than anchored to anything, and the
+comparison's gap shrinks from 21 points to 5.
 
 **Why 4 August and not 1 August.** Hungarian yields spiked to 7.24 on 1 August and
 reversed to 7.11 on 4 August. Starting on 1 August would date the window to a
@@ -74,18 +77,31 @@ twenty-one points *in the spread's favour*; by the eve it is 44 against 16, a ga
 twenty-eight. The contract sat between 0.625 and 0.685 for eight months and did not
 move decisively until the count.
 
-**What this costs us.** The previous draft claimed the prediction market moved first.
-It did not, in this window. The abstract, introduction, Sections 5.5, 7 and 8, the
-deck and the speech now say the bond market moved first and that the contract waited
-for the result. That is a less flattering finding than the one it replaces and it is
-also the one the data support.
+**What we claim, and what we no longer do.** The previous draft claimed the
+prediction market moved first. In this window it did not: the spread was ahead at
+every recorded date before the vote. But moving the base date back ten days reverses
+the ordering, so the paper now claims the divergence in timing and expressly not a
+ranking. The abstract, introduction, Sections 5.5, 7 and 8, the deck and the speech
+all say the two markets were on different clocks and decline to name a leader.
 
-**Where the ordering is not robust, and why we say so.** Anchored on the contract's
-opening week the same calculation puts the contract at 49 per cent on 9 April and the
-spread at 35. Across six candidate base dates the contract's share ranges from 11 to
-49 per cent while the spread's ranges only from 23 to 41. The figure therefore
-measures how fast each market moved once it started, not which one started first, and
-Section 5.5 says exactly that rather than reporting the ordering as a result.
+**The base-date sensitivity, tabulated.** Section 6 carries this as Table 14 rather
+than as a sentence, because the sentence could be read as a hedge and the table
+cannot:
+
+| Base date | Spread (pp) | P | Spread share | Contract share | Gap |
+|---|---:|---:|---:|---:|---:|
+| 25 Jul 2025 | 2.74 | 0.385 | 0.354 | 0.488 | +13 |
+| 4 Aug 2025 | 2.76 | 0.625 | 0.366 | 0.160 | −21 |
+| 11 Aug 2025 | 2.64 | 0.575 | 0.311 | 0.259 | −5 |
+| 1 Sep 2025 | 2.75 | 0.605 | 0.358 | 0.203 | −15 |
+| 1 Oct 2025 | 2.49 | 0.600 | 0.232 | 0.213 | −2 |
+| 3 Nov 2025 | 2.58 | 0.565 | 0.285 | 0.276 | −1 |
+
+The spread's share moves between 23 and 37 per cent across all six anchors; the
+contract's moves between 16 and 49. One series is stable and the other is not, because
+almost all of the contract's early movement happened in its first week. A comparison
+whose sign depends on where the clock starts does not identify leadership, and the
+paper does not use it to.
 
 **One month cuts against the reversal and is now stated.** On 24 March the spread had
 given back its early repricing (−4 per cent of its eventual move) in the global

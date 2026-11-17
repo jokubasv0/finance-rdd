@@ -1,6 +1,6 @@
 # Pricing Regime Change — 6-minute talk
 
-Eight slides. Spoken text is about 700 words, which is **6:22 at 110 words per minute** — a slow,
+Eight slides. Spoken text is about 710 words, which is **6:27 at 110 words per minute** — a slow,
 deliberate pace — and about 5:45 at a normal one. Leave the rest of the ten minutes unused.
 
 Rule for the whole talk: **say the number, then say what it means.** Never read a table. If you are
@@ -134,11 +134,11 @@ running late, drop slide 4 (literature) to two sentences; it is the only cuttabl
 > two move more than ten points — the opening week, and one after the result. There is no intensity
 > to exploit, so the treatment is a date, not a price.
 
-> The surprise is here, and it goes the other way. On one scale — how much of its own eventual
-> repricing each had done — the spread had done 37 per cent three days before the vote, the contract
-> 16. The bond market got there first; the contract did almost nothing until the count. That is the
-> opposite of what prediction markets are supposed to do, though it depends where the clock starts.
-> So I claim the timing, not the leadership.
+> The surprise is here. On one scale — how much of its own eventual repricing each had done — the
+> spread had done 37 per cent three days before the vote, the contract 16. The contract did almost
+> nothing until the count. But move the start back ten days and the ordering flips, because that is
+> where the contract made its early move. So the two markets were on different clocks, and I claim
+> the timing, not the leadership.
 
 ---
 
@@ -146,13 +146,13 @@ running late, drop slide 4 (literature) to two sentences; it is the only cuttabl
 
 **On slide**
 - **−109 bp** relative to neighbours; nearly two thirds of it after the result
-- The spread moved first; the contract waited for the count
+- 37% of the spread's move done by 9 April; the contract, 16%
 - Conditional: one treated unit, p = 0.125
 
 **Say**
 > Hungarian sovereign risk fell about 109 basis points relative to its neighbours — 160 comparing
-> endpoints — and nearly two thirds of it came after the result. The bond market moved first. The
-> contract waited for the count.
+> endpoints — and nearly two thirds of it came after the result. The contract told a different
+> story about when, and not even a consistent one.
 
 > The estimate is conditional. One treated country, a pre-trend that only a trend control
 > absorbs, and a p-value floored at one in eight.

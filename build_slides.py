@@ -454,8 +454,8 @@ para(tf, "16%  vs  37%", 42, RED, bold=True, first=True, line=1.0, font=DISPLAY)
 picture(s, "fig6_implied.png", 5.98, 3.12, 6.35, 2.78)
 
 tf = box(s, 5.98, 6.14, 6.35, 0.5)
-para(tf, "The bonds moved first. The contract waited for the count.", 14, NAVY,
-     bold=True, first=True)
+para(tf, "Different clocks. Where the clock starts decides who looks first.", 14,
+     NAVY, bold=True, first=True)
 footer(s, 7)
 
 # -------------------------------------------------------------------- slide 8
