@@ -407,7 +407,7 @@ for x_, lab in [("2026-02-26", "campaign"), ("2026-04-12", "election"),
     ax.axvline(pd.Timestamp(x_), color="black", lw=0.8, ls=":")
     ax.annotate(lab, (pd.Timestamp(x_), ax.get_ylim()[1]), fontsize=8, rotation=90,
                 va="top", ha="right", xytext=(0, -3), textcoords="offset points")
-ax.set_ylabel("yield, %"); ax.legend(frameon=False, fontsize=9, loc="lower left")
+ax.set_ylabel("yield, %"); ax.legend(frameon=False, fontsize=9, loc="upper left")
 ax.set_title("Hungarian and peer sovereign yields, August 2025 - May 2026")
 ax.xaxis.set_major_locator(mdates.MonthLocator(bymonthday=25))
 ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %y"))
@@ -424,18 +424,23 @@ for col, colour, ls, lab in [("SP_PEER", "#c00000", "-", "Over the six-peer aver
     s = (100 * w[col]).interpolate(limit=5, limit_area="inside")
     ax.plot(w.index, s, color=colour, lw=1.7, ls=ls, label=lab)
 ax.set_ylabel("spread, basis points")
-ax.set_title("Hungary's ten-year spread over three controls, July 2025 - May 2026")
-ax.xaxis.set_major_locator(mdates.MonthLocator(bymonthday=25))
+ax.set_title("Hungary's ten-year spread over three controls, August 2025 - May 2026")
+ax.xaxis.set_major_locator(mdates.MonthLocator())
 ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %y"))
-ax.legend(frameon=False, fontsize=9, loc="lower left")
 ax.margins(y=0.10)
-fig.tight_layout(); fig.savefig(OUT / "fig2_spread.png", dpi=170); plt.close(fig)
+# Three series fill the plot, so the legend goes underneath in one row.
+ax.legend(frameon=False, fontsize=9, loc="upper center",
+          bbox_to_anchor=(0.5, -0.11), ncol=3)
+fig.subplots_adjust(left=0.09, right=0.985, top=0.9, bottom=0.24)
+fig.savefig(OUT / "fig2_spread.png", dpi=170); plt.close(fig)
 
 fig, ax = plt.subplots(figsize=(9.4, 4.2))
 ax.axhline(0, color="black", lw=0.8)
 ax.plot(post.index, post.cum, color="#1f4e79", lw=1.7)
 ax.set_ylabel("cumulative residual, bp")
 ax.set_title("Hungary-specific yield move after removing global factors")
+ax.xaxis.set_major_locator(mdates.MonthLocator())
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %y"))
 fig.tight_layout(); fig.savefig(OUT / "fig3_residual.png", dpi=170); plt.close(fig)
 
 fig, ax = plt.subplots(figsize=(8.6, 4.2))
@@ -444,7 +449,8 @@ x = np.arange(len(Qs))
 ax.bar(x, Qs.values, color="#1f4e79", alpha=0.85, width=0.7)
 ax.axhline(0, color="black", lw=0.8)
 ax.set_xticks(x)
-ax.set_xticklabels(Qs.index, rotation=90, fontsize=7)
+ax.set_xticklabels([f"Q{pd.Period(s, 'Q').quarter} {int(str(s)[:4]) % 100:02d}"
+                    for s in Qs.index], rotation=90, fontsize=8)
 ax.set_ylabel("HU minus (CZ, PL, RO), bp")
 ax.set_title("Hungary's spread over Czechia, Poland and Romania, quarterly")
 fig.tight_layout(); fig.savefig(OUT / "fig4_spread_path.png", dpi=170); plt.close(fig)
@@ -479,17 +485,17 @@ ax.annotate("9 Apr: 16% vs 37%", (d9, 0.62), fontsize=10, ha="right", va="center
             xytext=(-7, 0), textcoords="offset points")
 # The contract dips below its own starting point, so the negative band is not a
 # plotting fault and the axis has to reach past it.
-ax.set_ylim(lo - 0.06, hi + 0.07)
+ax.set_ylim(lo - 0.17, hi + 0.07)
 cmin = cs.idxmin()
 ax.plot([cmin], [cs[cmin]], marker="o", ms=5.5, mfc="#c00000", mec="white", mew=1.2,
         zorder=6)
-ax.annotate(f"contract at {cs[cmin]*100:.0f}%\n({cmin:%d %b}): below its 4 Aug level",
-            (cmin, cs[cmin]), xytext=(pd.Timestamp("2026-02-08"), lo + 0.01),
-            fontsize=9, color="#c00000", ha="left", va="center",
+ax.annotate(f"contract at {cs[cmin]*100:.0f}% on {cmin:%d %b}, below its 4 Aug level",
+            (cmin, cs[cmin]), xytext=(cmin, lo - 0.055),
+            fontsize=8.5, color="#c00000", ha="center", va="center",
             arrowprops=dict(arrowstyle="-", color="#c00000", lw=0.8,
-                            shrinkA=2, shrinkB=6))
-ax.set_xlim(pd.Timestamp("2025-07-20"), pd.Timestamp("2026-05-10"))
-ax.xaxis.set_major_locator(mdates.MonthLocator(bymonthday=25))
+                            shrinkA=3, shrinkB=5))
+ax.set_xlim(pd.Timestamp("2025-07-26"), pd.Timestamp("2026-05-10"))
+ax.xaxis.set_major_locator(mdates.MonthLocator())
 ax.set_ylabel("share of the eventual move")
 ax.set_title("How much of its own repricing each market had done\n"
              r"share $= (x_t - x_0)/(x_T - x_0)$, $x$ = contract price or spread; "

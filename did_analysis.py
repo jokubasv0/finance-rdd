@@ -384,8 +384,14 @@ ax.axvline(len([m for m in EV_MONTHS if m < pd.Period("2026-04", "M")]) - 0.5,
            color="#c00000", lw=1.2, ls=":")
 ax.errorbar(xs, ys, yerr=es, fmt="o", ms=4, lw=1.2, color="#1f4e79", ecolor="#9dc3e6")
 ax.set_xticks(xs[::3])
-ax.set_xticklabels([str(m) for m in EV_MONTHS][::3], rotation=45, ha="right", fontsize=8)
-ax.margins(y=0.12)
+ax.set_xticklabels([m.strftime("%b %y") for m in EV_MONTHS][::3],
+                   rotation=45, ha="right", fontsize=8)
+# The last two coefficients are large and negative; margins alone clip their
+# lower bounds, so the axis is set from the interval extents.
+lows = [y - e for y, e in zip(ys, es)]
+highs = [y + e for y, e in zip(ys, es)]
+ax.set_ylim(min(lows) - (max(highs) - min(lows)) * 0.08,
+            max(highs) + (max(highs) - min(lows)) * 0.08)
 ax.set_ylabel("coefficient, pp")
 ax.set_title("Event study: monthly Hungary effect relative to February 2026")
 fig.tight_layout(); fig.savefig(OUT / "fig7_event_study.png", dpi=170); plt.close(fig)
