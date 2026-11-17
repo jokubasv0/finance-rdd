@@ -127,16 +127,17 @@ running late, drop slide 4 (literature) to two sentences; it is the only cuttabl
 
 **On slide**
 - Daily dose–response: β ≈ 0. Only two of 257 prints move more than 10 points
-- 9 April, three days before the vote: **Polymarket 69%, bonds 35%**
+- 9 April, three days before the vote: **the contract had done 49% of its move, the spread 35%**
 
 **Say**
 > I wanted to regress daily spread changes on daily probability changes. It fails. Of 257 prints,
 > two move more than ten points: the opening week, and one print after the result. There is no
 > intensity to exploit, so the treatment is a date, not a price.
 
-> The surprise is here. I can back out the probability the spread was implying. Three days before
-> the vote the contract said 69 per cent. Bonds said about a third. They did not disagree about the
-> level of risk. They disagreed about when to price it.
+> The surprise is here. I can put both markets on one scale: how much of its own eventual
+> repricing each had done. Three days before the vote the contract had done 49 per cent of its
+> move, the spread 35. On that scale they agreed about where risk was going. They differed on how
+> early to price it.
 
 ---
 
@@ -217,4 +218,4 @@ Five minutes of questions. Answer in one sentence, then stop.
 | Hungary's own fall | −138 bp |
 | After the result, not before | 65% |
 | Randomisation inference | p = 0.125 (floor) |
-| 9 April: contract vs bonds | 69% vs 35% |
+| 9 April: contract vs bonds | 49% of its move vs 35% |

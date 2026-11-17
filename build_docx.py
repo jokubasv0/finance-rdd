@@ -40,8 +40,7 @@ def add_runs(par, text):
         if chunk.startswith("**") and chunk.endswith("**"):
             par.add_run(chunk[2:-2]).bold = True
         elif chunk.startswith("$") and chunk.endswith("$") and not chunk[1].isdigit():
-            r = par.add_run(chunk[1:-1])
-            r.italic = True
+            add_math_runs(par, chunk[1:-1])
         elif chunk.startswith("*") and chunk.endswith("*"):
             par.add_run(chunk[1:-1]).italic = True
         else:

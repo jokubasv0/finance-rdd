@@ -186,22 +186,43 @@ time the spread had already fallen. It cannot support a daily treatment variable
 ============================================================================
 11. BOND-IMPLIED VERSUS MARKET-IMPLIED PROBABILITY
 ============================================================================
-If the spread moves one-for-one with the probability that Orbán leaves office,
+If the spread moves one-for-one with the probability that Orban leaves office,
 the bond market's implied probability is (S0 - St) / (S0 - ST).
 
-date           spread  Polymarket  bonds(May)  bonds(Nov)
-2025-07-25       2.74       0.385       0.000       0.000
-2026-02-26       2.35       0.625       0.245       0.174
-2026-04-09       2.18       0.685       0.354       0.251
-2026-05-08       1.16       1.000       1.000       0.708
-2026-11-13       0.51       1.000       1.413       1.000
+That maps the 25 July spread to zero, but the contract was already at 0.385
+that day. The two series do not start in the same place: one is a probability
+level, the other a share of the eventual fall, and setting them against each
+other hands the bond market a free head start by construction. The like-for-like
+comparison rescales both by their own eventual change, so that both are zero on
+25 July and one on 8 May:
 
-On 9 April, with the vote three days away, the bond market had priced roughly
-a third of the eventual compression while Polymarket had priced about 69%.
-Whichever terminal value is used, the prediction market moved first.
+    share_t = (x_t - x_0) / (x_T - x_0),   x = contract price or spread
 
-Read the bonds(May) column as a ratio, not a probability. It exceeds one after
-May 2026 because the spread keeps narrowing past the terminal value assumed for
-it: 1.413 on 13 November means the spread overshot the 8 May level by 41 per cent
-of the total fall. A probability cannot do that; a rescaled spread can. The paper
-reports only the four dates up to 8 May for this reason.
+date           spread       P   contract    bonds     gap
+2025-07-25       2.74   0.385      0.000    0.000  +0.000
+2026-02-26       2.35   0.625      0.391    0.245  +0.145
+2026-03-31       2.53   0.655      0.439    0.133  +0.307
+2026-04-09       2.18   0.685      0.488    0.354  +0.134
+2026-04-12       2.06   0.685      0.488    0.431  +0.057
+2026-05-08       1.16   1.000      1.000    1.000  +0.000
+
+On 9 April the contract had delivered 49% of its own move and the spread
+35%, a gap of 13 points. In March the two separate more
+sharply, but not as a simple lead: the spread retraced to its July level in the
+global selloff, giving back the whole of its early repricing (-6% on
+24 March) while the contract held at 42%. By the eve of the vote the
+spread had recovered to 43% against the contract's 49%, a gap of
+6 points against 13 three days earlier.
+
+The contract runs ahead of the spread on essentially every date after its
+opening week, but the ratio on 9 April is 1.4 to 1, not 2 to 1, and on
+the eve of the vote the two agree to within a few points. What the comparison
+supports is a lead of weeks, not a difference in what the two instruments
+believed the election would do.
+
+Read the bonds columns as shares, not probabilities. Under the 13 November
+anchor the share exceeds one after May 2026 because the spread keeps narrowing
+past the terminal value assumed for it: 1.438 on 13 November means the spread
+overshot the 8 May level by 44 per cent of the total fall. A share can do that;
+a probability cannot. That anchor is kept in the table as a robustness check and
+is not plotted, because it leaves the 0-1 axis.

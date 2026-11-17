@@ -307,29 +307,63 @@ impl = {}
 for T, lab in [("2026-05-08", "terminal = May 8"), ("2026-11-13", "terminal = Nov 13")]:
     ST = S.SP_PEER.loc[:T].dropna().iloc[-1]
     impl[lab] = (S0 - S.SP_PEER) / (S0 - ST)
-p("If the spread moves one-for-one with the probability that Orbán leaves office,")
+BONDS = impl["terminal = May 8"]
+
+# The contract is a probability LEVEL and the bond ratio is a SHARE of a move.
+# Rescale both by their own eventual change so the comparison is like for like:
+#     share_t = (x_t - x_0) / (x_T - x_0),   x = contract price or spread.
+P0 = PM.iloc[0]
+PT = PM.loc[:"2026-05-08"].dropna().iloc[-1]
+SHARE = (PM - P0) / (PT - P0)
+
+def at(s, d):
+    x = s.loc[:d].dropna()
+    return x.iloc[-1] if len(x) else np.nan
+
+p("If the spread moves one-for-one with the probability that Orban leaves office,")
 p("the bond market's implied probability is (S0 - St) / (S0 - ST).")
 p("")
-p(f"{'date':12s} {'spread':>8s} {'Polymarket':>11s} {'bonds(May)':>11s} {'bonds(Nov)':>11s}")
-for d in ["2025-07-25", "2026-02-26", "2026-04-09", "2026-05-08", "2026-11-13"]:
-    sp = S.SP_PEER.loc[:d].dropna()
-    pp = PM.loc[:d].dropna()
-    if len(sp) == 0:
-        continue
-    v = [impl[k].loc[:d].dropna() for k in impl]
-    v = [x.iloc[-1] if len(x) else np.nan for x in v]
-    p(f"{d:12s} {sp.iloc[-1]:8.2f} {(pp.iloc[-1] if len(pp) else np.nan):11.3f} "
-      f"{v[0]:11.3f} {v[1]:11.3f}")
+p(f"That maps the 25 July spread to zero, but the contract was already at {P0:.3f}")
+p("that day. The two series do not start in the same place: one is a probability")
+p("level, the other a share of the eventual fall, and setting them against each")
+p("other hands the bond market a free head start by construction. The like-for-like")
+p("comparison rescales both by their own eventual change, so that both are zero on")
+p("25 July and one on 8 May:")
 p("")
-p("On 9 April, with the vote three days away, the bond market had priced roughly")
-p("a third of the eventual compression while Polymarket had priced about 69%.")
-p("Whichever terminal value is used, the prediction market moved first.")
+p("    share_t = (x_t - x_0) / (x_T - x_0),   x = contract price or spread")
 p("")
-p("Read the bonds(May) column as a ratio, not a probability. It exceeds one after")
-p("May 2026 because the spread keeps narrowing past the terminal value assumed for")
-p("it: 1.413 on 13 November means the spread overshot the 8 May level by 41 per cent")
-p("of the total fall. A probability cannot do that; a rescaled spread can. The paper")
-p("reports only the four dates up to 8 May for this reason.")
+p(f"{'date':12s} {'spread':>8s} {'P':>7s} {'contract':>10s} {'bonds':>8s} {'gap':>7s}")
+for d in ["2025-07-25", "2026-02-26", "2026-03-31", "2026-04-09", "2026-04-12",
+          "2026-05-08"]:
+    sp, pp = at(S.SP_PEER, d), at(PM, d)
+    cs, bs = at(SHARE, d), at(BONDS, d)
+    p(f"{d:12s} {sp:8.2f} {pp:7.3f} {cs:10.3f} {bs:8.3f} {cs - bs:+7.3f}")
+p("")
+# The March comparison: the spread retraced to its July level in the global
+# selloff while the contract held, so the gap there is about a give-back, not a lead.
+c24, b24 = at(SHARE, "2026-03-24"), at(BONDS, "2026-03-24")
+c9, b9 = at(SHARE, "2026-04-09"), at(BONDS, "2026-04-09")
+c12, b12 = at(SHARE, "2026-04-12"), at(BONDS, "2026-04-12")
+p(f"On 9 April the contract had delivered {c9:.0%} of its own move and the spread")
+p(f"{b9:.0%}, a gap of {(c9 - b9) * 100:.0f} points. In March the two separate more")
+p("sharply, but not as a simple lead: the spread retraced to its July level in the")
+p(f"global selloff, giving back the whole of its early repricing ({b24:.0%} on")
+p(f"24 March) while the contract held at {c24:.0%}. By the eve of the vote the")
+p(f"spread had recovered to {b12:.0%} against the contract's {c12:.0%}, a gap of")
+p(f"{(c12 - b12) * 100:.0f} points against {(c9 - b9) * 100:.0f} three days earlier.")
+p("")
+p("The contract runs ahead of the spread on essentially every date after its")
+p(f"opening week, but the ratio on 9 April is {c9 / b9:.1f} to 1, not 2 to 1, and on")
+p("the eve of the vote the two agree to within a few points. What the comparison")
+p("supports is a lead of weeks, not a difference in what the two instruments")
+p("believed the election would do.")
+p("")
+p("Read the bonds columns as shares, not probabilities. Under the 13 November")
+p("anchor the share exceeds one after May 2026 because the spread keeps narrowing")
+p("past the terminal value assumed for it: 1.438 on 13 November means the spread")
+p("overshot the 8 May level by 44 per cent of the total fall. A share can do that;")
+p("a probability cannot. That anchor is kept in the table as a robustness check and")
+p("is not plotted, because it leaves the 0-1 axis.")
 
 # ---------------------------------------------------------------- figures
 fig, ax = plt.subplots(figsize=(9.4, 4.8))
@@ -397,25 +431,28 @@ ax.set_ylabel("slope, bp"); ax.legend(frameon=False)
 ax.set_title("Hungarian curve slope around the election")
 fig.tight_layout(); fig.savefig(OUT / "fig5_slope.png", dpi=170); plt.close(fig)
 
-fig, ax = plt.subplots(figsize=(9.0, 4.6))
-Pp = PM.dropna()
-ax.plot(Pp.index, Pp, color="#c00000", lw=1.7, label="Polymarket: P(Orbán leaves)")
-for k, ls, lab in [("terminal = May 8", "-", "Bond-implied, anchored at 8 May"),
-                   ("terminal = Nov 13", ":", "Bond-implied, anchored at 13 Nov")]:
-    s = impl[k].dropna().loc["2025-07-25":"2026-05-08"]
-    ax.plot(s.index, s, color="#1f4e79", lw=1.5, ls=ls, label=lab)
-# the divergence the paper is about
+fig, ax = plt.subplots(figsize=(9.0, 4.7))
+bs = BONDS.dropna().loc["2025-07-25":"2026-05-08"]
+cs = SHARE.dropna().loc["2025-07-25":"2026-05-08"]
+ax.plot(cs.index, cs, color="#c00000", lw=1.7, zorder=3,
+        label="Polymarket contract, share of its move")
+ax.plot(bs.index, bs, color="#1f4e79", lw=1.7, zorder=4,
+        label="Bond spread, share of its fall")
+# the divergence the paper is about, on the scale both series share
 d9 = pd.Timestamp("2026-04-09")
 ax.axvline(d9, color="black", lw=0.9, ls=":")
-ax.annotate("9 Apr: 69% vs 35%", (d9, 0.5), fontsize=9.5, ha="right", va="center",
+ax.annotate("9 Apr: 49% vs 35%", (d9, 0.62), fontsize=10, ha="right", va="center",
             xytext=(-7, 0), textcoords="offset points")
 ax.axhline(0, color="black", lw=0.6)
-ax.set_ylim(-0.14, 1.10); ax.set_ylabel("probability"); ax.margins(x=0.01)
-ax.set_title("Market-implied versus bond-implied probability of regime change\n"
-             "bond-implied P = (s_t − s_0)/(s_T − s_0); below zero means the spread "
-             "widened past its 25 July level", fontsize=10.5)
-ax.legend(fontsize=8.5, loc="upper left", facecolor="white", framealpha=0.92,
-          edgecolor="#d9dde3")
+ax.set_ylim(-0.12, 1.09)
+ax.set_xlim(pd.Timestamp("2025-07-20"), pd.Timestamp("2026-05-10"))
+ax.xaxis.set_major_locator(mdates.MonthLocator(bymonthday=25))
+ax.set_ylabel("share of the eventual move")
+ax.set_title("How much of its own repricing each market had done\n"
+             r"share $= (x_t - x_0)/(x_T - x_0)$, $x$ = contract price or spread; "
+             "both 0 on 25 July and 1 on 8 May", fontsize=10.5)
+ax.legend(fontsize=8.5, loc="upper left", frameon=False)
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %y"))
 fig.tight_layout(); fig.savefig(OUT / "fig6_implied.png", dpi=170); plt.close(fig)
 
 (OUT / "final_results.txt").write_text("\n".join(L))

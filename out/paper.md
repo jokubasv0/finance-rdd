@@ -6,7 +6,7 @@
 
 ## Abstract
 
-On 12 April 2026 Hungary elected a government that ended sixteen years of Fidesz rule. Using daily data on eight Central European sovereign bond markets and the price history of a Polymarket contract on whether Viktor Orbán would remain prime minister, we ask how much of Hungary's sovereign risk premium repriced around the election and when relative to the vote. Hungary's ten-year yield fell 138 basis points over the nine months surrounding the election while every other Central European yield rose except Romania's, which fell 21, compressing the spread over a six-country peer average by 157 basis points. Two thirds of the compression occurred after the result, and the pre-election part sat at the long end while the short end rose, which rules out a rate-expectations explanation. Three days before the vote the prediction market had priced 69 per cent of the eventual move and the bond spread about 35 per cent: the prediction market moved first. A difference-in-differences design against four neighbouring markets on a 2024–2026 panel, with country and calendar-date fixed effects and a country trend fitted before the treatment date, puts the repricing at 109 basis points (Driscoll–Kraay t = −11.3), and the three trend treatments span five basis points on that sample. The estimate is conditional: with one treated unit, randomisation inference bottoms out at p = 0.125.
+On 12 April 2026 Hungary elected a government that ended sixteen years of Fidesz rule. Using daily data on eight Central European sovereign bond markets and the price history of a Polymarket contract on whether Viktor Orbán would remain prime minister, we ask how much of Hungary's sovereign risk premium repriced around the election and when relative to the vote. Hungary's ten-year yield fell 138 basis points over the nine months surrounding the election while every other Central European yield rose except Romania's, which fell 21, compressing the spread over a six-country peer average by 157 basis points. Two thirds of the compression occurred after the result, and the pre-election part sat at the long end while the short end rose, which rules out a rate-expectations explanation. Three days before the vote the prediction market had completed 49 per cent of its own eventual move and the bond spread 35, a lead of weeks that had almost closed by polling day. A difference-in-differences design against four neighbouring markets on a 2024–2026 panel, with country and calendar-date fixed effects and a country trend fitted before the treatment date, puts the repricing at 109 basis points (Driscoll–Kraay t = −11.3), and the three trend treatments span five basis points on that sample. The estimate is conditional: with one treated unit, randomisation inference bottoms out at p = 0.125.
 
 **JEL codes:** G12, G14, G15, H63, P16
 
@@ -32,13 +32,13 @@ Hungary's ten-year yield fell from 7.13 to 5.75 per cent between 25 July 2025 an
 
 The compression is not evenly distributed in time. Splitting the window at the election, 56 basis points — about 35 per cent — occurred before the vote and 102 — about 65 per cent — between the result and the inauguration. The larger part came after the outcome was known. The pre-election component is also not a monetary-policy story: between July 2025 and early April 2026 the ten-year yield fell 40 basis points while the five-year yield *rose* 13, flattening the curve by 53. Rate-cut expectations move the short end first; a fall in the long end with a rise in the short end is a term-premium story.
 
-Backing a probability out of the spread and comparing it with the contract gives the timing result. Both series start near zero by construction on 25 July 2025. By 26 February 2026 Polymarket had reached 63 per cent while bonds implied 25. By 9 April, three days before the vote, the contract had reached 69 per cent and the spread implied 35. After the result the two converged. If the bond market was pricing the event weeks in advance, the election date is not the moment the information arrived, and a design that treats it as an exogenous shock is measuring confirmation rather than news.
+Backing a probability out of the spread and comparing it with the contract gives the timing result. The two must first be put on the same scale. The contract is a probability level and stood at 0.385 on 25 July 2025, whereas the ratio backed out of the spread maps that day to zero by construction, so comparing the two directly gives the bond market a free head start. Rescaling each series by its own eventual change, so that both are zero on 25 July and one on 8 May, removes that asymmetry. On this scale the contract had delivered 49 per cent of its own move by 9 April, three days before the vote, against 35 per cent in the spread. The gap had narrowed to six points by the eve of the vote, and the contract was ahead of the bonds throughout the campaign. If the bond market was pricing the event weeks in advance, the election date is not the moment the information arrived, and a design that treats it as an exogenous shock is measuring confirmation rather than news.
 
 For the estimate itself we use difference-in-differences against neighbouring markets with country and calendar-date fixed effects. Date effects remove whatever all markets share on a given day — global duration, US rates, volatility, regional risk appetite — so what remains is the Hungarian part of the move. On a 2024–2026 panel with a country trend fitted before the treatment date, the estimate is a 109 basis point fall relative to donors. The three trend treatments span five basis points on that sample, and dropping any single donor moves the estimate by at most fourteen. Extending the panel back to 2022 makes the specifications disagree by sixty-three, which is why we do not.
 
 The estimate is conditional, and Section 7 states the constraints in one place. In brief: with one treated unit, randomisation inference cannot go below 0.125; the pre-treatment leads are jointly non-zero although they do not trend; and the daily design, regressing spread changes on probability changes, returns a coefficient indistinguishable from zero.
 
-The paper contributes three things. It measures a European regime change at a magnitude that had not been documented — 109 basis points on the election window, 157 as an endpoint comparison, against a donor pool that rose. It dates the repricing and shows that two thirds of it came after the result rather than before, contrary to the common assumption that such events are priced in advance. And it documents a lead–lag pattern between a prediction market and a bond market: three days before the vote the contract had priced 69 per cent of the move and the spread about 35. That pattern has not been documented for a European election, where daily sovereign data and a liquid contract on the same event have not previously been available together.
+The paper contributes three things. It measures a European regime change at a magnitude that had not been documented — 109 basis points on the election window, 157 as an endpoint comparison, against a donor pool that rose. It dates the repricing and shows that two thirds of it came after the result rather than before, contrary to the common assumption that such events are priced in advance. And it documents a lead–lag pattern between a prediction market and a bond market: three days before the vote the contract had completed 49 per cent of its eventual move and the spread 35, a lead of weeks that had almost closed by polling day. That pattern has not been documented for a European election, where daily sovereign data and a liquid contract on the same event have not previously been available together.
 
 Section 2 gives the institutional background, Section 3 the data, Section 4 the empirical strategy. Section 5 presents the results, including the diagnostics that decide whether they stand. Section 6 reports robustness, Section 7 the limitations, and Section 8 concludes.
 
@@ -112,11 +112,11 @@ We report three versions of the specification on every panel: no trends, the kin
 
 Because there is one treated unit, the choice of standard error is not cosmetic. We report Driscoll–Kraay standard errors, which are robust to both serial correlation and cross-sectional dependence — necessary here because Central European yields co-move strongly on any given day. We also report conventional clustering on country, and we note that with eight clusters that estimator is itself unreliable. Neither is the right inference for a design with one treated unit, so Section 5.7 adds randomisation inference over the eight placebo assignments.
 
-The probability implied by the bond spread is backed out as
+The spread is turned into a fraction of its eventual fall as
 
-$$π_t = (S_0 − S_t) / (S_0 − S_T)$$
+$$share_t = (S_0 − S_t) / (S_0 − S_T)$$
 
-with the initial spread S₀ taken on 25 July 2025 and the terminal spread taken on 8 May 2026. This is a linear interpolation along the path and assumes the spread would not have moved absent the election; it is a descriptive device, not an estimate.
+with S₀ taken on 25 July 2025 and S_T on 8 May 2026. This maps the initial spread to zero, so it is a share of the move rather than a probability level: the contract stood at 0.385 on the day the formula assigns zero. Section 5.5 puts both series on one scale before comparing them. The construction is a linear interpolation along the path and assumes the spread would not have moved absent the election; it is a descriptive device, not an estimate.
 
 The design does not identify β at daily frequency from the probability series. Section 5.8 explains why, and Section 7 why the aggregate design is the only version of this exercise that one country can support. The choice of sample and end date is shown in Table 10, and the estimate moves by 63 basis points across the sample start dates and 63 across the end dates.
 
@@ -257,22 +257,28 @@ Lower rate expectations pull the short end down with the long end. Here the shor
 
 The Polymarket contract asked whether Orbán would be the next prime minister; P is one minus its price. It ran from 25 July 2025 to 9 May 2026 and printed 257 times, 76 of them on a weekend. The weekend prints are kept because one of the two largest moves in the series is a Saturday print. The series moves twice — +19.5 on Saturday 26 July, in the contract's first week, and +30.9 on 22 April — and otherwise drifts. It is thin: after the 9 April print the contract did not trade again until 22 April.
 
-Rescaling the spread by its own eventual change puts the bond market on the same axis (Table 8, Figure 6). On 9 April the contract had priced 69 per cent of the eventual move and the bond spread had priced 35 per cent. Three days before the vote the prediction market had travelled twice as far as the bond market.
+Putting the two on one axis takes more than rescaling the spread, because the contract is a probability level and the bond ratio is a share: on 25 July the contract stood at 0.385 while the spread mapped to zero. Figure 6 therefore applies the rescaling of Section 4 to both series, with x the contract price for one and the spread for the other, so that each is zero on 25 July and one on 8 May (Table 8).
 
-That is the paper's second result, and it rests on a single date. Section 5.8 explains why the same comparison cannot be run as a daily regression.
+On that scale the contract had delivered 49 per cent of its own move by 9 April and the spread 35. The gap is not monotone. In the March selloff the spread retraced to its July level, giving back the whole of its early repricing, while the contract held near 42 per cent; by the eve of the vote the spread had recovered to 43 against the contract's 49, and the ratio between them was 1.4 to 1 rather than 2 to 1. What the comparison supports is a lead of weeks through the campaign, not a disagreement about what the election would do.
 
-**Table 8. Implied probability of regime change**
+That is the paper's second result, and it rests on a handful of print dates. Section 5.8 explains why the same comparison cannot be run as a daily regression.
 
-| Date | Spread (pp) | Polymarket P | Bond-implied P |
-|---|---:|---:|---:|
-| 25 Jul 2025 | 2.74 | 0.385 | 0.000 |
-| 26 Feb 2026 | 2.35 | 0.625 | 0.245 |
-| 9 Apr 2026 | 2.18 | 0.685 | 0.354 |
-| 8 May 2026 | 1.16 | 1.000 | 1.000 |
+**Table 8. Share of the eventual move completed by each market**
+
+| Date | Spread (pp) | Polymarket P | Contract, share | Bond, share |
+|---|---:|---:|---:|---:|
+| 25 Jul 2025 | 2.74 | 0.385 | 0.000 | 0.000 |
+| 26 Feb 2026 | 2.35 | 0.625 | 0.391 | 0.245 |
+| 31 Mar 2026 | 2.53 | 0.655 | 0.439 | 0.133 |
+| 9 Apr 2026 | 2.18 | 0.685 | 0.488 | 0.354 |
+| 12 Apr 2026 | 2.06 | 0.685 | 0.488 | 0.431 |
+| 8 May 2026 | 1.16 | 1.000 | 1.000 | 1.000 |
+
+Shares are $(x_t - x_0)/(x_T - x_0)$, with $x$ the contract price or the spread over the six-peer average. The 13 November anchor used in an earlier version is a robustness check only and is not plotted, because it leaves the unit interval: it reaches 1.44 by November 2026.
 
 ![](fig6_implied.png)
 
-**Figure 6.** Implied probability that Orbán does not remain prime minister: the Polymarket contract and the probability backed out of the bond spread, 25 July 2025 to 8 May 2026.
+**Figure 6.** Share of its eventual move completed by each market: the Polymarket contract and the spread over the six-peer average, 25 July 2025 to 8 May 2026. Both series are zero on 25 July and one on 8 May. Values below zero mean the spread had widened past its 25 July level, giving back more than the whole of its fall.
 
 ### 5.6 Difference-in-differences
 
@@ -439,7 +445,7 @@ The design has one treated unit. Randomisation inference over eight assignments 
 
 The pre-treatment leads are jointly non-zero. They oscillate without drifting, the trend treatments agree to five basis points, and the placebo dates are zero, but a reader who rejects the trend specification outright should read the no-trends column of Table 9, −1.04, and recognise that the 2022 sample makes that choice consequential.
 
-The counterfactual is not observed. The bond-implied probability in Table 8 is a rescaled spread, not an independent estimate of the market's expectation: it assumes the total repricing is the denominator, so it cannot by itself establish that the bond market lagged. What supports the lead-lag reading is the prediction market's own path — 69 per cent priced by 9 April against 35 per cent in bonds — not the rescaling arithmetic.
+The counterfactual is not observed. Both lines in Figure 6 are rescaled by their own eventual change, so the figure measures how quickly each market moved rather than what either believed, and the bond series is normalised on the assumption that the 157 basis point fall is its complete repricing. What supports the lead-lag reading is that the contract ran ahead of the spread on essentially every date of the campaign — 49 against 35 per cent on 9 April — and that the gap had narrowed to six points by the eve of the vote, so the difference is one of timing rather than of level.
 
 The prediction market is thin and its participants are not a random sample. It printed 257 times over 288 calendar days, stopped trading between 9 and 22 April, and is banned for Hungarian residents. It is a probability proxy, not a measurement of the Hungarian electorate.
 
@@ -451,7 +457,7 @@ Daily Hungarian two-year yields were unavailable from the sources used. The term
 
 Hungary's April 2026 election coincided with a 157 basis point compression in its sovereign spread over a six-country peer average. Hungary was the only Central European market whose ten-year yield fell by more than 21 basis points; every other yield rose except Romania's, which fell 21. Two thirds of the compression occurred after the result rather than before it, and the pre-election component was concentrated at the long end, which rules out a rate-expectations explanation.
 
-A prediction market on whether Orbán would remain prime minister moved ahead of the bond market, reaching 69 per cent by three days before the vote while bonds had priced about 35 per cent of the eventual move.
+A prediction market on whether Orbán would remain prime minister moved ahead of the bond market: three days before the vote it had completed 49 per cent of its eventual move against 35 per cent in the spread, and the gap had almost closed by polling day.
 
 The identification comes from difference-in-differences against neighbouring markets on a 2024–2026 panel. With a country trend fitted before the treatment date the estimate is 109 basis points, and the three possible trend treatments span five basis points on that sample. Section 7 sets out what that estimate does and does not support.
 
