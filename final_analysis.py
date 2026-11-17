@@ -463,17 +463,31 @@ fig.tight_layout(); fig.savefig(OUT / "fig5_slope.png", dpi=170); plt.close(fig)
 fig, ax = plt.subplots(figsize=(9.0, 4.7))
 bs = BONDS.dropna().loc["2025-08-04":"2026-05-08"]
 cs = SHARE.dropna().loc["2025-08-04":"2026-05-08"]
-ax.plot(cs.index, cs, color="#c00000", lw=1.7, zorder=3,
+# The spread overshoots on the way: it gives back more than its whole fall in the
+# March selloff, so the bond share goes below zero. Show all of it.
+lo = min(bs.min(), cs.min())
+hi = max(bs.max(), cs.max())
+ax.axhline(0, color="#8a94a3", lw=0.8, zorder=1)
+ax.plot(cs.index, cs, color="#c00000", lw=2.2, zorder=5,
         label="Polymarket contract, share of its move")
-ax.plot(bs.index, bs, color="#1f4e79", lw=1.7, zorder=4,
+ax.plot(bs.index, bs, color="#1f4e79", lw=1.8, zorder=3,
         label="Bond spread, share of its fall")
 # the divergence the paper is about, on the scale both series share
 d9 = pd.Timestamp("2026-04-09")
-ax.axvline(d9, color="black", lw=0.9, ls=":")
+ax.axvline(d9, color="black", lw=0.9, ls=":", zorder=2)
 ax.annotate("9 Apr: 16% vs 37%", (d9, 0.62), fontsize=10, ha="right", va="center",
             xytext=(-7, 0), textcoords="offset points")
-ax.axhline(0, color="black", lw=0.6)
-ax.set_ylim(-0.12, 1.09)
+# The contract dips below its own starting point, so the negative band is not a
+# plotting fault and the axis has to reach past it.
+ax.set_ylim(lo - 0.06, hi + 0.07)
+cmin = cs.idxmin()
+ax.plot([cmin], [cs[cmin]], marker="o", ms=5.5, mfc="#c00000", mec="white", mew=1.2,
+        zorder=6)
+ax.annotate(f"contract at {cs[cmin]*100:.0f}%\n({cmin:%d %b}): below its 4 Aug level",
+            (cmin, cs[cmin]), xytext=(pd.Timestamp("2026-02-08"), lo + 0.01),
+            fontsize=9, color="#c00000", ha="left", va="center",
+            arrowprops=dict(arrowstyle="-", color="#c00000", lw=0.8,
+                            shrinkA=2, shrinkB=6))
 ax.set_xlim(pd.Timestamp("2025-07-20"), pd.Timestamp("2026-05-10"))
 ax.xaxis.set_major_locator(mdates.MonthLocator(bymonthday=25))
 ax.set_ylabel("share of the eventual move")

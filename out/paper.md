@@ -281,7 +281,7 @@ Shares are $(x_t - x_0)/(x_T - x_0)$, with $x$ the contract price or the spread 
 
 ![](fig6_implied.png)
 
-**Figure 6.** Share of its eventual move completed by each market: the Polymarket contract and the spread over the six-peer average, 4 August 2025 to 8 May 2026. Both series are zero on 4 August and one on 8 May. Values below zero mean a series had moved against its eventual direction, giving back more than the whole of its move so far.
+**Figure 6.** Share of its eventual move completed by each market: the Polymarket contract and the spread over the six-peer average, 4 August 2025 to 8 May 2026. Both series are zero on 4 August and one on 8 May. Values below zero mean a series had moved against its eventual direction: the spread gave back more than the whole of its early fall on eighteen days, most sharply in November and March, and the contract spent the winter below its 4 August level outright, reaching 27 per cent under it on 27 January.
 
 ### 5.6 Difference-in-differences
 
