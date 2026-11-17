@@ -319,7 +319,9 @@ def cont(panel, post_only=True):
     """
     d = panel.copy()
     dates = d.index.get_level_values("date")
-    d = d[(dates >= PMs.index.min()) & (dates <= END)]
+    # The contract opened with seven prints and a 26-point move in its first
+    # week; the intensity design starts a week in, as the price comparison does.
+    d = d[(dates >= pd.Timestamp("2025-08-04")) & (dates <= END)]
     d = d[d.y.notna()]
     dates = d.index.get_level_values("date")
     grid = pd.Index(np.sort(dates.unique()))
@@ -358,7 +360,7 @@ for lab, po in [("HU x P x Post", True), ("HU x P, all periods", False)]:
 p("")
 p("This design is identified. The date effects absorb P_t, which is common to")
 p("every country on a given day, but not HU_i x P_t, which is not. What it")
-p("surrenders is history: the contract begins on 2025-07-25, so the panel runs")
+p("surrenders is history: the contract is usable from 4 August 2025, so the panel runs")
 p("for 1,030 country-days instead of 3,200 and the nine flat quarters that make")
 p("the binary design credible are simply absent. Within that shorter window the")
 p("continuous estimate is -1.12 against the binary -1.09: three basis points")

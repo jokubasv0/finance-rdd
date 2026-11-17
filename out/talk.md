@@ -1,7 +1,7 @@
 # Pricing Regime Change — 6-minute talk
 
-Eight slides. Spoken text is about 675 words, which is **6:10 at 110 words per minute** — a slow,
-deliberate pace — and about 5:30 at a normal one. Leave the rest of the ten minutes unused.
+Eight slides. Spoken text is about 700 words, which is **6:22 at 110 words per minute** — a slow,
+deliberate pace — and about 5:45 at a normal one. Leave the rest of the ten minutes unused.
 
 Rule for the whole talk: **say the number, then say what it means.** Never read a table. If you are
 running late, drop slide 4 (literature) to two sentences; it is the only cuttable one.
@@ -24,16 +24,16 @@ running late, drop slide 4 (literature) to two sentences; it is the only cuttabl
 ## Slide 2 — Data and the fact (0:25–1:10) — **Figure 1**
 
 **On slide**
-- Polymarket P(Orbán not PM), 257 daily prints; eight sovereign ten-year yields; July 2025 → May 2026
-- HU 7.13 → 5.75 (**−138 bp**); six-peer average +19; Romania −21
+- Polymarket P(Orbán not PM), 257 daily prints; eight sovereign ten-year yields; August 2025 → May 2026
+- HU 7.11 → 5.75 (**−136 bp**); six-peer average +24; Romania −26
 
 **Say**
 > Everything is public: Investing.com for yields, Polymarket's API for the probability, Yahoo
 > Finance for controls.
 
-> Between July 2025 and May 2026 the Hungarian ten-year fell 138 basis points. Every other market
-> was flat or rose. Romania fell 21, less than a sixth as much. So this is not global duration. It is
-> Hungary.
+> From 4 August 2025 to 8 May 2026 the Hungarian ten-year fell 136 basis points. Every other market
+ > was flat or rose. Romania fell 26, less than a fifth as much. So this is not global duration. It is
+> Hungary. The window starts on 4 August: the contract's first week was a price being found, not news.
 
 > The dark blue line is Hungary, the grey is the peer average. Look at the shape — it opens in two
 > steps. That shape is the whole paper.
@@ -51,9 +51,9 @@ running late, drop slide 4 (literature) to two sentences; it is the only cuttabl
 > did the market remove, and when — before the result or after?
 
 > Hungary suits the question. Sixteen years of one government makes this regime risk, not a
-> rotation. EU funds were frozen, so the result had a fiscal consequence. And there was a
-> prediction market on the exact event — who becomes prime minister — printing daily for ten
-> months. Normally we infer beliefs from spreads. Here I observe a probability.
+> rotation. EU funds were frozen, so the result had a fiscal consequence. And a prediction market on
+> the exact event, printing daily for ten months. Normally we infer beliefs from spreads. Here I
+> observe a probability.
 
 ---
 
@@ -87,12 +87,12 @@ running late, drop slide 4 (literature) to two sentences; it is the only cuttabl
 
 **Say**
 > Difference-in-differences against neighbouring markets. Country effects absorb level
-> differences — why Hungary yields seven per cent and Germany two. Date effects absorb what all
-> markets share on a day: global duration, US rates, VIX, risk appetite.
+> differences — seven per cent against two. Date effects absorb what all markets share on a day:
+> global duration, US rates, VIX, risk appetite.
 
 > What is left is the Hungarian, dated part of the move: 109 basis points.
 
-> The number I would defend is the next one. No trend gives 104, a kinked trend 109, a linear
+> The number I would defend is this. No trend gives 104, a kinked trend 109, a linear
 > trend 109. Five basis points apart. On a sample going back to 2022 those same three span
 > sixty-three, which is why I start in 2024.
 
@@ -112,9 +112,9 @@ running late, drop slide 4 (literature) to two sentences; it is the only cuttabl
 > First, the pre-trend. Hungary's yield does drift relative to donors. But the leads oscillate;
 > they do not trend into the treatment date. I report the joint rejection rather than hide it.
 
-> Second, fake election dates, on a panel cut off before the real event. They come back at zero.
-> On 2022 data the same test returns minus 1.1 at almost any date. That is why the sample starts
-> in 2024 — a test, not a preference.
+> Second, fake election dates on a panel cut off before the event: zero. On 2022 data the same
+> test returns minus 1.1 at almost any date. That is why the sample starts in 2024 — a test, not a
+> preference.
 
 > Third, treat every country in turn. Hungary is minus 0.97; the next is plus 0.44. First of eight.
 
@@ -127,30 +127,32 @@ running late, drop slide 4 (literature) to two sentences; it is the only cuttabl
 
 **On slide**
 - Daily dose–response: β ≈ 0. Only two of 257 prints move more than 10 points
-- 9 April, three days before the vote: **the contract had done 49% of its move, the spread 35%**
+- 9 April, three days before the vote: **the spread had done 37% of its move, the contract 16%**
 
 **Say**
-> I wanted to regress daily spread changes on daily probability changes. It fails. Of 257 prints,
-> two move more than ten points: the opening week, and one print after the result. There is no
-> intensity to exploit, so the treatment is a date, not a price.
+> I wanted to regress daily spread changes on daily probability changes. It fails: of 257 prints,
+> two move more than ten points — the opening week, and one after the result. There is no intensity
+> to exploit, so the treatment is a date, not a price.
 
-> The surprise is here. I can put both markets on one scale: how much of its own eventual
-> repricing each had done. Three days before the vote the contract had done 49 per cent of its
-> move, the spread 35. On that scale they agreed about where risk was going. They differed on how
-> early to price it.
+> The surprise is here, and it goes the other way. On one scale — how much of its own eventual
+> repricing each had done — the spread had done 37 per cent three days before the vote, the contract
+> 16. The bond market got there first; the contract did almost nothing until the count. That is the
+> opposite of what prediction markets are supposed to do, though it depends where the clock starts.
+> So I claim the timing, not the leadership.
 
 ---
 
 ## Slide 8 — Conclusion (5:40–6:10)
 
 **On slide**
-- **−109 bp** relative to neighbours; two thirds of it after the result
-- Prediction market led by weeks
+- **−109 bp** relative to neighbours; nearly two thirds of it after the result
+- The spread moved first; the contract waited for the count
 - Conditional: one treated unit, p = 0.125
 
 **Say**
-> Hungarian sovereign risk fell about 109 basis points relative to its neighbours — 157 comparing
-> endpoints — and two thirds of it came after the result. The prediction market moved first.
+> Hungarian sovereign risk fell about 109 basis points relative to its neighbours — 160 comparing
+> endpoints — and nearly two thirds of it came after the result. The bond market moved first. The
+> contract waited for the count.
 
 > The estimate is conditional. One treated country, a pre-trend that only a trend control
 > absorbs, and a p-value floored at one in eight.
@@ -182,8 +184,8 @@ Five minutes of questions. Answer in one sentence, then stop.
 
 **"What is the single biggest threat?"**
 > That it was the central bank's easing cycle. The term structure argues against it: before the
-> vote the ten-year fell 40 basis points while the five-year *rose* 13. Easing moves the short end.
-> This moved the long end.
+> vote the ten-year fell 38 basis points and the five-year 8, so five sixths of the move was at the
+> long end and the curve flattened by 30. Easing moves the short end first.
 
 **"Isn't this just the EU funds story?"**
 > Possibly, and I cannot separate them. EU funds and political risk both predict a long-end
@@ -215,7 +217,7 @@ Five minutes of questions. Answer in one sentence, then stop.
 |---|---|
 | DiD, kinked trend | **−109 bp** |
 | No trend / linear trend | −104 / −109 bp |
-| Hungary's own fall | −138 bp |
-| After the result, not before | 65% |
+| Hungary's own fall | −136 bp |
+| After the result, not before | 63% |
 | Randomisation inference | p = 0.125 (floor) |
-| 9 April: contract vs bonds | 49% of its move vs 35% |
+| 9 April: spread vs contract | 37% of its move vs 16% |

@@ -80,7 +80,7 @@ for df in (S,):
 G["CEE3"] = G[["CZ10Y", "PL10Y", "RO10Y"]].ffill(limit=5).mean(axis=1, skipna=True)
 G["SP"] = G.HU10Y - G.CEE3
 
-W0, W1 = "2025-07-25", "2026-05-08"
+W0, W1 = "2025-08-04", "2026-05-08"
 w = S.loc[W0:W1].copy()
 
 # ---------------------------------------------------------------- 1
@@ -118,11 +118,11 @@ p(f"EURHUF: {(w.USDHUF*w.EURUSD).dropna().iloc[0]:.1f} -> {(w.USDHUF*w.EURUSD).d
 
 # ---------------------------------------------------------------- 3
 hdr("3. EVENT-WINDOW DECOMPOSITION")
-WINDOWS = [("2025-07-25", "2026-02-26", "A. Pre-campaign"),
+WINDOWS = [("2025-08-04", "2026-02-26", "A. Pre-campaign"),
            ("2026-02-26", "2026-04-09", "B. Campaign"),
-           ("2025-07-25", "2026-04-09", "   A+B Pre-vote"),
+           ("2025-08-04", "2026-04-09", "   A+B Pre-vote"),
            ("2026-04-09", "2026-05-08", "C. Result to inauguration"),
-           ("2025-07-25", "2026-05-08", "   TOTAL")]
+           ("2025-08-04", "2026-05-08", "   TOTAL")]
 p(f"{'window':28s} {'HU-peers':>10s} {'HU-Bund':>10s} {'HU-CZ':>9s} {'HU10Y':>9s}")
 for a, b, lab in WINDOWS:
     seg = w.loc[a:b]
@@ -169,8 +169,8 @@ x = np.arange(len(fitp))
 b, a = np.polyfit(x, fitp.values, 1)
 p(f"HU - (CZ,PL,RO) spread, level trend estimated on {fitp.index.min().date()} to {fitp.index.max().date()}")
 p(f"  slope = {100*b:.3f} bp per trading day = {100*b*252:.0f} bp per year")
-p(f"  fitted change over a 194-day window: {100*b*194:.0f} bp")
-miss = tr.loc["2025-07-25":"2026-05-08"]
+miss = tr.loc["2025-08-04":"2026-05-08"]
+p(f"  fitted change over a {len(miss)}-day window: {100*b*len(miss):.0f} bp")
 p(f"  observed change over the window: {100*(miss.iloc[-1]-miss.iloc[0]):.0f} bp")
 p(f"  trend-adjusted (observed minus trend): "
   f"{100*(miss.iloc[-1]-miss.iloc[0]) - 100*b*len(miss):.0f} bp")
@@ -181,14 +181,32 @@ p("estimate is the honest lower bound; the raw estimate is the upper bound.")
 # ---------------------------------------------------------------- 6
 hdr("6. TERM STRUCTURE")
 sl = (w.HU10Y - w.HU5Y) * 100
-for a_, b_, lab in [("2025-07-25", "2026-04-09", "pre-vote"),
+for a_, b_, lab in [("2025-08-04", "2026-04-09", "pre-vote"),
                     ("2026-04-09", "2026-05-08", "result to inauguration"),
-                    ("2025-07-25", "2026-05-08", "full window")]:
+                    ("2025-08-04", "2026-05-08", "full window")]:
     s = sl.loc[a_:b_].dropna()
     p(f"  {lab:26s} 10Y-5Y {s.iloc[0]:+5.0f} -> {s.iloc[-1]:+5.0f} bp  ({s.iloc[-1]-s.iloc[0]:+5.0f} bp)")
+pv = w.loc["2025-08-04":"2026-04-09"]
+d10 = 100 * (pv.HU10Y.dropna().iloc[-1] - pv.HU10Y.dropna().iloc[0])
+d5 = 100 * (pv.HU5Y.dropna().iloc[-1] - pv.HU5Y.dropna().iloc[0])
 p("")
-p("Pre-vote: 10Y fell while 5Y rose. A monetary-easing story predicts the opposite.")
-p("Post-result: the move is parallel, consistent with a level shift in perceived risk.")
+p(f"Pre-vote the ten-year fell {abs(d10):.0f} bp and the five-year {abs(d5):.0f}: "
+  f"{(d5/d10):.2f} of the move at the front end.")
+p("A monetary-easing story puts the front end first; this is a long-end story.")
+p("Post-result the move is roughly parallel, a level shift in perceived risk.")
+
+# ---------------------------------------------------------------- 6b
+hdr("6b. COUNTRY PLACEBO: EACH MARKET IN TURN")
+for c in ["HU10Y", "CZ10Y", "PL10Y", "RO10Y", "DE10Y", "SI10Y", "HR10Y", "AT10Y"]:
+    oth = [x for x in ["HU10Y", "CZ10Y", "PL10Y", "RO10Y", "DE10Y",
+                       "SI10Y", "HR10Y", "AT10Y"] if x != c]
+    sp = (S[c] - S[oth].mean(axis=1)).loc["2025-08-04":"2026-05-08"].dropna()
+    p(f"  {c[:2]} vs the other seven        {100*(sp.iloc[-1]-sp.iloc[0]):+5.0f} bp")
+p("")
+p("Each market against the equal-weighted average of the other seven, same")
+p("window. Hungary is the only large negative by an order of magnitude.")
+p("The pool is seven controls rather than the headline six, which is why")
+p("Hungary reads -145 here rather than -160.")
 
 # ---------------------------------------------------------------- 7
 hdr("7. MARKET MODEL")
@@ -204,7 +222,7 @@ mm = sm.OLS(train.dHU, sm.add_constant(train[["dCEE", "dUS", "dVIX", "dBrent"]])
 p(f"d(HU10Y) on d(peer yield) and global factors")
 p(f"Training {train.index.min().date()} to {train.index.max().date()}, N = {len(train)}, R2 = {mm.rsquared:.3f}")
 p(pd.DataFrame({"coef": mm.params, "se": mm.bse, "t": mm.tvalues}).round(4).to_string())
-post = m.loc["2025-07-25":"2026-05-08"].copy()
+post = m.loc["2025-08-04":"2026-05-08"].copy()
 post["res"] = post.dHU - mm.predict(sm.add_constant(post[["dCEE", "dUS", "dVIX", "dBrent"]]))
 post["cum"] = 100 * post.res.cumsum()
 p("")
@@ -222,7 +240,7 @@ p("is the part of the Hungarian move not matched by its peers.")
 # ---------------------------------------------------------------- 8
 hdr("8. PLACEBO: RANDOM WINDOWS (WITHDRAWN, NOT REPAIRED)")
 sp = G.SP.dropna()
-n = 194
+n = len(sp.loc["2025-08-04":"2026-05-08"])
 rows = []
 for i in range(0, len(sp) - n, 5):
     seg = sp.iloc[i:i + n]
@@ -238,7 +256,7 @@ p(f"  share at least as negative, all draws          : {100*(rnd.chg <= obs).mea
 p(f"  share at least as negative, pre-event draws only: {100*(pre.chg <= obs).mean():.0f}%")
 p("")
 p("WHY THIS IS WITHDRAWN RATHER THAN CORRECTED.")
-p("The series trends down across the whole sample. A 194-day change is therefore")
+p(f"The series trends down across the whole sample. A {n}-day change is therefore")
 p("not a stationary quantity: its distribution depends entirely on where the")
 p("window sits relative to the trend, and the observed window sits at the end.")
 p("Restricting draws to windows that end before the election does not fix this,")
@@ -312,7 +330,11 @@ BONDS = impl["terminal = May 8"]
 # The contract is a probability LEVEL and the bond ratio is a SHARE of a move.
 # Rescale both by their own eventual change so the comparison is like for like:
 #     share_t = (x_t - x_0) / (x_T - x_0),   x = contract price or spread.
-P0 = PM.iloc[0]
+# Both series are anchored on the same date, and that date is now the first
+# trading day after the contract's opening week: the contract printed seven
+# times in that week and moved 26 points, which is more than a fifth of its
+# eventual move and enough to decide the comparison on its own.
+P0 = PM.loc[W0:].dropna().iloc[0]
 PT = PM.loc[:"2026-05-08"].dropna().iloc[-1]
 SHARE = (PM - P0) / (PT - P0)
 
@@ -323,17 +345,18 @@ def at(s, d):
 p("If the spread moves one-for-one with the probability that Orban leaves office,")
 p("the bond market's implied probability is (S0 - St) / (S0 - ST).")
 p("")
-p(f"That maps the 25 July spread to zero, but the contract was already at {P0:.3f}")
-p("that day. The two series do not start in the same place: one is a probability")
+p(f"That maps the {pd.Timestamp(W0):%-d %B} spread to zero, but the contract was")
+p(f"already at {P0:.3f} that day. The two series do not start in the same place:")
+p("one is a probability level, the other a share of the eventual fall.")
 p("level, the other a share of the eventual fall, and setting them against each")
 p("other hands the bond market a free head start by construction. The like-for-like")
 p("comparison rescales both by their own eventual change, so that both are zero on")
-p("25 July and one on 8 May:")
+p(f"{pd.Timestamp(W0):%-d %B} and one on 8 May:")
 p("")
 p("    share_t = (x_t - x_0) / (x_T - x_0),   x = contract price or spread")
 p("")
 p(f"{'date':12s} {'spread':>8s} {'P':>7s} {'contract':>10s} {'bonds':>8s} {'gap':>7s}")
-for d in ["2025-07-25", "2026-02-26", "2026-03-31", "2026-04-09", "2026-04-12",
+for d in ["2025-08-04", "2026-02-26", "2026-03-31", "2026-04-09", "2026-04-12",
           "2026-05-08"]:
     sp, pp = at(S.SP_PEER, d), at(PM, d)
     cs, bs = at(SHARE, d), at(BONDS, d)
@@ -345,18 +368,22 @@ c24, b24 = at(SHARE, "2026-03-24"), at(BONDS, "2026-03-24")
 c9, b9 = at(SHARE, "2026-04-09"), at(BONDS, "2026-04-09")
 c12, b12 = at(SHARE, "2026-04-12"), at(BONDS, "2026-04-12")
 p(f"On 9 April the contract had delivered {c9:.0%} of its own move and the spread")
-p(f"{b9:.0%}, a gap of {(c9 - b9) * 100:.0f} points. In March the two separate more")
-p("sharply, but not as a simple lead: the spread retraced to its July level in the")
-p(f"global selloff, giving back the whole of its early repricing ({b24:.0%} on")
-p(f"24 March) while the contract held at {c24:.0%}. By the eve of the vote the")
-p(f"spread had recovered to {b12:.0%} against the contract's {c12:.0%}, a gap of")
-p(f"{(c12 - b12) * 100:.0f} points against {(c9 - b9) * 100:.0f} three days earlier.")
+p(f"{b9:.0%}, a gap of {(b9 - c9) * 100:.0f} points in the spread's favour.")
+p(f"On the eve of the vote it is {c12:.0%} against {b12:.0%}: the gap widens to")
+p(f"{(b12 - c12) * 100:.0f} points, because the spread kept falling after the")
+p("contract had stopped repricing. In March the two move against each other: the")
+p(f"spread retraced to its early-August level in the global selloff ({b24:.0%} on")
+p(f"24 March) while the contract held at {c24:.0%}. That is a give-back on both")
+p("sides, not a lead in either direction.")
 p("")
-p("The contract runs ahead of the spread on essentially every date after its")
-p(f"opening week, but the ratio on 9 April is {c9 / b9:.1f} to 1, not 2 to 1, and on")
-p("the eve of the vote the two agree to within a few points. What the comparison")
-p("supports is a lead of weeks, not a difference in what the two instruments")
-p("believed the election would do.")
+p("So the contract did not anticipate the bonds in this window. Over the eight")
+p("months to the vote it travelled from 0.625 to 0.685 while the spread did a")
+p("third of its eventual move, and it did not move decisively until the count.")
+p("The ordering is not robust to the choice of base date, however: anchored on")
+p("the contract's opening week, which is when it repriced 26 points on seven")
+p("prints, the same calculation puts the contract at 49 per cent and the spread")
+p("at 35. The comparison therefore measures how quickly each market moved once")
+p("it started, not which one started first, and it is not a lead-lag test.")
 p("")
 p("Read the bonds columns as shares, not probabilities. Under the 13 November")
 p("anchor the share exceeds one after May 2026 because the spread keeps narrowing")
@@ -374,14 +401,14 @@ ax.plot(w.index, hu, color="#1f4e79", lw=1.9, label="Hungary 10Y")
 ax.plot(w.index, w.CEE, color="#7f7f7f", lw=1.6, label="Peer average 10Y")
 ax.plot(w.index, w.DE10Y, color="#bfbfbf", lw=1.2, ls="--", label="Germany 10Y")
 ax.margins(y=0.16)                      # room for the labels, before anchoring them
-ax.set_xlim(pd.Timestamp("2025-07-25"), pd.Timestamp("2026-05-09"))
+ax.set_xlim(pd.Timestamp("2025-08-04"), pd.Timestamp("2026-05-09"))
 for x_, lab in [("2026-02-26", "campaign"), ("2026-04-12", "election"),
                 ("2026-05-09", "inauguration")]:
     ax.axvline(pd.Timestamp(x_), color="black", lw=0.8, ls=":")
     ax.annotate(lab, (pd.Timestamp(x_), ax.get_ylim()[1]), fontsize=8, rotation=90,
                 va="top", ha="right", xytext=(0, -3), textcoords="offset points")
 ax.set_ylabel("yield, %"); ax.legend(frameon=False, fontsize=9, loc="lower left")
-ax.set_title("Hungarian and peer sovereign yields, July 2025 - May 2026")
+ax.set_title("Hungarian and peer sovereign yields, August 2025 - May 2026")
 ax.xaxis.set_major_locator(mdates.MonthLocator(bymonthday=25))
 ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %y"))
 fig.tight_layout(); fig.savefig(OUT / "fig1_levels.png", dpi=170); plt.close(fig)
@@ -428,12 +455,14 @@ ax.plot(seg.index, seg, color="#c00000", lw=1.8, label="10Y minus 5Y")
 ax.axhline(0, color="black", lw=0.8)
 ax.axvline(pd.Timestamp("2026-04-12"), color="black", lw=0.8, ls=":")
 ax.set_ylabel("slope, bp"); ax.legend(frameon=False)
+ax.xaxis.set_major_locator(mdates.MonthLocator())
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %y"))
 ax.set_title("Hungarian curve slope around the election")
 fig.tight_layout(); fig.savefig(OUT / "fig5_slope.png", dpi=170); plt.close(fig)
 
 fig, ax = plt.subplots(figsize=(9.0, 4.7))
-bs = BONDS.dropna().loc["2025-07-25":"2026-05-08"]
-cs = SHARE.dropna().loc["2025-07-25":"2026-05-08"]
+bs = BONDS.dropna().loc["2025-08-04":"2026-05-08"]
+cs = SHARE.dropna().loc["2025-08-04":"2026-05-08"]
 ax.plot(cs.index, cs, color="#c00000", lw=1.7, zorder=3,
         label="Polymarket contract, share of its move")
 ax.plot(bs.index, bs, color="#1f4e79", lw=1.7, zorder=4,
@@ -441,7 +470,7 @@ ax.plot(bs.index, bs, color="#1f4e79", lw=1.7, zorder=4,
 # the divergence the paper is about, on the scale both series share
 d9 = pd.Timestamp("2026-04-09")
 ax.axvline(d9, color="black", lw=0.9, ls=":")
-ax.annotate("9 Apr: 49% vs 35%", (d9, 0.62), fontsize=10, ha="right", va="center",
+ax.annotate("9 Apr: 16% vs 37%", (d9, 0.62), fontsize=10, ha="right", va="center",
             xytext=(-7, 0), textcoords="offset points")
 ax.axhline(0, color="black", lw=0.6)
 ax.set_ylim(-0.12, 1.09)
@@ -450,7 +479,7 @@ ax.xaxis.set_major_locator(mdates.MonthLocator(bymonthday=25))
 ax.set_ylabel("share of the eventual move")
 ax.set_title("How much of its own repricing each market had done\n"
              r"share $= (x_t - x_0)/(x_T - x_0)$, $x$ = contract price or spread; "
-             "both 0 on 25 July and 1 on 8 May", fontsize=10.5)
+             "both 0 on 4 August and 1 on 8 May", fontsize=10.5)
 ax.legend(fontsize=8.5, loc="upper left", frameon=False)
 ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %y"))
 fig.tight_layout(); fig.savefig(OUT / "fig6_implied.png", dpi=170); plt.close(fig)

@@ -6,7 +6,7 @@
 
 ## Abstract
 
-On 12 April 2026 Hungary elected a government that ended sixteen years of Fidesz rule. Using daily data on eight Central European sovereign bond markets and the price history of a Polymarket contract on whether Viktor Orbán would remain prime minister, we ask how much of Hungary's sovereign risk premium repriced around the election and when relative to the vote. Hungary's ten-year yield fell 138 basis points over the nine months surrounding the election while every other Central European yield rose except Romania's, which fell 21, compressing the spread over a six-country peer average by 157 basis points. Two thirds of the compression occurred after the result, and the pre-election part sat at the long end while the short end rose, which rules out a rate-expectations explanation. Three days before the vote the prediction market had completed 49 per cent of its own eventual move and the bond spread 35, a lead of weeks that had almost closed by polling day. A difference-in-differences design against four neighbouring markets on a 2024–2026 panel, with country and calendar-date fixed effects and a country trend fitted before the treatment date, puts the repricing at 109 basis points (Driscoll–Kraay t = −11.3), and the three trend treatments span five basis points on that sample. The estimate is conditional: with one treated unit, randomisation inference bottoms out at p = 0.125.
+On 12 April 2026 Hungary elected a government that ended sixteen years of Fidesz rule. Using daily data on eight Central European sovereign bond markets and the price history of a Polymarket contract on whether Viktor Orbán would remain prime minister, we ask how much of Hungary's sovereign risk premium repriced around the election and when relative to the vote. Hungary's ten-year yield fell 136 basis points over the nine months surrounding the election while every other Central European yield rose except Romania's, which fell 26, compressing the spread over a six-country peer average by 160 basis points. Nearly two thirds of the compression occurred after the result, and the pre-election part sat at the long end while the short end barely moved, which rules out a rate-expectations explanation. On a scale that measures how much of its own eventual move each market had completed, the spread was ahead of the contract at every date recorded before the vote: 37 per cent against 16 three days out. That ordering reverses if the comparison is anchored on the contract's opening week, so the two series establish that they moved at different times rather than which one moved first. A difference-in-differences design against four neighbouring markets on a 2024–2026 panel, with country and calendar-date fixed effects and a country trend fitted before the treatment date, puts the repricing at 109 basis points (Driscoll–Kraay t = −11.3), and the three trend treatments span five basis points on that sample. The estimate is conditional: with one treated unit, randomisation inference bottoms out at p = 0.125.
 
 **JEL codes:** G12, G14, G15, H63, P16
 
@@ -28,17 +28,17 @@ This paper joins the three strands by putting a prediction market and a sovereig
 
 Hungary's April 2026 election is an unusually clean case. The outcome was a genuine regime change rather than a rotation: Fidesz had governed since 2010, the election produced a Tisza supermajority of 141 seats, and Péter Magyar was sworn in on 9 May 2026. Polymarket ran a contract on whether Orbán would be the next prime minister, which printed 257 daily prices between July 2025 and May 2026 and gives a daily, forward-looking measure of the market's belief about the outcome. And Hungary has close, liquid comparators: Czechia, Poland, Romania, Slovenia, Croatia and Austria all issue benchmarks with daily quotes, so a spread against those peers strips out the global and regional component of the yield move.
 
-Hungary's ten-year yield fell from 7.13 to 5.75 per cent between 25 July 2025 and 8 May 2026, a decline of 138 basis points. Over the same window the six-country peer average rose 19 basis points, the German yield rose 29 and the Czech yield rose 47. Hungary's spread over the peer average fell from 274 to 116 basis points, a compression of 157 basis points, and Hungary was the only country to fall by more than 21.
+Hungary's ten-year yield fell from 7.11 to 5.75 per cent between 4 August 2025 and 8 May 2026, a decline of 136 basis points. Over the same window the six-country peer average rose 24 basis points, the German yield rose 38 and the Czech yield rose 51. Hungary's spread over the peer average fell from 276 to 116 basis points, a compression of 160, and Hungary was the only country to fall by more than 26.
 
-The compression is not evenly distributed in time. Splitting the window at the election, 56 basis points — about 35 per cent — occurred before the vote and 102 — about 65 per cent — between the result and the inauguration. The larger part came after the outcome was known. The pre-election component is also not a monetary-policy story: between July 2025 and early April 2026 the ten-year yield fell 40 basis points while the five-year yield *rose* 13, flattening the curve by 53. Rate-cut expectations move the short end first; a fall in the long end with a rise in the short end is a term-premium story.
+The compression is not evenly distributed in time. Splitting the window at the election, 59 basis points — 37 per cent — occurred before the vote and 102 — 63 per cent — between the result and the inauguration. The larger part came after the outcome was known. The pre-election component is also not a monetary-policy story: between August 2025 and early April 2026 the ten-year yield fell 38 basis points while the five-year fell 8, so four fifths of the move was at the long end and the curve flattened by 30. Rate-cut expectations pull the front end down at least as far as the long end; a long end that falls five times as fast is a term-premium story.
 
-Backing a probability out of the spread and comparing it with the contract gives the timing result. The two must first be put on the same scale. The contract is a probability level and stood at 0.385 on 25 July 2025, whereas the ratio backed out of the spread maps that day to zero by construction, so comparing the two directly gives the bond market a free head start. Rescaling each series by its own eventual change, so that both are zero on 25 July and one on 8 May, removes that asymmetry. On this scale the contract had delivered 49 per cent of its own move by 9 April, three days before the vote, against 35 per cent in the spread. The gap had narrowed to six points by the eve of the vote, and the contract was ahead of the bonds throughout the campaign. If the bond market was pricing the event weeks in advance, the election date is not the moment the information arrived, and a design that treats it as an exogenous shock is measuring confirmation rather than news.
+For the timing question the contract and the spread must first be put on the same scale. The contract is a probability level and stood at 0.625 on 4 August 2025, whereas the ratio backed out of the spread maps that day to zero by construction, so comparing the two directly gives the bond market a free head start. Rescaling each series by its own eventual change, so that both are zero on 4 August and one on 8 May, removes that asymmetry. On this scale the spread had completed 37 per cent of its repricing by 9 April, three days before the vote, and the contract 16. The contract barely moved until the count: it sat between 0.625 and 0.685 for eight months while the spread did a third of its eventual move. The ordering is not secure, however. Anchored on the contract's opening week, when it repriced 26 points on seven prints while the spread widened, the same calculation puts the contract at 49 per cent and the spread at 35. The comparison measures how fast each market moved once it started, not which one started first, and we report it as such.
 
 For the estimate itself we use difference-in-differences against neighbouring markets with country and calendar-date fixed effects. Date effects remove whatever all markets share on a given day — global duration, US rates, volatility, regional risk appetite — so what remains is the Hungarian part of the move. On a 2024–2026 panel with a country trend fitted before the treatment date, the estimate is a 109 basis point fall relative to donors. The three trend treatments span five basis points on that sample, and dropping any single donor moves the estimate by at most fourteen. Extending the panel back to 2022 makes the specifications disagree by sixty-three, which is why we do not.
 
 The estimate is conditional, and Section 7 states the constraints in one place. In brief: with one treated unit, randomisation inference cannot go below 0.125; the pre-treatment leads are jointly non-zero although they do not trend; and the daily design, regressing spread changes on probability changes, returns a coefficient indistinguishable from zero.
 
-The paper contributes three things. It measures a European regime change at a magnitude that had not been documented — 109 basis points on the election window, 157 as an endpoint comparison, against a donor pool that rose. It dates the repricing and shows that two thirds of it came after the result rather than before, contrary to the common assumption that such events are priced in advance. And it documents a lead–lag pattern between a prediction market and a bond market: three days before the vote the contract had completed 49 per cent of its eventual move and the spread 35, a lead of weeks that had almost closed by polling day. That pattern has not been documented for a European election, where daily sovereign data and a liquid contract on the same event have not previously been available together.
+The paper contributes three things. It measures a European regime change at a magnitude that had not been documented — 109 basis points on the election window, 160 as an endpoint comparison, against a donor pool that rose. It dates the repricing and shows that nearly two thirds of it came after the result rather than before, contrary to the common assumption that such events are priced in advance. And it documents a timing divergence between a prediction market and a bond market: over the eight months before the vote the spread completed most of its repricing while the contract completed almost none, so the daily bond data lead the contract rather than the reverse. We also show that this ordering depends on the base date of the comparison, which is a reason to be careful with it rather than a reason to discard it.
 
 Section 2 gives the institutional background, Section 3 the data, Section 4 the empirical strategy. Section 5 presents the results, including the diagnostics that decide whether they stand. Section 6 reports robustness, Section 7 the limitations, and Section 8 concludes.
 
@@ -88,7 +88,7 @@ US ten-year yield, VIX, Brent crude, and EUR/USD from Yahoo Finance. EUR/HUF is 
 
 ### 3.4 Sample construction
 
-The event window runs from 25 July 2025, the first day the prediction market has a price, to 8 May 2026, the day before the new government took office. It contains 206 trading days, of which 194 carry a Hungarian ten-year observation and 16 have a missing peer yield that is forward-filled. The estimation sample for the market model runs from 4 January 2022 to 30 June 2025, 841 observations, ending before the window opens.
+The event window runs from 4 August 2025 to 8 May 2026, the day before the new government took office. It spans 217 calendar days, on 188 of which Hungary has a ten-year observation, and 16 trading days carry a missing peer yield that is forward-filled. The window begins a week after the contract's first print because that week is mechanical: between 25 July and 1 August 2025 the contract moved 26 points across seven prints, finding its level, while the Hungarian yield rose 11 basis points. Including it would credit the contract with a repricing that is about its own bootstrapping rather than about the election, and Section 5.5 reports what happens when it is included. The estimation sample for the market model runs from 4 January 2022 to 30 June 2025, 841 observations, ending before the window opens.
 
 The peer average is the equal-weighted mean of Czech, Polish, Romanian, Slovenian, Croatian and Austrian ten-year yields, requiring at least four non-missing observations. The primary spread is
 
@@ -116,9 +116,9 @@ The spread is turned into a fraction of its eventual fall as
 
 $$share_t = (S_0 − S_t) / (S_0 − S_T)$$
 
-with S₀ taken on 25 July 2025 and S_T on 8 May 2026. This maps the initial spread to zero, so it is a share of the move rather than a probability level: the contract stood at 0.385 on the day the formula assigns zero. Section 5.5 puts both series on one scale before comparing them. The construction is a linear interpolation along the path and assumes the spread would not have moved absent the election; it is a descriptive device, not an estimate.
+with S_0 taken on 4 August 2025 and S_T on 8 May 2026. This maps the initial spread to zero, so it is a share of the move rather than a probability level: the contract stood at 0.625 on the day the formula assigns zero. Section 5.5 puts both series on one scale before comparing them. The construction is a linear interpolation along the path and assumes the spread would not have moved absent the election; it is a descriptive device, not an estimate.
 
-The design does not identify β at daily frequency from the probability series. Section 5.8 explains why, and Section 7 why the aggregate design is the only version of this exercise that one country can support. The choice of sample and end date is shown in Table 10, and the estimate moves by 63 basis points across the sample start dates and 63 across the end dates.
+A daily regression of spread changes on probability changes does not identify β either. Section 5.8 explains why, Section 6 reports the level version that does, and Section 7 explains why the aggregate design is the only version of this exercise that one country can support. The choice of sample and end date is shown in Table 10, and the estimate moves by 63 basis points across the sample start dates and 63 across the end dates.
 
 ---
 
@@ -126,56 +126,56 @@ The design does not identify β at daily frequency from the probability series. 
 
 ### 5.1 The compression
 
-Hungary's ten-year yield fell 138 basis points over the nine months from 25 July 2025 to 8 May 2026, from 7.13 to 5.75 per cent. Every other market in the sample rose except Romania, which fell 21 basis points; Hungary was the only country to fall by more than 21 (Table 1). The backdrop was a bear steepening — German, Austrian, Slovenian and Croatian yields rose 20 to 31 basis points — so the Hungarian move is not a duration effect but its opposite.
+Hungary's ten-year yield fell 136 basis points over the nine months from 4 August 2025 to 8 May 2026, from 7.11 to 5.75 per cent. Every other market in the sample rose except Romania, which fell 26 basis points; Hungary was the only country to fall by more than 26 (Table 1). The backdrop was a bear steepening — German, Austrian, Slovenian and Croatian yields rose 30 to 38 basis points — so the Hungarian move is not a duration effect but its opposite.
 
-Against an equal-weighted average of six peers the spread fell 157 basis points, from 2.74 to 1.16 percentage points (Table 2, Figures 1 and 2). Against Germany alone it fell 167, and against Czechia, the most favourable single control, 185. The six-peer figure is used throughout; Section 5.3 shows that the peer definition does not drive it.
+Against an equal-weighted average of six peers the spread fell 160 basis points, from 2.76 to 1.16 percentage points (Table 2, Figures 1 and 2). Against Germany alone it fell 174, and against Czechia, the most favourable single control, 187. The six-peer figure is used throughout; Section 5.3 shows that the peer definition does not drive it.
 
-**Table 1. Ten-year yields, 25 July 2025 to 8 May 2026 (per cent)**
+**Table 1. Ten-year yields, 4 August 2025 to 8 May 2026 (per cent)**
 
-| Country | 25 Jul 2025 | 8 May 2026 | Change (bp) |
+| Country | 4 Aug 2025 | 8 May 2026 | Change (bp) |
 |---|---:|---:|---:|
-| **Hungary** | **7.13** | **5.75** | **−138** |
-| Czechia | 4.32 | 4.79 | +47 |
-| Poland | 5.50 | 5.60 | +10 |
-| Romania | 7.23 | 7.02 | −21 |
-| Germany | 2.72 | 3.00 | +29 |
-| Slovenia | 3.12 | 3.41 | +29 |
+| **Hungary** | **7.11** | **5.75** | **−136** |
+| Czechia | 4.28 | 4.79 | +51 |
+| Poland | 5.38 | 5.60 | +22 |
+| Romania | 7.28 | 7.02 | −26 |
+| Germany | 2.63 | 3.00 | +38 |
+| Slovenia | 3.04 | 3.41 | +37 |
 | Croatia | 3.14 | 3.45 | +31 |
-| Austria | 3.06 | 3.25 | +20 |
-| Peer average | 4.39 | 4.59 | +19 |
+| Austria | 2.95 | 3.25 | +30 |
+| Peer average | 4.35 | 4.59 | +24 |
 
-**Table 2. Hungary spreads, 25 July 2025 to 8 May 2026 (percentage points)**
+**Table 2. Hungary spreads, 4 August 2025 to 8 May 2026 (percentage points)**
 
-| Spread | 25 Jul 2025 | 8 May 2026 | Change (bp) |
+| Spread | 4 Aug 2025 | 8 May 2026 | Change (bp) |
 |---|---:|---:|---:|
-| HU − peer average | 2.74 | 1.16 | **−157** |
+| HU − peer average | 2.76 | 1.16 | **−160** |
 | HU − peer median | 3.40 | 1.63 | −177 |
-| HU − Bund | 4.41 | 2.75 | −167 |
-| HU − Czechia | 2.81 | 0.96 | −185 |
+| HU − Bund | 4.48 | 2.75 | −174 |
+| HU − Czechia | 2.83 | 0.96 | −187 |
 
 ![](fig1_levels.png)
 
-**Figure 1.** Hungarian and peer ten-year yields, 25 July 2025 to 8 May 2026 (per cent). Hungary falls while the peer average rises.
+**Figure 1.** Hungarian and peer ten-year yields, 4 August 2025 to 8 May 2026 (per cent). Hungary falls while the peer average rises.
 
 ![](fig2_spread.png)
 
-**Figure 2.** Hungary's ten-year spread over the six-country peer average, over Bunds and over Czechia, 25 July 2025 to 8 May 2026 (basis points).
+**Figure 2.** Hungary's ten-year spread over the six-country peer average, over Bunds and over Czechia, 4 August 2025 to 8 May 2026 (basis points).
 
 ### 5.2 Timing
 
-Two thirds of the compression came after the result. From 25 July 2025 to 9 April 2026, three days before the vote, the spread fell 56 basis points; from the result to the inauguration it fell a further 102 (Table 3).
+Nearly two thirds of the compression came after the result. From 4 August 2025 to 9 April 2026, three days before the vote, the spread fell 59 basis points; from the result to the inauguration it fell a further 102 (Table 3).
 
-The pre-vote component is itself uneven, and the unevenness matters. The spread narrowed 39 basis points before the campaign and 17 during it, while the Hungarian ten-year yield rose 24 basis points during the campaign. Yields were rising as the probability of regime change was rising, which is the opposite of a market pricing the outcome in advance.
+The pre-vote component is itself uneven, and the unevenness matters. The spread narrowed 41 basis points before the campaign and 17 during it, while the Hungarian ten-year yield rose 24 basis points during the campaign. Yields were rising as the probability of regime change was rising, which is the opposite of a market pricing the outcome in advance.
 
 **Table 3. Event-window decomposition (basis points)**
 
 | Window | HU − peers | HU − Bund | HU − CZ | HU 10Y |
 |---|---:|---:|---:|---:|
-| A. 25 Jul 2025 → 26 Feb 2026 (pre-campaign) | −39 | −62 | −68 | −64 |
+| A. 4 Aug 2025 → 26 Feb 2026 (pre-campaign) | −41 | −69 | −69 | −62 |
 | B. 26 Feb → 9 Apr 2026 (campaign) | −17 | −7 | −19 | +24 |
-| **A + B. Pre-vote** | **−56** | **−69** | **−86** | **−40** |
+| **A + B. Pre-vote** | **−59** | **−76** | **−88** | **−38** |
 | C. 9 Apr → 8 May 2026 (result to inauguration) | −102 | −97 | −99 | −98 |
-| **Total** | **−157** | **−167** | **−185** | **−138** |
+| **Total** | **−160** | **−174** | **−187** | **−136** |
 
 ### 5.3 Was the move Hungary-specific?
 
@@ -183,35 +183,36 @@ Four checks, each removing a different confound.
 
 The first repeats the calculation for every country in turn, treating each as if it were the event. Hungary is the only market that compressed by a substantial amount (Table 4).
 
-The second varies the reference basket: an equal-weighted peer average, a median peer, Germany alone, Czechia alone, and the three-country Czech–Polish–Romanian average. All give −117 basis points or more (Table 5).
+The second varies the reference basket: an equal-weighted peer average, a median peer, Germany alone, Czechia alone, and the three-country Czech–Polish–Romanian average. All give −110 basis points or more (Table 5).
 
-The third removes common factors explicitly. Regressing the daily change in the Hungarian yield on the daily changes in the Czech–Polish–Romanian average, the US ten-year, the VIX and log Brent over January 2022 to June 2025 leaves a cumulative residual of −162 basis points by 8 May 2026, against an R² of 0.248 (Table 6, Figure 3). This is the market-model counterpart of the date effects in the difference-in-differences.
+The third removes common factors explicitly. Regressing the daily change in the Hungarian yield on the daily changes in the Czech–Polish–Romanian average, the US ten-year, the VIX and log Brent over January 2022 to June 2025 leaves a cumulative residual of −182 basis points by 8 May 2026, against an R² of 0.248 (Table 6, Figure 3). This is the market-model counterpart of the date effects in the difference-in-differences.
 
-**Table 4. Country placebo, same window (basis points)**
+**Table 4. Country placebo, same window (basis points): each market against the equal-weighted average of the other seven**
 
 | Country | Spread change vs others |
 |---|---:|
-| **Hungary** | **−157** |
-| Romania | −48 |
-| Poland | −11 |
-| Austria | 0 |
-| Slovenia | +12 |
-| Croatia | +14 |
-| Czechia | +33 |
+| **Hungary** | **−162** |
+| Romania | −36 |
+| Poland | +18 |
+| Austria | +28 |
+| Croatia | +29 |
+| Germany | +36 |
+| Slovenia | +36 |
+| Czechia | +51 |
 
 **Table 5. Control-choice sensitivity (basis points, same window)**
 
 | Control | Spread change | Daily t-statistic |
 |---|---:|---:|
-| Czechia | −185 | −1.91 |
+| Czechia | −187 | −1.95 |
 | Peer median | −177 | −0.79 |
-| Croatia | −169 | −1.57 |
-| Germany | −167 | −1.48 |
-| Slovenia | −167 | −1.66 |
-| Austria | −158 | −1.39 |
-| **Peer average** | **−157** | **−1.71** |
-| Poland | −148 | −1.25 |
-| Romania | −117 | −0.93 |
+| Germany | −174 | −1.55 |
+| Slovenia | −173 | −1.73 |
+| Croatia | −167 | −1.57 |
+| Austria | −166 | −1.47 |
+| **Peer average** | **−160** | **−1.76** |
+| Poland | −158 | −1.36 |
+| Romania | −110 | −0.88 |
 
 **Table 6. Market model, 4 Jan 2022 – 30 Jun 2025**
 
@@ -227,7 +228,7 @@ The third removes common factors explicitly. Regressing the daily change in the 
 
 ![](fig3_residual.png)
 
-**Figure 3.** Cumulative residual from the market model of Table 6, January 2022 to November 2026 (basis points). The residual is the part of the Hungarian yield move that the Czech–Polish–Romanian average, the US ten-year, the VIX and Brent do not explain.
+**Figure 3.** Cumulative residual from the market model of Table 6, 4 August 2025 to 8 May 2026 (basis points), accumulated from zero at the start of the window. The residual is the part of the Hungarian yield move that the Czech–Polish–Romanian average, the US ten-year, the VIX and Brent do not explain.
 
 The fourth check is model-free. Figure 4 plots Hungary's spread over Czechia, Poland and Romania by quarter. It halved between the 2022 energy crisis and the first quarter of 2024, sat flat for nine quarters between 100 and 140 basis points, and then collapsed. That plateau is why the estimation sample starts in 2024.
 
@@ -237,17 +238,17 @@ The fourth check is model-free. Figure 4 plots Hungary's spread over Czechia, Po
 
 ### 5.4 The move was at the long end
 
-A falling ten-year yield can reflect lower expected policy rates rather than lower sovereign risk, and the two imply different things about what the election did. The term structure separates them. Between 25 July 2025 and 9 April 2026 the ten-year yield fell 40 basis points while the five-year yield rose 13, flattening the slope by 53 basis points, from +58 to +5 (Table 7, Figure 5). By 8 May the slope had steepened back to +11 as the short end fell after the result.
+A falling ten-year yield can reflect lower expected policy rates rather than lower sovereign risk, and the two imply different things about what the election did. The term structure separates them. Between 4 August 2025 and 9 April 2026 the ten-year yield fell 38 basis points while the five-year fell 8, flattening the slope by 30 basis points, from +35 to +5 (Table 7, Figure 5). By 8 May the slope had steepened back to +11 as the short end fell after the result.
 
-Lower rate expectations pull the short end down with the long end. Here the short end rose. What fell was the compensation for holding Hungarian duration, which is a risk premium rather than a forecast of policy.
+Lower rate expectations pull the short end down with the long end. Here the long end fell five times as far as the short end. What fell was the compensation for holding Hungarian duration, which is a risk premium rather than a forecast of policy.
 
-**Table 7. Hungarian term structure, 25 July 2025 to 8 May 2026 (yields in per cent, slope in basis points)**
+**Table 7. Hungarian term structure, 4 August 2025 to 8 May 2026 (yields in per cent, slope in basis points)**
 
-| | 25 Jul 2025 | 9 Apr 2026 | 8 May 2026 |
+| | 4 Aug 2025 | 9 Apr 2026 | 8 May 2026 |
 |---|---:|---:|---:|
-| 10Y yield | 7.13 | 6.73 | 5.75 |
-| 5Y yield | 6.55 | 6.68 | 5.64 |
-| 10Y − 5Y slope | +58 | +5 | +11 |
+| 10Y yield | 7.11 | 6.73 | 5.75 |
+| 5Y yield | 6.76 | 6.68 | 5.64 |
+| 10Y − 5Y slope | +35 | +5 | +11 |
 
 ![](fig5_slope.png)
 
@@ -257,9 +258,11 @@ Lower rate expectations pull the short end down with the long end. Here the shor
 
 The Polymarket contract asked whether Orbán would be the next prime minister; P is one minus its price. It ran from 25 July 2025 to 9 May 2026 and printed 257 times, 76 of them on a weekend. The weekend prints are kept because one of the two largest moves in the series is a Saturday print. The series moves twice — +19.5 on Saturday 26 July, in the contract's first week, and +30.9 on 22 April — and otherwise drifts. It is thin: after the 9 April print the contract did not trade again until 22 April.
 
-Putting the two on one axis takes more than rescaling the spread, because the contract is a probability level and the bond ratio is a share: on 25 July the contract stood at 0.385 while the spread mapped to zero. Figure 6 therefore applies the rescaling of Section 4 to both series, with x the contract price for one and the spread for the other, so that each is zero on 25 July and one on 8 May (Table 8).
+Putting the two on one axis takes more than rescaling the spread, because the contract is a probability level and the bond ratio is a share: on 4 August the contract stood at 0.625 while the spread mapped to zero. Figure 6 therefore applies the rescaling of Section 4 to both series, with x the contract price for one and the spread for the other, so that each is zero on 4 August 2025 and one on 8 May 2026 (Table 8).
 
-On that scale the contract had delivered 49 per cent of its own move by 9 April and the spread 35. The gap is not monotone. In the March selloff the spread retraced to its July level, giving back the whole of its early repricing, while the contract held near 42 per cent; by the eve of the vote the spread had recovered to 43 against the contract's 49, and the ratio between them was 1.4 to 1 rather than 2 to 1. What the comparison supports is a lead of weeks through the campaign, not a disagreement about what the election would do.
+On that scale the spread had completed 37 per cent of its repricing by 9 April and the contract 16, a gap of twenty-one points in the spread's favour, and the gap widened through the campaign rather than closing: by the eve of the vote the spread had done 44 per cent and the contract still 16. The contract simply did not move until the count. Over the eight months to the vote it drifted from 0.625 to 0.685 while the spread completed a third of its eventual move.
+
+That ordering is not robust to the base date, which is the honest qualification. Anchored on 25 July instead, the contract is at 49 per cent on 9 April and the spread at 35, because the contract's opening week accounts for the whole of its early repricing. Across six candidate base dates the contract's share ranges from 11 to 49 per cent while the spread's stays between 23 and 41. What the figure supports is that the two markets moved at different times and that, over the part of the window in which the contract is informative, the spread moved first. It does not support a general claim that bond markets lead prediction markets.
 
 That is the paper's second result, and it rests on a handful of print dates. Section 5.8 explains why the same comparison cannot be run as a daily regression.
 
@@ -267,18 +270,18 @@ That is the paper's second result, and it rests on a handful of print dates. Sec
 
 | Date | Spread (pp) | Polymarket P | Contract, share | Bond, share |
 |---|---:|---:|---:|---:|
-| 25 Jul 2025 | 2.74 | 0.385 | 0.000 | 0.000 |
-| 26 Feb 2026 | 2.35 | 0.625 | 0.391 | 0.245 |
-| 31 Mar 2026 | 2.53 | 0.655 | 0.439 | 0.133 |
-| 9 Apr 2026 | 2.18 | 0.685 | 0.488 | 0.354 |
-| 12 Apr 2026 | 2.06 | 0.685 | 0.488 | 0.431 |
+| 4 Aug 2025 | 2.76 | 0.625 | 0.000 | 0.000 |
+| 26 Feb 2026 | 2.35 | 0.625 | 0.000 | 0.259 |
+| 31 Mar 2026 | 2.53 | 0.655 | 0.080 | 0.148 |
+| 9 Apr 2026 | 2.18 | 0.685 | 0.160 | 0.366 |
+| 12 Apr 2026 | 2.06 | 0.685 | 0.160 | 0.441 |
 | 8 May 2026 | 1.16 | 1.000 | 1.000 | 1.000 |
 
-Shares are $(x_t - x_0)/(x_T - x_0)$, with $x$ the contract price or the spread over the six-peer average. The 13 November anchor used in an earlier version is a robustness check only and is not plotted, because it leaves the unit interval: it reaches 1.44 by November 2026.
+Shares are $(x_t - x_0)/(x_T - x_0)$, with $x$ the contract price or the spread over the six-peer average and both dated 4 August 2025 and 8 May 2026. A second anchor at 13 November, used in an earlier version, is a robustness check only and is not plotted: the spread keeps narrowing past 8 May, so the ratio leaves the unit interval.
 
 ![](fig6_implied.png)
 
-**Figure 6.** Share of its eventual move completed by each market: the Polymarket contract and the spread over the six-peer average, 25 July 2025 to 8 May 2026. Both series are zero on 25 July and one on 8 May. Values below zero mean the spread had widened past its 25 July level, giving back more than the whole of its fall.
+**Figure 6.** Share of its eventual move completed by each market: the Polymarket contract and the spread over the six-peer average, 4 August 2025 to 8 May 2026. Both series are zero on 4 August and one on 8 May. Values below zero mean a series had moved against its eventual direction, giving back more than the whole of its move so far.
 
 ### 5.6 Difference-in-differences
 
@@ -307,7 +310,7 @@ The eight-country panel gives −0.97, with Austria, Slovenia and Croatia added 
 
 The estimate is insensitive to the end date within the election window and highly sensitive beyond it. Ending at the inauguration gives −1.09; ending in November gives −1.72, which is the same design charged with seven months of post-inauguration convergence. Both are in Table 10, and only the first is the election.
 
-The three headline numbers in the paper answer three different questions and are not in competition. The descriptive **−157 basis points** is a level change between two dates, and it is large because the repricing is concentrated in the last six weeks of the window. The DiD **−109 basis points** is an average difference relative to donors across the whole path, so it is smaller by construction. The **−172** is the total through November. The election window is the headline; the other two describe the same event measured differently.
+The three headline numbers in the paper answer three different questions and are not in competition. The descriptive **−160 basis points** is a level change between two dates, and it is large because the repricing is concentrated in the last six weeks of the window. The DiD **−109 basis points** is an average difference relative to donors across the whole path, so it is smaller by construction. The **−172** is the total through November. The election window is the headline; the other two describe the same event measured differently.
 
 **Table 10. End date and sample start (percentage points)**
 
@@ -415,7 +418,7 @@ The natural next step is to identify the effect at daily frequency from the prob
 
 Run on 257 prints carried forward to trading days, the change in the spread on the change in P gives β = +0.0012 (t = 0.02, N = 170) without controls and β = −0.034 (t = −0.66, N = 163) with the US ten-year, VIX and Brent changes added. Neither coefficient is distinguishable from zero and the sign is not stable across the two specifications.
 
-The reason is the print frequency rather than the specification. Two of 257 prints move the contract by more than ten percentage points and most move by less than one, so a daily regression on that series is mostly regression on staleness. The 69-versus-35 comparison in Section 5.5 is a comparison of cumulative repricing at a single decision-relevant date, and it is the version of the lead-lag question that these data can answer.
+The reason is the print frequency rather than the specification. Two of 257 prints move the contract by more than ten percentage points and most move by less than one, so a daily regression on that series is mostly regression on staleness. The share comparison in Section 5.5 is a comparison of cumulative repricing at a few decision-relevant dates, and it is the version of the lead-lag question that these data can answer.
 
 The daily change regression is the wrong instrument for a separate reason as well. It differences away the level relationship the paper is about: if the spread and the probability both trend through the window, their changes are dominated by noise on both sides, and a null on differences says little about a level reallocation. Section 6 reports the level version, where the probability enters as an intensity rather than as a differenced regressor.
 
@@ -423,17 +426,17 @@ The daily change regression is the wrong instrument for a separate reason as wel
 
 The estimation window closes at the inauguration, but the data run to November 2026. Hungary's ten-year yield fell further to 5.09 per cent by 30 June, rose to 5.64 by 31 August and stood at 5.52 on 13 November. The peer spread compressed from 116 basis points in May to 69 in June, 83 in August and 51 in November, a further 65 basis points.
 
-The compression did not reverse. Had the May level been an overreaction, mean reversion would be visible by November; continued narrowing suggests the market was repricing a persistent change in Hungarian risk. EUR/HUF appreciated a further 3.0 per cent after the inauguration, having already gained 10.3 per cent over the window.
+The compression did not reverse. Had the May level been an overreaction, mean reversion would be visible by November; continued narrowing suggests the market was repricing a persistent change in Hungarian risk. EUR/HUF appreciated a further 3.0 per cent after the inauguration, having already gained 10.9 per cent over the window.
 
 ## 6. Robustness
 
 Five checks that are not already in Section 5.
 
-**Continuous difference-in-differences.** Replacing the binary treatment with Hungary × P_t, switched on at the vote, gives −1.12 with a Driscoll–Kraay t-statistic of −15.6 on 1,030 country-days: three basis points from the binary −1.09 in Table 9. The date effects absorb P_t, which is common to every country on a given day, but not the interaction, which varies across countries within a date. What this design surrenders is history, because the contract begins on 25 July 2025, so it covers ten months rather than the two and a half years of the headline sample. Where the two overlap, the binary and intensity versions agree.
+**Continuous difference-in-differences.** Replacing the binary treatment with Hungary × P_t, switched on at the vote, gives −1.13 with a Driscoll–Kraay t-statistic of −15.6 on 1,000 country-days: four basis points from the binary −1.09 in Table 9. The date effects absorb P_t, which is common to every country on a given day, but not the interaction, which varies across countries within a date. What this design surrenders is history, because the contract is usable only from 4 August 2025, so it covers nine months rather than the two and a half years of the headline sample. Where the two overlap, the binary and intensity versions agree.
 
-**Trend adjustment.** Hungary's spread over Czechia, Poland and Romania was narrowing before the election. Fitting a linear trend to January 2022 to June 2025 gives −0.086 basis points per trading day, or −22 basis points per year; over a 194-day window it predicts 17 basis points of the compression. Subtracting it gives a trend-adjusted estimate of −133 basis points, so the defensible range for the headline is −133 to −157.
+**Trend adjustment.** Hungary's spread over Czechia, Poland and Romania was narrowing before the election. Fitting a linear trend to January 2022 to June 2025 gives −0.086 basis points per trading day, or −22 basis points per year; over the 188-day window it predicts 16 basis points of the compression. Subtracting it gives a trend-adjusted estimate of −135 basis points, so the defensible range for the headline is −135 to −160.
 
-**Excluding the contract's opening week.** Dropping 25 July to 1 August 2025 removes the first mechanical probability jump and reduces the pre-election component to about −20 basis points, which widens the post-election share rather than narrowing it.
+**Starting instead on 25 July 2025.** Including the contract's opening week adds four basis points to the descriptive estimates — −140 for the yield and −164 for the spread — and eight country-days to the intensity panel. It also reverses the ordering in Figure 6, because the contract's 26-point move across seven prints lands in that week while the spread widened. We exclude the week and report the alternative because the movement is the contract finding its level, not news.
 
 **Regional shock.** On 19 March 2026 the Hungarian spread over Czechia widened sharply, to 258 basis points. The cross-section shows a regional selloff rather than a Hungarian event: Romanian yields rose 31 basis points that day, Croatian 22, Hungarian 19, Slovenian 15, Polish 7, Czech 4 and German 1, leaving Hungary 4 basis points wider than the peer average. This is why the peer average rather than a single country is the preferred control.
 
@@ -445,7 +448,7 @@ The design has one treated unit. Randomisation inference over eight assignments 
 
 The pre-treatment leads are jointly non-zero. They oscillate without drifting, the trend treatments agree to five basis points, and the placebo dates are zero, but a reader who rejects the trend specification outright should read the no-trends column of Table 9, −1.04, and recognise that the 2022 sample makes that choice consequential.
 
-The counterfactual is not observed. Both lines in Figure 6 are rescaled by their own eventual change, so the figure measures how quickly each market moved rather than what either believed, and the bond series is normalised on the assumption that the 157 basis point fall is its complete repricing. What supports the lead-lag reading is that the contract ran ahead of the spread on essentially every date of the campaign — 49 against 35 per cent on 9 April — and that the gap had narrowed to six points by the eve of the vote, so the difference is one of timing rather than of level.
+The counterfactual is not observed. Both lines in Figure 6 are rescaled by their own eventual change, so the figure measures how quickly each market moved rather than what either believed, and the bond series is normalised on the assumption that the 160 basis point fall is its complete repricing. What supports the reading is that the spread was ahead of the contract at every date recorded before the vote — 37 against 16 per cent three days out — and that the ordering reverses if the base date is the contract's opening week. The divergence in timing is robust; which market led is not.
 
 The prediction market is thin and its participants are not a random sample. It printed 257 times over 288 calendar days, stopped trading between 9 and 22 April, and is banned for Hungarian residents. It is a probability proxy, not a measurement of the Hungarian electorate.
 
@@ -455,13 +458,13 @@ Daily Hungarian two-year yields were unavailable from the sources used. The term
 
 ## 8. Conclusion
 
-Hungary's April 2026 election coincided with a 157 basis point compression in its sovereign spread over a six-country peer average. Hungary was the only Central European market whose ten-year yield fell by more than 21 basis points; every other yield rose except Romania's, which fell 21. Two thirds of the compression occurred after the result rather than before it, and the pre-election component was concentrated at the long end, which rules out a rate-expectations explanation.
+Hungary's April 2026 election coincided with a 160 basis point compression in its sovereign spread over a six-country peer average. Hungary was the only Central European market whose ten-year yield fell by more than 26 basis points; every other yield rose except Romania's, which fell 26. Nearly two thirds of the compression occurred after the result rather than before it, and the pre-election component was concentrated at the long end, which rules out a rate-expectations explanation.
 
-A prediction market on whether Orbán would remain prime minister moved ahead of the bond market: three days before the vote it had completed 49 per cent of its eventual move against 35 per cent in the spread, and the gap had almost closed by polling day.
+A prediction market on whether Orbán would remain prime minister did not move ahead of the bond market. Over the eight months to the vote the spread completed 37 per cent of its eventual repricing by 9 April against 16 per cent in the contract, and the contract did not move until the count. That ordering reverses if the comparison is anchored on the contract's opening week, so what the two series establish is that they moved at different times, not which one moved first.
 
 The identification comes from difference-in-differences against neighbouring markets on a 2024–2026 panel. With a country trend fitted before the treatment date the estimate is 109 basis points, and the three possible trend treatments span five basis points on that sample. Section 7 sets out what that estimate does and does not support.
 
-What generalises is the design rather than the number. A liquid contract on a political event and a daily sovereign spread on the same event are rarely available together; where they are, the two instruments answer different halves of the same question, and the timing of the answer is a fact about market structure rather than about the event. In Hungary in 2026 the prediction market moved first.
+What generalises is the design rather than the number. A liquid contract on a political event and a daily sovereign spread on the same event are rarely available together; where they are, the two instruments answer different halves of the same question, and the timing of the answer is a fact about market structure rather than about the event. In Hungary in 2026 the spread moved first, though that conclusion is worth less than it looks: it depends on where the comparison starts.
 
 ## References
 
@@ -479,7 +482,7 @@ Wolfers, Justin and Eric Zitzewitz (2004). "Prediction Markets." *Journal of Eco
 
 Three sources. Ten-year sovereign yields come from the Investing.com historical data API: eight countries from June 2025 and five from January 2022, with the Hungarian five-year yield over the same shorter span. The Orbán contract comes from Polymarket's price history, which records a daily print on each day the market trades, from July 2025 to May 2026. The US ten-year yield, the VIX, Brent, EUR/USD and USD/HUF come from the Yahoo Finance chart API, January 2022 to November 2026.
 
-Two properties of the data matter for interpretation. The yield files hold a row for every business day and no market holidays are removed, which no real bond market produces; individual series are simply blank on their own market's holidays, twelve days for Hungary, so the series are a reconstruction consistent with daily closes rather than a tick-level record. Peer blanks are carried flat for up to five business days, and the Hungarian blanks are filled for plotting only. Sixteen of the 206 trading days in the event window have at least one blank peer yield, which is forward-filled so that the peer average keeps a constant composition, with at least four peers required on any day the average is used; without this the average drops mechanically when a high-yielding market is absent and the spread acquires spurious spikes. The average was checked against a skip-missing version, which differs by at most 57 basis points on a single holiday date.
+Two properties of the data matter for interpretation. The yield files hold a row for every business day and no market holidays are removed, which no real bond market produces; individual series are simply blank on their own market's holidays, twelve days for Hungary, so the series are a reconstruction consistent with daily closes rather than a tick-level record. Peer blanks are carried flat for up to five business days, and the Hungarian blanks are filled for plotting only. Sixteen of the 200 trading days in the event window have at least one blank peer yield, which is forward-filled so that the peer average keeps a constant composition, with at least four peers required on any day the average is used; without this the average drops mechanically when a high-yielding market is absent and the spread acquires spurious spikes. The average was checked against a skip-missing version, which differs by at most 57 basis points on a single holiday date.
 
 All series are freely available without registration.
 

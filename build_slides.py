@@ -258,10 +258,10 @@ s = slide()
 eyebrow(s, "Data and the fact")
 headline(s, "One country repriced.\nThe others did not.", 30, w=5.0)
 
-kpi(s, ML, 2.02, 4.45, "−138 bp", "Hungary's ten-year yield, 7.13% → 5.75%", RED, 36)
-kpi(s, ML, 3.10, 4.45, "+19 bp", "Average of the six peers — Germany is shown "
+kpi(s, ML, 2.02, 4.45, "−136 bp", "Hungary's ten-year yield, 7.11% → 5.75%", RED, 36)
+kpi(s, ML, 3.10, 4.45, "+24 bp", "Average of the six peers — Germany is shown "
                                  "separately", NAVY, 36)
-kpi(s, ML, 4.30, 4.45, "−21 bp", "Romania — the only other faller", GREY, 36)
+kpi(s, ML, 4.30, 4.45, "−26 bp", "Romania — the only other faller", GREY, 36)
 
 picture(s, "fig1_levels.png", 5.92, 1.52, 6.55, 3.45,
         cap="Hungary in dark blue, the peer average in grey. The fall opens in "
@@ -412,7 +412,7 @@ picture(s, "fig7_event_study.png", 6.45, 1.78, 6.0, 2.8,
             "the vote, not before it.")
 
 card(s, 6.45, 5.32, 5.95, 1.16, "Alternative estimator",
-     "Intensity (Hungary × P): −1.12 — three basis points from the binary "
+     "Intensity (Hungary × P): −1.13 — four basis points from the binary "
      "estimate.", accent=NAVY, body_size=12, label_size=8.5)
 footer(s, 6)
 
@@ -438,10 +438,10 @@ panel(s, ML, 4.12, 4.8, 1.62, fill=WHITE, border=BORDER, bar=True,
 tf = box(s, ML + 0.3, 4.28, 4.25, 0.24)
 para(tf, "NOT MONETARY POLICY", 8.5, NAVY, bold=True, first=True, spc=140)
 tf = box(s, ML + 0.3, 4.53, 4.25, 0.3)
-para_runs(tf, [("10Y  −40 bp", NAVY, True), ("5Y  +13 bp", NAVY, True),
-               ("HUF  +10%", NAVY, True)], 12.5, first=True, gap="     ")
+para_runs(tf, [("10Y  −38 bp", NAVY, True), ("5Y  −8 bp", NAVY, True),
+               ("HUF  +11%", NAVY, True)], 12.5, first=True, gap="     ")
 tf = box(s, ML + 0.3, 4.9, 4.25, 0.7)
-para(tf, "The long end fell while the front end rose, and the forint "
+para(tf, "The long end fell five times as far as the front end, and the forint "
          "appreciated. Long-end risk, not rate cuts.", 11.5, INK, first=True,
      line=1.28)
 
@@ -449,30 +449,30 @@ tf = box(s, 5.98, 2.02, 6.3, 0.3)
 para(tf, "9 APRIL   ·   THREE DAYS BEFORE THE VOTE", 9.5, RED, bold=True,
      first=True, spc=160)
 tf = box(s, 5.98, 2.3, 6.3, 0.8)
-para(tf, "69%  vs  35%", 42, RED, bold=True, first=True, line=1.0, font=DISPLAY)
+para(tf, "16%  vs  37%", 42, RED, bold=True, first=True, line=1.0, font=DISPLAY)
 
 picture(s, "fig6_implied.png", 5.98, 3.12, 6.35, 2.78)
 
 tf = box(s, 5.98, 6.14, 6.35, 0.5)
-para(tf, "They agreed on the level of risk, not on when to price it.", 14, NAVY,
+para(tf, "The bonds moved first. The contract waited for the count.", 14, NAVY,
      bold=True, first=True)
 footer(s, 7)
 
 # -------------------------------------------------------------------- slide 8
 s = slide()
 eyebrow(s, "Conclusion")
-headline(s, "A real repricing. The contract saw it first.", 31, y=0.8)
+headline(s, "A real repricing, priced before the count.", 31, y=0.8)
 
 for i, (num, lab, col) in enumerate([
         ("−109 bp", "relative to neighbours, over the election window", RED),
-        ("65%", "of it came after the result, not before", RED),
-        ("first", "the prediction market moved before the bonds", NAVY)]):
+        ("63%", "of it came after the result, not before", RED),
+        ("37%", "of the spread's move done by 9 April; the contract, 16%", NAVY)]):
     kpi(s, ML + i * 3.9, 2.14, 3.6, num, lab, col, numsize=42, labsize=10.5)
 
 tf = box(s, ML, 4.02, CW, 0.9)
 para(tf, "Hungarian sovereign risk fell about 109 basis points relative to its "
-         "neighbours — 157 comparing endpoints — and two thirds of it came after "
-         "the vote.", 16.5, INK, first=True, line=1.32)
+         "neighbours — 160 comparing endpoints — and nearly two thirds of it came "
+         "after the vote.", 16.5, INK, first=True, line=1.32)
 
 panel(s, ML, 5.32, CW, 1.0, fill=NAVY_DEEP)
 tf = box(s, ML + 0.42, 5.32, 2.0, 1.0, anchor=MSO_ANCHOR.MIDDLE)

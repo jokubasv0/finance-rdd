@@ -186,8 +186,8 @@ def build():
                     cell = cells[ci]
                     cell.paragraphs[0].text = ""
                     par = cell.paragraphs[0]
-                    par.paragraph_format.space_after = Pt(2)
-                    par.paragraph_format.space_before = Pt(2)
+                    par.paragraph_format.space_after = Pt(1)
+                    par.paragraph_format.space_before = Pt(1)
                     if ci > 0:
                         par.alignment = WD_ALIGN_PARAGRAPH.RIGHT
                     add_runs(par, txt)
@@ -200,10 +200,18 @@ def build():
                     for cell in cells:
                         for cp in cell.paragraphs:
                             cp.paragraph_format.keep_with_next = True
-            # fixed layout: wide label column, 2.15 cm for each numeric column
-            NUM = 2.15
+            # Fixed layout. Numeric columns are sized to their widest cell so that
+            # two-word headers such as "Spread change" do not wrap onto three lines;
+            # the label column takes whatever is left, with a floor so long labels
+            # stay on one line.
+            TOTAL = 16.4
             if ncol >= 2:
-                cw = [max(3.5, 16.0 - NUM * (ncol - 1))] + [NUM] * (ncol - 1)
+                num = []
+                for ci in range(1, ncol):
+                    wmax = max(len(r[ci]) if ci < len(r) else 0 for r in rows)
+                    num.append(min(3.4, max(1.9, 0.155 * min(wmax, 16) + 0.42)))
+                lab = max(4.6, TOTAL - sum(num))
+                cw = [lab] + num
             else:
                 cw = [16.0]
             table.autofit = False

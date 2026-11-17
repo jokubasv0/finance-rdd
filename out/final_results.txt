@@ -3,23 +3,23 @@
 1. SAMPLE
 ============================================================================
 Full sample      : 2025-06-01 to 2026-11-13
-Event window     : 2025-07-25 to 2026-05-08  (225 days)
+Event window     : 2025-08-04 to 2026-05-08  (217 days)
 Long sample      : 2022-01-01 to 2026-11-13  (1405 days)
 
 Non-missing observations in the event window:
-  HU10Y      194
-  HU5Y       194
-  CZ10Y      203
-  DE10Y      206
-  PL10Y      205
-  RO10Y      197
-  SI10Y      204
-  HR10Y      194
-  AT10Y      206
-  CEE        225
-  SP_PEER    194
-  SP_DE      194
-  SP_CZ      194
+  HU10Y      188
+  HU5Y       188
+  CZ10Y      197
+  DE10Y      200
+  PL10Y      199
+  RO10Y      191
+  SI10Y      198
+  HR10Y      188
+  AT10Y      200
+  CEE        217
+  SP_PEER    188
+  SP_DE      188
+  SP_CZ      188
 
 Peer group = equal-weighted Czechia, Poland, Romania, Slovenia, Croatia, Austria.
 Romania enters with the highest level (~7%) and the highest volatility, so the
@@ -29,49 +29,49 @@ peer average is checked against a median-based version below.
 2. LEVELS AND CHANGES OVER THE EVENT WINDOW
 ============================================================================
 series        start      end    change
-HU10Y          7.13     5.75     -138bp
-HU5Y           6.55     5.64      -91bp
-CEE            4.39     4.59      +19bp
-DE10Y          2.72     3.00      +29bp
-CZ10Y          4.32     4.79      +47bp
-PL10Y          5.50     5.60      +10bp
-RO10Y          7.23     7.02      -21bp
+HU10Y          7.11     5.75     -136bp
+HU5Y           6.76     5.64     -112bp
+CEE            4.35     4.59      +24bp
+DE10Y          2.63     3.00      +38bp
+CZ10Y          4.28     4.79      +51bp
+PL10Y          5.38     5.60      +22bp
+RO10Y          7.28     7.02      -26bp
 
-HU - peers      2.74     1.16     -157bp
+HU - peers      2.76     1.16     -160bp
 HU - peer med     3.40     1.63     -177bp
-HU - Bund       4.41     2.75     -167bp
-HU - Czechia     2.81     0.96     -185bp
+HU - Bund       4.48     2.75     -174bp
+HU - Czechia     2.83     0.96     -187bp
 
-P(Orban does not remain PM): 0.385 -> 1.000
-EURHUF: 396.1 -> 355.4
+P(Orban does not remain PM): 0.625 -> 1.000
+EURHUF: 399.0 -> 355.4
 
 ============================================================================
 3. EVENT-WINDOW DECOMPOSITION
 ============================================================================
 window                         HU-peers    HU-Bund     HU-CZ     HU10Y
-A. Pre-campaign                    -39bp       -62bp      -68bp      -64bp
+A. Pre-campaign                    -41bp       -69bp      -69bp      -62bp
 B. Campaign                        -17bp        -7bp      -19bp      +24bp
-   A+B Pre-vote                    -56bp       -69bp      -86bp      -40bp
+   A+B Pre-vote                    -59bp       -76bp      -88bp      -38bp
 C. Result to inauguration         -102bp       -97bp      -99bp      -98bp
-   TOTAL                          -157bp      -167bp     -185bp     -138bp
+   TOTAL                          -160bp      -174bp     -187bp     -136bp
 
 Share of the total peer-relative compression occurring before the vote:
-  35% (-56 of -157 bp)
+  37% (-59 of -160 bp)
 
 ============================================================================
 4. CONTROL-CHOICE SENSITIVITY
 ============================================================================
 Change in the HU spread, same window, different control:
 control             change   daily t     N
-Czechia              -185bp     -1.91   193
-Germany (Bund)       -167bp     -1.48   193
-Poland               -148bp     -1.25   193
-Romania              -117bp     -0.93   189
-Slovenia             -167bp     -1.66   193
-Croatia              -169bp     -1.57   189
-Austria              -158bp     -1.39   193
-Peer average         -157bp     -1.71   193
-Peer median          -177bp     -0.79   193
+Czechia              -187bp     -1.95   187
+Germany (Bund)       -174bp     -1.55   187
+Poland               -158bp     -1.36   187
+Romania              -110bp     -0.88   183
+Slovenia             -173bp     -1.73   187
+Croatia              -167bp     -1.57   183
+Austria              -166bp     -1.47   187
+Peer average         -160bp     -1.76   187
+Peer median          -177bp     -0.79   187
 
 Every control gives a large negative. Czechia gives the most favourable number;
 the peer average is the conservative one and is the headline estimate.
@@ -81,9 +81,9 @@ the peer average is the conservative one and is the headline estimate.
 ============================================================================
 HU - (CZ,PL,RO) spread, level trend estimated on 2022-01-03 to 2025-06-30
   slope = -0.086 bp per trading day = -22 bp per year
-  fitted change over a 194-day window: -17 bp
-  observed change over the window: -150 bp
-  trend-adjusted (observed minus trend): -133 bp
+  fitted change over a 188-day window: -16 bp
+  observed change over the window: -152 bp
+  trend-adjusted (observed minus trend): -135 bp
 
 The peer spread was already narrowing before the election. The trend-adjusted
 estimate is the honest lower bound; the raw estimate is the upper bound.
@@ -91,12 +91,30 @@ estimate is the honest lower bound; the raw estimate is the upper bound.
 ============================================================================
 6. TERM STRUCTURE
 ============================================================================
-  pre-vote                   10Y-5Y   +58 ->    +5 bp  (  -53 bp)
+  pre-vote                   10Y-5Y   +35 ->    +5 bp  (  -30 bp)
   result to inauguration     10Y-5Y    +5 ->   +11 bp  (   +6 bp)
-  full window                10Y-5Y   +58 ->   +11 bp  (  -47 bp)
+  full window                10Y-5Y   +35 ->   +11 bp  (  -24 bp)
 
-Pre-vote: 10Y fell while 5Y rose. A monetary-easing story predicts the opposite.
-Post-result: the move is parallel, consistent with a level shift in perceived risk.
+Pre-vote the ten-year fell 38 bp and the five-year 8: 0.21 of the move at the front end.
+A monetary-easing story puts the front end first; this is a long-end story.
+Post-result the move is roughly parallel, a level shift in perceived risk.
+
+============================================================================
+6b. COUNTRY PLACEBO: EACH MARKET IN TURN
+============================================================================
+  HU vs the other seven         -162 bp
+  CZ vs the other seven          +51 bp
+  PL vs the other seven          +18 bp
+  RO vs the other seven          -36 bp
+  DE vs the other seven          +36 bp
+  SI vs the other seven          +36 bp
+  HR vs the other seven          +29 bp
+  AT vs the other seven          +28 bp
+
+Each market against the equal-weighted average of the other seven, same
+window. Hungary is the only large negative by an order of magnitude.
+The pool is seven controls rather than the headline six, which is why
+Hungary reads -145 here rather than -160.
 
 ============================================================================
 7. MARKET MODEL
@@ -111,11 +129,11 @@ dVIX    0.0011  0.0030  0.3730
 dBrent  0.1089  0.2259  0.4822
 
 Cumulative Hungary-specific residual, bp:
-  2025-12-31:     -7
-  2026-02-26:    -22
-  2026-04-09:    -57
-  2026-05-08:   -162
-  window total: -162 bp
+  2025-12-31:    -27
+  2026-02-26:    -41
+  2026-04-09:    -76
+  2026-05-08:   -182
+  window total: -182 bp
 
 The model explains movements in the Hungarian yield, not the spread. Its residual
 is the part of the Hungarian move not matched by its peers.
@@ -123,14 +141,14 @@ is the part of the Hungarian move not matched by its peers.
 ============================================================================
 8. PLACEBO: RANDOM WINDOWS (WITHDRAWN, NOT REPAIRED)
 ============================================================================
-Draws: 204 windows of 194 days, series 2022-01-03 to 2026-11-13
-  windows ending after the real event: 30 of 204
-  observed window change: -150 bp
-  share at least as negative, all draws          : 15%
-  share at least as negative, pre-event draws only: 4%
+Draws: 205 windows of 188 days, series 2022-01-03 to 2026-11-13
+  windows ending after the real event: 30 of 205
+  observed window change: -152 bp
+  share at least as negative, all draws          : 14%
+  share at least as negative, pre-event draws only: 3%
 
 WHY THIS IS WITHDRAWN RATHER THAN CORRECTED.
-The series trends down across the whole sample. A 194-day change is therefore
+The series trends down across the whole sample. A 188-day change is therefore
 not a stationary quantity: its distribution depends entirely on where the
 window sits relative to the trend, and the observed window sits at the end.
 Restricting draws to windows that end before the election does not fix this,
@@ -148,18 +166,18 @@ Hungary minus (CZ, PL, RO), quarterly mean, bp -- the reason 2022 is excluded:
 9. PLACEBO: COUNTRIES
 ============================================================================
 Each country's spread over the peer average, same window (should be ~0):
-  Czechia       +33 bp
-  Poland        -11 bp
-  Romania       -48 bp
-  Slovenia      +12 bp
-  Croatia       +14 bp
-  Austria        +0 bp
+  Czechia       +32 bp
+  Poland         -3 bp
+  Romania       -60 bp
+  Slovenia      +15 bp
+  Croatia        +8 bp
+  Austria        +8 bp
 
 ============================================================================
 10. THE POLYMARKET SERIES
 ============================================================================
 Prints: 257 over 288 calendar days
-  prints inside the event window 2025-07-25 to 2026-05-08: 256, of which 181 on weekdays
+  prints inside the event window 2025-08-04 to 2026-05-08: 246, of which 175 on weekdays
   prints falling on a weekend: 76
 Largest single-day moves in P:
   2026-04-22 Wed   +30.9 pp   (68.5 -> 99.4)
@@ -174,8 +192,8 @@ Largest single-day moves in P:
 Moves larger than 10 pp: 2.  Larger than 5 pp: 5.
 
 Daily regression of the peer spread on dP (P carried forward between prints):
-  no controls    beta = +0.0012  (t = +0.02, N = 170)
-  with controls  beta = -0.0338  (t = -0.66, N = 163)
+  no controls    beta = -0.0002  (t = -0.00, N = 166)
+  with controls  beta = -0.0140  (t = -0.24, N = 159)
 
 Neither coefficient is distinguishable from zero and the sign is not stable
 across the two specifications, so the daily design cannot estimate the dose-
@@ -189,36 +207,41 @@ time the spread had already fallen. It cannot support a daily treatment variable
 If the spread moves one-for-one with the probability that Orban leaves office,
 the bond market's implied probability is (S0 - St) / (S0 - ST).
 
-That maps the 25 July spread to zero, but the contract was already at 0.385
-that day. The two series do not start in the same place: one is a probability
+That maps the 4 August spread to zero, but the contract was
+already at 0.625 that day. The two series do not start in the same place:
+one is a probability level, the other a share of the eventual fall.
 level, the other a share of the eventual fall, and setting them against each
 other hands the bond market a free head start by construction. The like-for-like
 comparison rescales both by their own eventual change, so that both are zero on
-25 July and one on 8 May:
+4 August and one on 8 May:
 
     share_t = (x_t - x_0) / (x_T - x_0),   x = contract price or spread
 
 date           spread       P   contract    bonds     gap
-2025-07-25       2.74   0.385      0.000    0.000  +0.000
-2026-02-26       2.35   0.625      0.391    0.245  +0.145
-2026-03-31       2.53   0.655      0.439    0.133  +0.307
-2026-04-09       2.18   0.685      0.488    0.354  +0.134
-2026-04-12       2.06   0.685      0.488    0.431  +0.057
+2025-08-04       2.76   0.625      0.000    0.000  +0.000
+2026-02-26       2.35   0.625      0.000    0.259  -0.259
+2026-03-31       2.53   0.655      0.080    0.148  -0.068
+2026-04-09       2.18   0.685      0.160    0.366  -0.206
+2026-04-12       2.06   0.685      0.160    0.441  -0.281
 2026-05-08       1.16   1.000      1.000    1.000  +0.000
 
-On 9 April the contract had delivered 49% of its own move and the spread
-35%, a gap of 13 points. In March the two separate more
-sharply, but not as a simple lead: the spread retraced to its July level in the
-global selloff, giving back the whole of its early repricing (-6% on
-24 March) while the contract held at 42%. By the eve of the vote the
-spread had recovered to 43% against the contract's 49%, a gap of
-6 points against 13 three days earlier.
+On 9 April the contract had delivered 16% of its own move and the spread
+37%, a gap of 21 points in the spread's favour.
+On the eve of the vote it is 16% against 44%: the gap widens to
+28 points, because the spread kept falling after the
+contract had stopped repricing. In March the two move against each other: the
+spread retraced to its early-August level in the global selloff (-4% on
+24 March) while the contract held at 5%. That is a give-back on both
+sides, not a lead in either direction.
 
-The contract runs ahead of the spread on essentially every date after its
-opening week, but the ratio on 9 April is 1.4 to 1, not 2 to 1, and on
-the eve of the vote the two agree to within a few points. What the comparison
-supports is a lead of weeks, not a difference in what the two instruments
-believed the election would do.
+So the contract did not anticipate the bonds in this window. Over the eight
+months to the vote it travelled from 0.625 to 0.685 while the spread did a
+third of its eventual move, and it did not move decisively until the count.
+The ordering is not robust to the choice of base date, however: anchored on
+the contract's opening week, which is when it repriced 26 points on seven
+prints, the same calculation puts the contract at 49 per cent and the spread
+at 35. The comparison therefore measures how quickly each market moved once
+it started, not which one started first, and it is not a lead-lag test.
 
 Read the bonds columns as shares, not probabilities. Under the 13 November
 anchor the share exceeds one after May 2026 because the spread keeps narrowing

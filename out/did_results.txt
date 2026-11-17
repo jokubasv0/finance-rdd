@@ -164,12 +164,12 @@ estimate by a few basis points.
 9. CONTINUOUS DIFFERENCE-IN-DIFFERENCES
 ==============================================================================
 specification                       beta       se        t       N
-HU x P x Post                     -1.119    0.072   -15.59    1030
-HU x P, all periods               -2.353    0.267    -8.82    1030
+HU x P x Post                     -1.128    0.073   -15.55    1000
+HU x P, all periods               -2.466    0.239   -10.30    1000
 
 This design is identified. The date effects absorb P_t, which is common to
 every country on a given day, but not HU_i x P_t, which is not. What it
-surrenders is history: the contract begins on 2025-07-25, so the panel runs
+surrenders is history: the contract is usable from 4 August 2025, so the panel runs
 for 1,030 country-days instead of 3,200 and the nine flat quarters that make
 the binary design credible are simply absent. Within that shorter window the
 continuous estimate is -1.12 against the binary -1.09: three basis points
